@@ -1,0 +1,140 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import ${jpaMapperPackage}.JpaMapper;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+
+/**
+ * Generic abstract mapper for "ModelMapper" implementation.
+ * 
+ * @author $AUTHOR
+ */
+public class JpaMapperImpl<JPA, POJO> implements JpaMapper<JPA, POJO> {
+
+	private final ModelMapper modelMapper;
+	private final Class<JPA>  jpaClass;
+	private final Class<POJO> pojoClass;
+
+	/**
+	 * Constructor
+	 */
+	public JpaMapperImpl(Class<JPA> jpaClass, Class<POJO> pojoClass) {
+		super();
+		this.jpaClass = jpaClass ;
+		this.pojoClass = pojoClass ;
+		
+		this.modelMapper = new ModelMapper();
+		this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+	}
+	
+	/**
+	 * Mapping from 'CarJpaRecord' to 'CarRecord'
+	 * @param entity the mapping input 
+	 */
+	@Override
+	public POJO mapEntityToRecord (JPA entity) {
+		if ( entity == null ) {
+			return null;
+		}
+
+//		//--- Generic mapping 
+//		POJO record = map(entity, pojoClass);
+//
+//		return record ;
+		return modelMapper.map(entity, pojoClass);
+	}
+
+	/**
+	 * Mapping from 'CarRecord' to 'CarJpaRecord' 
+	 * @param record the mapping input 
+	 * @return
+	 */
+	@Override
+	public JPA mapRecordToEntity(POJO record) {
+		if ( record == null ) {
+			return null;
+		}
+		//return map(record, jpaClass);
+		return modelMapper.map(record, jpaClass);		
+	}
+
+	/**
+	 * Mapping from record 'CarRecord' to entity 'CarJpaRecord'
+	 * @param record
+	 * @param entity
+	 */
+	public void mapRecordToEntity(POJO record, JPA entity) {
+		if ( record == null ) {
+			return;
+		}
+
+		//--- Generic mapping 
+		//map(record, entity);
+		this.modelMapper.map(record, entity);
+	}
+
+//	/**
+//	 * Returns the current mapper instance
+//	 * @return
+//	 */
+//	protected ModelMapper getModelMapper() {
+//		return this.modelMapper ;
+//	}
+//	
+//	/**
+//	 * Map input bean to a new output bean.
+//	 * @param input Input bean
+//	 * @param outputClass Output bean class
+//	 * @return New output bean
+//	 */
+//	protected <I, O> O map(I input, Class<O> outputClass) {
+//		return this.modelMapper.map(input, outputClass);
+//	}
+
+//	/**
+//	 * Map input bean to an existing output bean.
+//	 * @param input Input bean
+//	 * @param output Output bean
+//	 */
+//	protected <I, O> void map(I input, O output) {
+//		this.modelMapper.map(input, output);
+//	}
+		
+	/**
+	 * Map input beans to new output beans.
+	 * @param inputs Input beans
+	 * @param outputClass Output beans class
+	 * @return New output beans
+	 */
+	protected <I, O> List<O> map(Collection<I> inputs, Class<O> outputClass) {
+		List<O> outputs = new ArrayList<O>();
+		for(I input : inputs) {
+			//O output = map(input, outputClass);
+			O output = modelMapper.map(input, outputClass);		
+
+			outputs.add(output);
+		}
+		return outputs;
+	}
+
+	/**
+	 * Map input beans to existing output beans.
+	 * @param inputs Input beans
+	 * @param outputs Output beans
+	 * @param outputClass Output beans class
+	 */
+	protected <I, O> void map(Collection<I> inputs, Collection<O> outputs, Class<O> outputClass) {
+		for(I input : inputs) {
+			//O output = map(input, outputClass);
+			O output = modelMapper.map(input, outputClass);		
+			outputs.add(output);
+		}
+	}
+	
+}

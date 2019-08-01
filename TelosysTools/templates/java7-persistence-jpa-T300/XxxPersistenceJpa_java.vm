@@ -1,0 +1,169 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+## ----------------------------------------------------------------------
+#if ( $entity.hasCompositePrimaryKey() )
+#set( $primaryKeyType = ${jpaRecordKeyClass} )
+#else 
+#set( $primaryKeyType = $entity.keyAttributes[0].wrapperType )
+#end
+## ----------------------------------------------------------------------
+
+package ${target.javaPackageFromFolder($SRC)};
+
+#foreach( $import in $java.imports($entity.keyAttributes) )
+import $import;
+#end
+
+import java.util.List;
+
+import javax.inject.Named;
+
+import $recordPackage.${recordClass}; // "Neutral Record" class 
+import ${ROOT_PKG}.persistence.${entity.name}Persistence; // Persistence service interface
+import ${jpaCommonsPackage}.GenericJpaService;
+import ${jpaMapperPackage}.JpaMapper;
+import ${jpaMapperPackage}.JpaMapping;
+
+import ${jpaRecordPackage}.${jpaRecordClass}; // "JPA Record" class (with JPA mapping) 
+#if ( $entity.hasCompositePrimaryKey() )
+import ${jpaRecordPackage}.${jpaRecordKeyClass};
+#end
+
+/**
+ * ${entity.name} persistence service - JPA implementation 
+ * 
+ * @author Telosys 
+ *
+ */
+@Named("${entity.name}Persistence")
+public class ${jpaServiceClass} extends GenericJpaService<${jpaRecordClass}, $primaryKeyType> implements ${entity.name}Persistence {
+
+	private final JpaMapper<${jpaRecordClass},${recordClass}> mapper = JpaMapping.getMapperProvider().getMapper(${jpaRecordClass}.class,${recordClass}.class);
+
+	/**
+	 * Constructor
+	 */
+	public ${jpaServiceClass}() {
+		super(${jpaRecordClass}.class);
+	}
+
+	@Override
+	public ${recordClass} findById( $fn.argumentsListWithWrapperType( $entity.keyAttributes ) ) {
+#if ( $entity.hasCompositePrimaryKey() )
+		// Build the composite key
+		$primaryKeyType key = new $primaryKeyType( $fn.argumentsList( $entity.keyAttributes ) );
+		${jpaRecordClass} entity = super.find( key );
+#else
+		${jpaRecordClass} entity = super.find( $fn.argumentsList( $entity.keyAttributes ) );
+#end
+		return mapper.mapEntityToRecord(entity);	
+	}
+
+	@Override
+	public List<${recordClass}> findAll() {
+		List<${jpaRecordClass}> entities = super.loadAll() ;
+		List<${recordClass}> records = new java.util.LinkedList<${recordClass}>();
+		for ( ${jpaRecordClass} entity : entities ) {
+			records.add( mapper.mapEntityToRecord(entity) ) ;
+		}
+		return records ;
+	}
+
+	@Override
+	public ${recordClass} create(${recordClass} record) {
+		${jpaRecordClass} entity = mapper.mapRecordToEntity(record);
+		super.persist(entity);
+#if ( $entity.hasAutoIncrementedKey() )
+		// Auto-incremented key : set the generated id in the original record
+		record.${entity.autoincrementedKeyAttribute.setter}( entity.${entity.autoincrementedKeyAttribute.getter}() ) ;
+		//record.setId(entity.getId());
+#end
+		return record ;
+	}
+	
+	@Override
+	public boolean update(${recordClass} record) {
+#if ( $entity.hasCompositePrimaryKey() )
+		// Build the composite key
+		$primaryKeyType pk = new $primaryKeyType( $fn.argumentsListWithGetter( "record", $entity.keyAttributes ) );
+#else
+		$primaryKeyType pk = $fn.argumentsListWithGetter( "record", $entity.keyAttributes ) ;
+#end	
+		if ( super.find( pk ) != null ) {
+			// Exists => 'merge' 
+			${jpaRecordClass} entity = mapper.mapRecordToEntity(record);
+			super.merge(entity);
+			return true ;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public ${recordClass} save(${recordClass} record) {
+		${jpaRecordClass} entity = mapper.mapRecordToEntity(record);
+		super.merge(entity);
+		return record ;
+	}
+
+	@Override
+	public boolean deleteById( $fn.argumentsListWithWrapperType( $entity.keyAttributes ) ) {
+#if ( $entity.hasCompositePrimaryKey() )
+		// Build the composite key
+		$primaryKeyType key = new $primaryKeyType( $fn.argumentsList( $entity.keyAttributes ) );
+		return super.remove( key );
+#else
+		return super.remove( $fn.argumentsList( $entity.keyAttributes ) );
+#end	
+	}
+
+	@Override
+	public boolean delete(${recordClass} record) {
+		if ( record != null ) {
+#if ( $entity.hasCompositePrimaryKey() )
+			// Build the composite key
+			$primaryKeyType key = new $primaryKeyType( $fn.argumentsListWithGetter( "record", $entity.keyAttributes ) );
+			return super.remove( key );
+#else
+			return super.remove( $fn.argumentsListWithGetter( "record", $entity.keyAttributes ) );
+#end	
+		}
+		return false ;
+	}
+
+	@Override
+	public long countAll() {
+		Long count = (Long) super.execNamedQueryWithSingleResult( buildQueryName("countAll") ) ;
+		return count.longValue();
+	}
+
+	public long countById($fn.argumentsListWithWrapperType($entity.keyAttributes)) {
+		Long count = (Long) super.execNamedQueryWithSingleResult( buildQueryName("countById"), $fn.argumentsList($entity.keyAttributes) ) ;
+		return count.longValue();
+	}
+	
+	@Override
+	public boolean exists($fn.argumentsListWithWrapperType($entity.keyAttributes)) {
+		long count = countById($fn.argumentsList($entity.keyAttributes)) ;
+		return count > 0 ;
+	}
+
+
+	@Override
+	public boolean exists(${recordClass} record) {
+		if ( record != null ) {
+			return exists( $fn.argumentsListWithGetter( "record", $entity.keyAttributes ) );
+		}
+		return false ;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<${jpaRecordClass}> queryExample() {
+		List<?> list = super.execNamedQuery(buildQueryName("theNamedQueryToBeUsed")) ;
+		return (List<${jpaRecordClass}>) list ;
+	}
+
+}

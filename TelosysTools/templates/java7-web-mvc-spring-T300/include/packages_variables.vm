@@ -1,0 +1,6 @@
+## --- Packages
+#set( $recordPackage          = "${ROOT_PKG}.data.record" )
+#set( $recordListItemPackage  = "${ROOT_PKG}.data.record.listitem" )
+#set( $webCommonsPackage      = "${ROOT_PKG}.web.mvc.spring.commons" )
+#set( $webControllerPackage   = "${ROOT_PKG}.web.mvc.spring.controller" )
+#set( $persistenceImplPackage = "${ROOT_PKG}.persistence.impl.fake" )

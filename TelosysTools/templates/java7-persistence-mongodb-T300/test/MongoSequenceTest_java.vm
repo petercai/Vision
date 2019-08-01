@@ -1,0 +1,38 @@
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+
+import org.junit.Test;
+
+/**
+ * Mongo Sequence class Test <br>
+ * 
+ * @author Telosys 
+ *
+ */
+public class MongoSequenceIT {
+
+	@Test
+	public void test1() throws Exception {
+		System.out.println("--- test1");
+		MongoSequence sequence = new MongoSequence("seqTest") ;
+
+    	assertEquals( 0L, sequence.currVal() );
+
+    	assertEquals( 1L, sequence.nextVal() );
+    	System.out.println("Sequence currVal() = " + sequence.currVal() );
+    	
+    	for ( int i=0 ; i < 10 ; i++ ) {
+        	sequence.nextVal() ;
+    	}
+    	System.out.println("Sequence currVal() = " + sequence.currVal() );
+    	assertEquals( 11L, sequence.currVal() );
+
+		boolean b = sequence.delete();
+        assertTrue(b);
+    	System.out.println("Sequence deleted");	
+	}	
+}

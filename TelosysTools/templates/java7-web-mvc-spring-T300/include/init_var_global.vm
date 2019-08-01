@@ -1,0 +1,15 @@
+## --- Global Variables (without reference to $entity )
+#set( $recordPackage         = "${ROOT_PKG}.data.record" )
+#set( $recordListItemPackage = "${ROOT_PKG}.data.record.listitem" )
+##
+#set( $webCommonsPackage      = "${ROOT_PKG}.web.mvc.spring.commons" )
+#set( $webControllerPackage   = "${ROOT_PKG}.web.mvc.spring.controller" )
+##
+#set( $persistenceImplPackage = "${ROOT_PKG}.persistence.impl.fake" )
+#*
+#set( $persistenceJpaPackage = "${ROOT_PKG}.persistence.impl.jpa" )
+#set( $jpaCommonsPackage     = "${ROOT_PKG}.persistence.impl.jpa.commons" )
+#set( $jpaMapperPackage      = "${ROOT_PKG}.persistence.impl.jpa.mapping" )
+#set( $jpaRecordPackage      = "${ROOT_PKG}.persistence.impl.jpa.record" )
+*#
+##

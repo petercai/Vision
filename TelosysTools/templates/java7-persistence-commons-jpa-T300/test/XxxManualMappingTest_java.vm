@@ -1,0 +1,37 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import static org.junit.Assert.assertEquals;
+
+import ${recordPackage}.${recordClass};
+import ${jpaMapperPackage}.${entity.name}MappingGenericTest;
+import ${jpaMapperPackage}.JpaMapper;
+import org.junit.Test;
+
+/**
+ * Mapping tests for ${entity.name} with 'manual mapping'
+ * 
+ * @author Telosys
+ *
+ */
+public class ${entity.name}ManualMappingTest extends ${entity.name}MappingGenericTest {
+
+	@Test
+	public void testGetMapperInstance() {
+
+		JpaMapperProviderImpl provider = new JpaMapperProviderImpl();
+		JpaMapper<?,?> mapper = provider.getMapperInstance(${recordClass}.class);
+		assertEquals("${entity.name}ManualMapper", mapper.getClass().getSimpleName());
+	}	
+
+	@Test
+	public void testMapping() {
+
+		setMapperProvider(new JpaMapperProviderImpl()) ;
+		processAllTest();
+	}	
+}

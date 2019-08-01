@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Telosys Redis</title>
+
+</head>
+<body>
+
+	<h1>
+		<a name="tutorial-for-the-redis-telosys-bundle" class="anchor" href=""><span
+			class="octicon octicon-link"></span></a>Tutorial for the Redis Telosys
+		bundle
+	</h1>
+	<h2>
+		<a name="note" class="anchor" href="..md.html#note"><span
+			class="octicon octicon-link"></span> </a>Note
+	</h2>
+		<!-- <li>The packaging of this project must be <strong>&quot;war&quot;</strong> </li> -->
+		<li><p>
+				The redis <strong>compliance level must be 3.5</strong>
+			</p>
+		</li>
+		<li><p>
+				we use <strong>Jedis 2.9.0 like  redis java client</strong>
+			</p>
+		</li>
+
+
+	<h2>
+		<a name="1-project-creation" class="anchor" href=""><span
+			class="octicon octicon-link"></span> </a>1. Project Creation
+	</h2>
+	<ul>
+		<li>You can start by create a new <strong>maven</strong> project
+			or start on an existing one.
+		</li>
+		<!-- <li>The packaging of this project must be <strong>&quot;war&quot;</strong> </li> -->
+		<li><p>
+				The java <strong>compliance level must be 1.7</strong>
+			</p>
+		</li>
+	</ul>
+	<h2>
+		<a name="2-initialize-telosys-tools" class="anchor" href=""><span
+			class="octicon octicon-link"></span> </a>2. Initialize Telosys Tools
+	</h2>
+	<ul>
+		<li>Open the properties window of your project</li>
+		<li>In the left entries, select <strong>&quot;Telosys
+				Tools&quot;</strong> and fill all project informations in
+			&quot;General&quot;, &quot;Packages&quot; and &quot;Folders&quot; tab
+			(right side)
+		</li>
+		<li>Click on the <strong>&quot;Apply&quot;</strong> button (don't
+			forget this step!)
+		</li>
+		<li>Click on <strong>&quot;Init Telosys Tools&quot;</strong> in
+			the &quot;General&quot; tab =&gt; <strong>The &quot;Telosys
+				Tools&quot; directory is now added in the project</strong>
+		</li>
+		<li>In the &quot;download&quot; tab, download from this Github
+			repository the <strong>&quot;redis-templates-TT3100&quot;</strong>
+		</li>
+		<li>Click on <strong>&quot;Download selected
+				bundle(s)&quot;</strong> and verify the checkbox <strong>&quot;Install
+				downloaded bundle(s)&quot;</strong> is checked.
+		</li>
+		<li>After this, close the project properties window.</li>
+		<li><p>
+				In the project, you should now have the <strong>&quot;redis-templates-TT3100&quot;</strong>
+				directory under <strong>&quot;TelosysTools/templates&quot;</strong>
+			</p></li>
+	</ul>
+	<h2>
+		<a name="5-generate-the-rest-api" class="anchor"
+			href="..md.html#5-generate-the-rest-api"><span
+			class="octicon octicon-link"></span></a>5. Generate the Redis Persistence
+	</h2>
+	<ul>
+		<li>Click on the <strong>&quot;code generation&quot; in the DSL interface</strong> 
+		</li>
+		<li>Select the <strong>&quot;redis-templates-TT3100&quot;</strong>
+			templates bundle in the dropdown list =&gt; all templates are now
+			visible in right list
+		</li>
+		<li>Select all templates and select <strong>&quot;copy
+				static resources&quot;</strong>
+		</li>
+		<li>Click on the <strong>&quot;Generate&quot;</strong> button
+		</li>
+		<li>You should have a successfull message</li>
+		<li><p>
+				After add the maven depedencies (next part) the project source code <strong>should compile successfully</strong>
+			</p>
+		</li>
+	</ul>
+	<h2>
+		<a name="3-update-maven-dependencies" class="anchor" href=""><span
+			class="octicon octicon-link"></span></a>3. Update maven dependencies
+	</h2>
+	<ul>
+		<li>Under the <strong>&quot;TelosysTools&quot;</strong>
+			, open the <strong>pom_persistence_redis.txt</strong>
+		</li>
+		<li>Copy and paste the dependencies to your project pom (if they
+			are not already exist)</li>
+	</ul>
+	<h2>
+		<a name="4-database-repository-generation" class="anchor" href="">
+			<spa class="octicon octicon-link">
+			</span>
+		</a>4. Redis Database Configuration
+	</h2>
+	<ul>
+		<li>Open the redis configuration file in your project : &quot;src/main/ressources/redis.properties</li>
+		<li>Put your redis configuration</li>
+		
+	</ul>
+</body>
+</html>
+

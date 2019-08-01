@@ -1,0 +1,100 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import static com.mongodb.client.model.Filters.eq;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import com.mongodb.client.MongoCollection;
+
+/**
+ * Utility class for sequence emulation
+ * 
+ * @author ${AUTHOR}
+ *
+ */
+public class MongoSequence {
+
+	private static final String INCR     = "${DOLLAR}inc";
+	private static final String COUNTERS = "counters";
+
+	private final Bson filter;
+	private final String sequenceName;
+	private final String sequenceKey;
+	private final MongoCollection<Document> counters;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param entityName
+	 */
+	public MongoSequence(String name) {
+		super();
+		this.sequenceName = name;
+		this.sequenceKey = "SEQUENCE_" + name;
+		this.counters = MongoManager.getMongoCollection(COUNTERS);
+		Document doc = new Document("sequenceField", sequenceName).append(sequenceKey, 0L);
+		this.counters.insertOne(doc);
+		this.filter = eq("sequenceField", sequenceName);
+	}
+
+	/**
+	 * Returns the sequence name
+	 * 
+	 * @return
+	 */
+	public final String getSequenceName() {
+		return sequenceName;
+	}
+
+	/**
+	 * Returns the Mongo key for this sequence
+	 * 
+	 * @return
+	 */
+	public final String getSequenceKey() {
+		return sequenceKey;
+	}
+
+	/**
+	 * Returns the current value <br>
+	 * Returns 0 if the sequence doesn't exist
+	 * 
+	 * @return
+	 */
+	public final long currVal() {
+		Document mySequence = counters.find(filter).first();
+		if (mySequence != null) {
+			return mySequence.getLong(sequenceKey);
+		}
+
+		return 0L;
+	}
+
+	/**
+	 * Returns the next value (the sequence value is incremented)
+	 * 
+	 * @return
+	 */
+	public final long nextVal() {
+		Document mySequence = counters.find(filter).first();
+		counters.updateOne(mySequence, new Document(INCR, new Document(sequenceKey, 1L)));
+		mySequence = counters.find(filter).first();
+
+		return mySequence.getLong(sequenceKey);
+	}
+
+	/**
+	 * Delete this sequence in Mongo
+	 * 
+	 * @return
+	 */
+	public final boolean delete() {
+		Document mySequence = counters.find(filter).first();
+		long deletedCount = counters.deleteOne(mySequence).getDeletedCount();
+
+		return deletedCount == 1;
+	}
+}

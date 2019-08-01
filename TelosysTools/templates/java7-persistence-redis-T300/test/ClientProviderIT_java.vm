@@ -1,0 +1,68 @@
+#parse("/include/java_header.vm")
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import java.util.Properties;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+/**
+ * Redis ClientProvider Integration Test (IT) <br>
+ * ( requires a Redis active database )
+ * 
+ * @author Telosys 
+ *
+ */
+public class ClientProviderIT {
+
+	private void printProperty(Properties properties, String name, boolean notNullnotBlank) {
+		String value = properties.getProperty(name);
+		System.out.println(" . " + name + " = " + value );
+		if ( notNullnotBlank ) {
+			Assert.assertNotNull( value );
+			Assert.assertFalse( "".equals(value.trim()));			
+		}
+	}
+
+	@Test
+	public void test1RedisProperties() {
+		System.out.println("--- test REDIS properties");
+    	
+		System.out.println("REDIS properties file name = '" + ClientProvider.getRedisPropertiesFileName() + "'");
+		System.out.println(" properties file searched via classpath in : " );
+		System.out.println(" 1 - 'src/test/resources' " );
+		System.out.println(" 2 - 'src/main/resources' " );
+		
+		Properties properties = ClientProvider.loadRedisPropertiesFromClassPath();
+
+		System.out.println("REDIS properties values : " );
+		printProperty(properties, "redis.hostname", true );
+		printProperty(properties, "redis.port", true );		
+		printProperty(properties, "redis.password", false );	
+	}
+	
+	@Test
+	public void test2GetJedisPool() {
+    	System.out.println("--- test getJedisPool() ");	
+    	JedisPool jedisPool = ClientProvider.getJedisPool();
+    	System.out.println("jedisPool ready. ");
+    	
+    	Assert.assertNotNull( jedisPool );
+    	//jedisPool.close();
+    	//System.out.println("Connection closed. ");
+	}
+
+	@Test
+	public void test3GetJedisInstance() {
+    	System.out.println("--- test getJedisInstance() ");	
+    	Jedis jedis = ClientProvider.getJedisInstance();
+    	System.out.println("jedis ready. ");
+    	
+    	Assert.assertNotNull( jedis );
+    	jedis.close();
+    	System.out.println("jedis closed. ");
+	}
+}

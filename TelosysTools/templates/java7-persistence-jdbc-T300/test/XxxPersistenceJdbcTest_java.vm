@@ -1,0 +1,67 @@
+#checkId($entity)
+#parse("/include/init_var_global.vm")
+#parse("/include/init_var_entity.vm")
+#parse("/include/java_header.vm")
+##--------------------------------------------------------------------------------------------------------
+##--------------------------------------------------------------------------------------------------------
+## #set( $recordClass = "${entity.name}Record" )
+#set( $daoClass    = "${entity.name}PersistenceJdbc" )
+
+#set( $uncapitalizedEntityName = $fn.uncapitalize($entity.name) )
+#set( $keyValues   = $fn.buildValues($entity.keyAttributes,     1) )
+#set( $dataValues  = $fn.buildValues($entity.nonKeyAttributes , 1) )
+#set( $dataValues2 = $fn.buildValues($entity.nonKeyAttributes , 2) )
+#set( $keyValues3  = $fn.buildValues($entity.keyAttributes,     3) )
+##--------------------------------------------------------------------------------------------------------
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+#*
+#foreach( $import in $java.imports($entity.attributes) )
+import $import;
+#end
+import java.sql.SQLException;
+*#
+
+## import ${recordPackage}.${recordClass} ;
+import ${ROOT_PKG}.persistence.$persistenceInterface ;
+import ${ROOT_PKG}.persistence.impl.jdbc.commons.DAOTestUtil;
+import ${ROOT_PKG}.persistence.${entity.name}PersistenceGenericTest;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+
+/**
+ * JUnit tests for ${entity.name}DAO
+ * 
+ * @author Telosys Tools
+ *
+ */
+public class ${entity.name}PersistenceJdbcTest extends ${entity.name}PersistenceGenericTest {
+
+#set( $createTableLines = $h2.ddlCreateTable($entity) )
+
+	private static final String CREATE_TABLE = 
+#foreach( $line in $createTableLines )
+			#if ( $foreach.count > 1 )+#end "${line}"
+#end 
+			;
+
+	@BeforeClass
+	public static void init() {
+		DAOTestUtil.initDatabase(CREATE_TABLE, "${entity.databaseTable}") ;
+	}
+
+	@Test
+	public void testPersistenceService() {
+
+    	$persistenceInterface persistenceService = new ${jdbcServiceClass}();
+
+#if ( $entity.hasAutoIncrementedKey() )
+    	testPersistenceServiceWithAutoincrementedKey(persistenceService);
+#else
+    	testPersistenceService(persistenceService);
+#end
+	}	
+
+}

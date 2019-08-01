@@ -1,0 +1,179 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import java.util.LinkedList;
+import java.util.List;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Projections.*;
+
+/**
+ * Generic abstract class for basic MONGO DAO
+ * 
+ * @author ${AUTHOR}
+ *
+ * @param <T>
+ */
+public abstract class GenericMongoDAO<T> {
+
+	private String entityName;
+	private MongoCollection<Document> mongoCollection;
+	private static final String SET = "${DOLLAR}set";
+
+	//-----------------------------------------------------------------------------------------
+	/**
+	 * Constructor
+	 * @param entityName
+	 */
+	protected GenericMongoDAO(String entityName) {
+		this.entityName = entityName;
+		this.mongoCollection = MongoManager.getMongoCollection(entityName);
+	}
+
+	//-----------------------------------------------------------------------------------------
+	// ABSTRACT METHODS
+	//-----------------------------------------------------------------------------------------
+	/**
+	 * Abstract method used to set the computed value for an auto-incremented key <br>
+	 * This method is supposed to set the key if the bean has an auto-incremented key <br>
+	 * or to throw an exception if the bean doesn't have an auto-incremented key 
+	 * @param bean
+	 * @param id
+	 */
+	protected abstract void setAutoIncrementedKey(T bean, long id);
+	/**
+	 * Converts the given Bson  to a bean instance
+	 * @param Bson
+	 * @return
+	 */
+	protected abstract T docTobean(Document doc);
+
+	/**
+	 * Converts the given bean to a bson 
+	 * @param bean
+	 * @return
+	 */
+	protected abstract DocumentWrapper beanToDoc(T bean);
+	
+	/**
+	 * Give update query 
+	 * @param bean
+	 * @return Bson query
+	 */
+	protected abstract Bson bsonForIdentifyBean(T bean);
+
+	//-----------------------------------------------------------------------------------------
+	// PERSISTENCE METHODS
+	//-----------------------------------------------------------------------------------------
+	/**
+	 * Loads the given bean from the database using its primary key 
+	 * @param bean
+	 * @return bean if found and loaded, null if not found
+	 */
+	protected T doSelect(T bean) {
+		Bson filter = bsonForIdentifyBean(bean);
+		Document myDoc = mongoCollection.find(filter).projection(excludeId()).first();
+		if(myDoc!=null)
+			return docTobean(myDoc);
+		return null;	
+	}
+
+	/**
+	 * Returns all the occurrences existing in the database
+	 * 
+	 * @return
+	 */
+	protected List<T> doSelectAll() {
+		MongoCursor<Document> cursor = mongoCollection.find().iterator();
+			List<T> list = new LinkedList<T>();
+			T bean;
+			while (cursor.hasNext()) {
+				bean = docTobean(cursor.next());
+				list.add(bean);
+			}
+			return list;
+	}
+
+	/**
+	 * Inserts the given bean in the database (Mongo)
+	 * 
+	 * @param bean
+	 */
+	protected long doInsertIncr(T bean) {
+		MongoSequence sequence = new MongoSequence(entityName) ;
+		do {
+			setAutoIncrementedKey(bean, sequence.nextVal()) ; 				
+		} while ( doExists(bean) == true );
+		DocumentWrapper myDoc = beanToDoc(bean);
+		mongoCollection.insertOne(myDoc.getDocument());
+		return sequence.currVal() ;
+	}
+
+	/**
+	 * Inserts the given bean in the database <br>
+	 * only if the key does not already exist
+	 * 
+	 * @param bean
+	 * @return Indicates if the insert is successful
+	 */
+	protected void doInsert(T bean) {
+		DocumentWrapper myDoc = beanToDoc(bean);
+		if (myDoc != null) {
+			mongoCollection.insertOne(myDoc.getDocument());
+		}
+	}
+
+	/**
+	 * Updates the given bean in the database
+	 * 
+	 * @param bean
+	 * @return the Mongo return code (i.e. the row count affected by the UPDATE
+	 */
+	protected long doUpdate(T bean) {
+		long result = 0;
+		DocumentWrapper myDoc = beanToDoc(bean);
+		Bson updateQuery = bsonForIdentifyBean(bean);
+		Document doc = new Document(SET, myDoc.getDocument());
+		result = mongoCollection.updateOne(updateQuery, doc).getModifiedCount();
+		return result;
+	}
+
+	/**
+	 * Deletes the given bean in the database
+	 * 
+	 * @param bean
+	 * @return the Redis return code (i.e. the row count affected by the DELETE
+	 *         operation : 0 or 1 )
+	 */
+	protected long doDelete(T bean) {
+		Bson filter = bsonForIdentifyBean(bean);
+		long result = mongoCollection.deleteOne(filter).getDeletedCount();
+		return result;
+	}
+
+	/**
+	 * Checks if the given bean exists in the database
+	 * 
+	 * @param bean
+	 * @return true if bean exist false else
+	 */
+	protected boolean doExists(T bean) {
+		Bson filter = bsonForIdentifyBean(bean);
+		Document existQuery = mongoCollection.find(filter).first();
+		return (existQuery != null);
+		
+	}
+
+	/**
+	 * Counts all the occurrences in the database
+	 * 
+	 * @return
+	 */
+	protected long doCountAll() {
+		return mongoCollection.count();
+	}
+}

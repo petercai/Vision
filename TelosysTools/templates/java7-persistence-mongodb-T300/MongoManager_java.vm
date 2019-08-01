@@ -1,0 +1,141 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.bson.Document;
+
+import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+/**
+ * Utility class for MongoDB database configuration management <br>
+ * 
+ * @author ${AUTHOR}
+ */
+public class MongoManager {
+
+	/**
+	 * The properties file containing the mongo configuration
+	 */
+	private final static String MONGO_PROPERTIES_FILE_NAME = "/META-INF/mongo.properties";
+	private final static String PORT   = "mongo.port";
+	private final static String HOST   = "mongo.hostname";
+	private final static String DBNAME = "mongo.dbname";
+
+	private static MongoClient  mongoClient ;
+	private static Properties   mongoProperties ;
+	
+	static {
+		mongoProperties = loadPropertiesFromClassPath(MONGO_PROPERTIES_FILE_NAME);
+		mongoClient = createMongoClient(mongoProperties);
+	}
+
+	/**
+	 * Private constructor
+	 */
+	private MongoManager() {
+	}
+
+	/**
+	 * Creates the MongoClient instance
+	 * @return
+	 */
+	private static MongoClient createMongoClient(Properties properties) {
+		return new MongoClient(getHost(properties), getPort(properties));
+	}
+	
+	private static String getHost(Properties properties) {
+		String host = properties.getProperty(HOST);
+		if ( host != null && ! host.trim().isEmpty() ) {
+			return host.trim();
+		}
+		else {
+			return ServerAddress.defaultHost(); // MongoDB default value
+		}
+	}
+	
+	private static int getPort(Properties properties) {
+		String port = properties.getProperty(PORT);
+		if ( port != null && ! port.trim().isEmpty() ) {
+			return Integer.valueOf(port);
+		}
+		else {
+			return ServerAddress.defaultPort(); // MongoDB default value
+		}
+	}
+
+	/**
+	 * Loads the properties from the given file name located with the class-path
+	 * @param fileName
+	 * @return
+	 */
+	private static Properties loadPropertiesFromClassPath(String fileName) {
+		Properties properties = new Properties();
+		InputStream is = MongoManager.class.getResourceAsStream(fileName);
+		if (is != null) {
+			try {
+				properties.load(is);
+			} catch (IOException e) {
+				throw new RuntimeException("Cannot load '" + fileName + "'", e);
+			}
+		} else {
+			throw new RuntimeException("Cannot found '" + fileName + "' (InputStream is null)");
+		}
+		return properties;
+	}
+
+	/**
+	 * Returns the properties file name
+	 * @return 
+	 */
+	public static String getMongoPropertiesFileName() {
+		return MONGO_PROPERTIES_FILE_NAME;
+	}
+
+	/**
+	 * Returns the properties loaded and used for the database connection
+	 * @return
+	 */
+	public static Properties getMongoProperties() {
+		return mongoProperties;
+	}
+	
+	/**
+	 * Returns the MongoClient single instance
+	 * @return
+	 */
+	public static MongoClient getMongoClient() {
+		return mongoClient;
+	}
+	
+	/**
+	 * Returns the database name defined in the properties
+	 * @return
+	 */
+	public static String getMongoDatabaseName() {
+		return mongoProperties.getProperty(DBNAME);
+	}
+	
+	/**
+	 * Returns the MongoDatabase database (obtained from MongoClient)
+	 * @return 
+	 */
+	public static MongoDatabase getMongoDatabase() {
+		return mongoClient.getDatabase(getMongoDatabaseName());
+	}
+
+	/**
+	 * Returns the MongoCollection for the given collection name 
+	 * @param collectionName
+	 * @return
+	 */
+	public static MongoCollection<Document> getMongoCollection(String collectionName) {
+		return getMongoDatabase().getCollection(collectionName);
+	}
+}

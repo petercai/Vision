@@ -1,0 +1,61 @@
+#checkId($entity)
+#parse("/include/init_var_global.vm")
+#parse("/include/init_var_entity.vm")
+#parse("/include/java_header.vm")
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import org.junit.Test;
+
+//import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+//import static org.junit.Assert.assertNull;
+//import static org.junit.Assert.assertTrue;
+
+import ${recordPackage}.${recordClass} ;
+
+/**
+ * JSON mapping test class 
+ * 
+ * @author Telosys
+ *
+ */
+public class ${entity.name}JsonMappingTest {
+
+	@Test
+	public void test() throws Exception {
+		JsonMapper mapper = JsonMapperProvider.getJsonMapper();
+
+		${recordClass} object1 = buildInstance() ;
+		System.out.println("instance 1 : " + object1);
+		String json = mapper.beanToJson(object1);
+		${recordClass} object2 = mapper.jsonToBean(json, ${recordClass}.class);
+		System.out.println("instance 2 : " + object2);
+
+		// Compare the objects attribute by attribute 
+    	assertNotNull(object2);
+#foreach( $attribute in $entity.attributes )
+#if($attribute.type == "BigDecimal")
+		assertEquals(0, object1.${attribute.getter}().compareTo( object2.${attribute.getter}() ) );  // BigDecimal => use 'compareTo'
+#else
+#if($attribute.neutralType == "timestamp")
+		//assertEquals(object1.${attribute.getter}(), object2.${attribute.getter}() ); // Cannot test timestamp (different class in initial value) 
+#else
+		assertEquals(object1.${attribute.getter}(), object2.${attribute.getter}() ); 
+#end
+#end
+#end
+    	System.out.println("OK, normal end of test." );
+	}
+
+#set( $values = $fn.buildValues($entity.attributes,1) )
+	private ${recordClass} buildInstance() throws Exception {
+
+    	${recordClass} object = new ${recordClass}();
+		//--- Set initial value for each attribute
+#foreach( $attribute in $entity.attributes )
+		object.${attribute.setter}($values.getValue($attribute.name)); // $attribute.neutralType --> $attribute.fullType
+#end
+		return object ;
+	}
+}

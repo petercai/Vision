@@ -1,0 +1,37 @@
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder; 
+
+/**
+ * Single instance of Gson mapper <br>
+ * Gson is thread-safe <br>
+ * cf JavaDoc : https://google.github.io/gson/apidocs/com/google/gson/Gson.html <br>
+ * "Gson instances are Thread-safe so you can reuse them freely across multiple threads." <br>
+ * 
+ * @author Telosys
+ *
+ */
+public class GsonMapperSingleton {
+	
+	private final static Gson gson = buildMapper();
+
+	private final static Gson buildMapper() {
+	      GsonBuilder builder = new GsonBuilder(); 
+	      //builder.setPrettyPrinting(); 
+	      //builder.setDateFormat(DATE_FORMAT);
+	      //--- Standard java.util.Date
+	      builder.registerTypeAdapter(java.util.Date.class, new GsonTypeAdapterForUtilDate());
+	      //--- SQL date, time and timestamp
+	      builder.registerTypeAdapter(java.sql.Date.class,      new GsonTypeAdapterForSqlDate());
+	      builder.registerTypeAdapter(java.sql.Time.class,      new GsonTypeAdapterForSqlTime());
+	      builder.registerTypeAdapter(java.sql.Timestamp.class, new GsonTypeAdapterForSqlTimestamp());
+	      Gson gson = builder.create(); 
+	      return gson ;
+	}
+
+	public final static Gson getMapper() {
+		return gson ;
+	}
+}

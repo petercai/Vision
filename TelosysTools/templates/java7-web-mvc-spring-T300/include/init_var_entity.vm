@@ -1,0 +1,4 @@
+## --- Variables with reference to the current $entity
+#set( $recordClass    = "${entity.name}Record" )
+#set( $recordInstance = $fn.uncapitalize($entity.name) )
+##

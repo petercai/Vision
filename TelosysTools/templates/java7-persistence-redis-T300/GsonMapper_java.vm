@@ -1,0 +1,46 @@
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import org.demo.persistence.impl.redis.commons.json.JsonMapper;
+
+import com.google.gson.Gson; 
+
+/**
+ * JsonMapper implementation based on Google GSON <br>
+ * 
+ * @author Telosys
+ *
+ */
+public class GsonMapper implements JsonMapper {
+	
+	/* (non-Javadoc)
+	 * @see interface
+	 */
+	@Override
+	public String beanToJson(Object bean) {
+		Gson mapper = GsonMapperSingleton.getMapper();
+		try {
+			return mapper.toJson(bean);
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot convert BEAN to JSON", e);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see interface
+	 */
+	@Override
+	public <T> T jsonToBean(String json, Class<T> entityClass) {
+		Gson mapper = GsonMapperSingleton.getMapper();
+		if ( json != null ) {
+			try {
+				return mapper.fromJson(json, entityClass);
+			} catch (Exception e) {
+				throw new RuntimeException("Cannot convert JSON to BEAN", e);
+			}
+		}
+		else {
+			return null ;
+		}
+	}
+}

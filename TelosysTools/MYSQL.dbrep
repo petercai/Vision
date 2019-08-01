@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Telosys Database Repository --><root>
+<tableList databaseId="0" databaseName="MYSQL" databaseProductName="MySQL" generation="2019-07-17 23:07:44">
+<table catalog="commafeed" databaseType="TABLE" javaBean="Databasechangelog" name="databasechangelog" schema="">
+<column dbComment="" dbDefaultValue="" dbName="ID" dbNotNull="true" dbPosition="1" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="id" javaType="java.lang.String" jdbcTypeCode="12" label="Id" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="AUTHOR" dbNotNull="true" dbPosition="2" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="author" javaType="java.lang.String" jdbcTypeCode="12" label="Author" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="FILENAME" dbNotNull="true" dbPosition="3" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="filename" javaType="java.lang.String" jdbcTypeCode="12" label="Filename" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="DATEEXECUTED" dbNotNull="true" dbPosition="4" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="dateexecuted" javaType="java.util.Date" jdbcTypeCode="93" label="Dateexecuted" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="ORDEREXECUTED" dbNotNull="true" dbPosition="5" dbSize="10" dbTypeName="INT" inputType="number" javaName="orderexecuted" javaType="java.lang.Integer" jdbcTypeCode="4" label="Orderexecuted" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="EXECTYPE" dbNotNull="true" dbPosition="6" dbSize="10" dbTypeName="VARCHAR" inputType="text" javaName="exectype" javaType="java.lang.String" jdbcTypeCode="12" label="Exectype" maxLength="10" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="MD5SUM" dbNotNull="false" dbPosition="7" dbSize="35" dbTypeName="VARCHAR" inputType="text" javaName="md5sum" javaType="java.lang.String" jdbcTypeCode="12" label="Md5sum" maxLength="35" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="DESCRIPTION" dbNotNull="false" dbPosition="8" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="description" javaType="java.lang.String" jdbcTypeCode="12" label="Description" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="COMMENTS" dbNotNull="false" dbPosition="9" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="comments" javaType="java.lang.String" jdbcTypeCode="12" label="Comments" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="TAG" dbNotNull="false" dbPosition="10" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="tag" javaType="java.lang.String" jdbcTypeCode="12" label="Tag" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="LIQUIBASE" dbNotNull="false" dbPosition="11" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="liquibase" javaType="java.lang.String" jdbcTypeCode="12" label="Liquibase" maxLength="20" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="CONTEXTS" dbNotNull="false" dbPosition="12" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="contexts" javaType="java.lang.String" jdbcTypeCode="12" label="Contexts" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="LABELS" dbNotNull="false" dbPosition="13" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="labels" javaType="java.lang.String" jdbcTypeCode="12" label="Labels" maxLength="255" notNull="false" selected="true"/>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Databasechangeloglock" name="databasechangeloglock" schema="">
+<column dbComment="" dbDefaultValue="" dbName="ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="LOCKED" dbNotNull="true" dbPosition="2" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="locked" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Locked" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="LOCKGRANTED" dbNotNull="false" dbPosition="3" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="lockgranted" javaType="java.util.Date" jdbcTypeCode="93" label="Lockgranted" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="LOCKEDBY" dbNotNull="false" dbPosition="4" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="lockedby" javaType="java.lang.String" jdbcTypeCode="12" label="Lockedby" maxLength="255" notNull="false" selected="true"/>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Feedcategories" name="feedcategories" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="collapsed" dbNotNull="true" dbPosition="2" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="collapsed" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Collapsed" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="3" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Name" maxLength="128" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="parent_id" dbNotNull="false" dbPosition="4" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="parentId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Parent id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_id" dbNotNull="true" dbPosition="5" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="position" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="INT" inputType="number" javaName="position" javaType="java.lang.Integer" jdbcTypeCode="4" label="Position" notNull="false" selected="true"/>
+<fk name="FK15C8223A6D690261">
+<fkcol colname="user_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedcategories" tableref="users" updaterule="3"/>
+</fk>
+<fk name="FK15C8223AD60EB13">
+<fkcol colname="parent_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedcategories" tableref="feedcategories" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK15C8223A6D690261" id="LINK_FK_FK15C8223A6D690261_O" inverseSideOf="" javaName="users" javaType="Users" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedcategories" targetEntity="Users" targetTableName="users" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK15C8223AD60EB13" id="LINK_FK_FK15C8223AD60EB13_I" inverseSideOf="LINK_FK_FK15C8223AD60EB13_O" javaName="listOfFeedcategories" javaType="java.util.List" joinTableName="" mappedBy="feedcategories" optional="" owningSide="false" sourceTableName="feedcategories" targetEntity="Feedcategories" targetTableName="feedcategories" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK15C8223AD60EB13" id="LINK_FK_FK15C8223AD60EB13_O" inverseSideOf="" javaName="feedcategories" javaType="Feedcategories" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedcategories" targetEntity="Feedcategories" targetTableName="feedcategories" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="parent_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK420395F8EDA2E63F" id="LINK_FK_FK420395F8EDA2E63F_I" inverseSideOf="LINK_FK_FK420395F8EDA2E63F_O" javaName="listOfFeedsubscriptions" javaType="java.util.List" joinTableName="" mappedBy="feedcategories" optional="" owningSide="false" sourceTableName="feedcategories" targetEntity="Feedsubscriptions" targetTableName="feedsubscriptions" used="true"/>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Feedentries" name="feedentries" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="guid" dbNotNull="true" dbPosition="2" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="guid" javaType="java.lang.String" jdbcTypeCode="12" label="Guid" maxLength="2048" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="guidHash" dbNotNull="true" dbPosition="3" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="guidhash" javaType="java.lang.String" jdbcTypeCode="12" label="Guidhash" maxLength="40" notEmpty="true" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="inserted" dbNotNull="false" dbPosition="4" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="inserted" javaType="java.util.Date" jdbcTypeCode="93" label="Inserted" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="updated" dbNotNull="false" dbPosition="5" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="updated" javaType="java.util.Date" jdbcTypeCode="93" label="Updated" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="url" dbNotNull="false" dbPosition="6" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="url" javaType="java.lang.String" jdbcTypeCode="12" label="Url" maxLength="2048" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="content_id" dbNotNull="true" dbPosition="7" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="contentId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Content id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="1" dbName="feed_id" dbNotNull="true" dbPosition="8" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="feedId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Feed id" notNull="true" selected="true"/>
+<fk name="FKE8844512A0FBD10D">
+<fkcol colname="content_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedentries" tableref="feedentrycontents" updaterule="3"/>
+</fk>
+<fk name="fk_feed_id">
+<fkcol colname="feed_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedentries" tableref="feeds" updaterule="3"/>
+</fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_entry_id" id="LINK_FK_fk_entry_id_I" inverseSideOf="LINK_FK_fk_entry_id_O" javaName="listOfFeedentrytags" javaType="java.util.List" joinTableName="" mappedBy="feedentries" optional="" owningSide="false" sourceTableName="feedentries" targetEntity="Feedentrytags" targetTableName="feedentrytags" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FKD6DCE994F46A5555" id="LINK_FK_FKD6DCE994F46A5555_I" inverseSideOf="LINK_FK_FKD6DCE994F46A5555_O" javaName="listOfFeedentrystatuses" javaType="java.util.List" joinTableName="" mappedBy="feedentries" optional="" owningSide="false" sourceTableName="feedentries" targetEntity="Feedentrystatuses" targetTableName="feedentrystatuses" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_feed_id" id="LINK_FK_fk_feed_id_O" inverseSideOf="" javaName="feeds" javaType="Feeds" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedentries" targetEntity="Feeds" targetTableName="feeds" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="feed_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FKE8844512A0FBD10D" id="LINK_FK_FKE8844512A0FBD10D_O" inverseSideOf="" javaName="feedentrycontents" javaType="Feedentrycontents" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedentries" targetEntity="Feedentrycontents" targetTableName="feedentrycontents" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="content_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Feedentrycontents" name="feedentrycontents" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="content" dbNotNull="false" dbPosition="2" dbSize="2147483647" dbTypeName="LONGTEXT" inputType="text" javaName="content" javaType="java.lang.String" jdbcTypeCode="-1" label="Content" longText="true" maxLength="2147483647" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="enclosureType" dbNotNull="false" dbPosition="3" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="enclosuretype" javaType="java.lang.String" jdbcTypeCode="12" label="Enclosuretype" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="enclosureUrl" dbNotNull="false" dbPosition="4" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="enclosureurl" javaType="java.lang.String" jdbcTypeCode="12" label="Enclosureurl" maxLength="2048" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="title" dbNotNull="false" dbPosition="5" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="title" javaType="java.lang.String" jdbcTypeCode="12" label="Title" maxLength="2048" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="author" dbNotNull="false" dbPosition="6" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="author" javaType="java.lang.String" jdbcTypeCode="12" label="Author" maxLength="128" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="contentHash" dbNotNull="false" dbPosition="7" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="contenthash" javaType="java.lang.String" jdbcTypeCode="12" label="Contenthash" maxLength="40" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="titleHash" dbNotNull="false" dbPosition="8" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="titlehash" javaType="java.lang.String" jdbcTypeCode="12" label="Titlehash" maxLength="40" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="categories" dbNotNull="false" dbPosition="9" dbSize="4096" dbTypeName="VARCHAR" inputType="text" javaName="categories" javaType="java.lang.String" jdbcTypeCode="12" label="Categories" maxLength="4096" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FKE8844512A0FBD10D" id="LINK_FK_FKE8844512A0FBD10D_I" inverseSideOf="LINK_FK_FKE8844512A0FBD10D_O" javaName="listOfFeedentries" javaType="java.util.List" joinTableName="" mappedBy="feedentrycontents" optional="" owningSide="false" sourceTableName="feedentrycontents" targetEntity="Feedentries" targetTableName="feedentries" used="true"/>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Feedentrystatuses" name="feedentrystatuses" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="read_status" dbNotNull="false" dbPosition="2" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="readStatus" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Read status" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="starred" dbNotNull="true" dbPosition="3" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="starred" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Starred" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="entry_id" dbNotNull="true" dbPosition="4" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="entryId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Entry id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="subscription_id" dbNotNull="true" dbPosition="5" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="subscriptionId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Subscription id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="1" dbName="user_id" dbNotNull="true" dbPosition="6" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="entryInserted" dbNotNull="false" dbPosition="7" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="entryinserted" javaType="java.util.Date" jdbcTypeCode="93" label="Entryinserted" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="entryUpdated" dbNotNull="false" dbPosition="8" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="entryupdated" javaType="java.util.Date" jdbcTypeCode="93" label="Entryupdated" notNull="false" selected="true"/>
+<fk name="FKD6DCE994E181535F">
+<fkcol colname="subscription_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedentrystatuses" tableref="feedsubscriptions" updaterule="3"/>
+</fk>
+<fk name="FKD6DCE994F46A5555">
+<fkcol colname="entry_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedentrystatuses" tableref="feedentries" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FKD6DCE994F46A5555" id="LINK_FK_FKD6DCE994F46A5555_O" inverseSideOf="" javaName="feedentries" javaType="Feedentries" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedentrystatuses" targetEntity="Feedentries" targetTableName="feedentries" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="entry_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FKD6DCE994E181535F" id="LINK_FK_FKD6DCE994E181535F_O" inverseSideOf="" javaName="feedsubscriptions" javaType="Feedsubscriptions" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedentrystatuses" targetEntity="Feedsubscriptions" targetTableName="feedsubscriptions" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="subscription_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Feedentrytags" name="feedentrytags" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="entry_id" dbNotNull="true" dbPosition="2" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="entryId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Entry id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_id" dbNotNull="true" dbPosition="3" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="4" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Name" maxLength="40" notEmpty="true" notNull="true" selected="true"/>
+<fk name="fk_entry_id">
+<fkcol colname="entry_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedentrytags" tableref="feedentries" updaterule="3"/>
+</fk>
+<fk name="fk_user_id">
+<fkcol colname="user_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedentrytags" tableref="users" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_user_id" id="LINK_FK_fk_user_id_O" inverseSideOf="" javaName="users" javaType="Users" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedentrytags" targetEntity="Users" targetTableName="users" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_entry_id" id="LINK_FK_fk_entry_id_O" inverseSideOf="" javaName="feedentries" javaType="Feedentries" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedentrytags" targetEntity="Feedentries" targetTableName="feedentries" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="entry_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Feeds" name="feeds" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="disabledUntil" dbNotNull="false" dbPosition="2" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="disableduntil" javaType="java.util.Date" jdbcTypeCode="93" label="Disableduntil" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="errorCount" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="errorcount" javaType="java.lang.Integer" jdbcTypeCode="4" label="Errorcount" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="lastUpdated" dbNotNull="false" dbPosition="4" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="lastupdated" javaType="java.util.Date" jdbcTypeCode="93" label="Lastupdated" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="link" dbNotNull="false" dbPosition="5" dbSize="2147483647" dbTypeName="LONGTEXT" inputType="text" javaName="link" javaType="java.lang.String" jdbcTypeCode="-1" label="Link" longText="true" maxLength="2147483647" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="message" dbNotNull="false" dbPosition="6" dbSize="2147483647" dbTypeName="LONGTEXT" inputType="text" javaName="message" javaType="java.lang.String" jdbcTypeCode="-1" label="Message" longText="true" maxLength="2147483647" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="url" dbNotNull="true" dbPosition="7" dbSize="2147483647" dbTypeName="LONGTEXT" inputType="text" javaName="url" javaType="java.lang.String" jdbcTypeCode="-1" label="Url" longText="true" maxLength="2147483647" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="etagHeader" dbNotNull="false" dbPosition="8" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="etagheader" javaType="java.lang.String" jdbcTypeCode="12" label="Etagheader" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="lastModifiedHeader" dbNotNull="false" dbPosition="9" dbSize="64" dbTypeName="VARCHAR" inputType="text" javaName="lastmodifiedheader" javaType="java.lang.String" jdbcTypeCode="12" label="Lastmodifiedheader" maxLength="64" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="pushHub" dbNotNull="false" dbPosition="10" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="pushhub" javaType="java.lang.String" jdbcTypeCode="12" label="Pushhub" maxLength="2048" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="pushTopic" dbNotNull="false" dbPosition="11" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="pushtopic" javaType="java.lang.String" jdbcTypeCode="12" label="Pushtopic" maxLength="2048" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="pushLastPing" dbNotNull="false" dbPosition="12" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="pushlastping" javaType="java.util.Date" jdbcTypeCode="93" label="Pushlastping" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="lastPublishedDate" dbNotNull="false" dbPosition="13" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="lastpublisheddate" javaType="java.util.Date" jdbcTypeCode="93" label="Lastpublisheddate" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="lastContentHash" dbNotNull="false" dbPosition="14" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="lastcontenthash" javaType="java.lang.String" jdbcTypeCode="12" label="Lastcontenthash" maxLength="40" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="averageEntryInterval" dbNotNull="false" dbPosition="15" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="averageentryinterval" javaType="java.lang.Long" jdbcTypeCode="-5" label="Averageentryinterval" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="lastEntryDate" dbNotNull="false" dbPosition="16" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="lastentrydate" javaType="java.util.Date" jdbcTypeCode="93" label="Lastentrydate" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="push_topic_hash" dbNotNull="false" dbPosition="17" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="pushTopicHash" javaType="java.lang.String" jdbcTypeCode="12" label="Push topic hash" maxLength="40" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="normalizedUrl" dbNotNull="false" dbPosition="18" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="normalizedurl" javaType="java.lang.String" jdbcTypeCode="12" label="Normalizedurl" maxLength="2048" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="normalizedUrlHash" dbNotNull="false" dbPosition="19" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="normalizedurlhash" javaType="java.lang.String" jdbcTypeCode="12" label="Normalizedurlhash" maxLength="40" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="url_after_redirect" dbNotNull="false" dbPosition="20" dbSize="2048" dbTypeName="VARCHAR" inputType="text" javaName="urlAfterRedirect" javaType="java.lang.String" jdbcTypeCode="12" label="Url after redirect" maxLength="2048" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_feed_id" id="LINK_FK_fk_feed_id_I" inverseSideOf="LINK_FK_fk_feed_id_O" javaName="listOfFeedentries" javaType="java.util.List" joinTableName="" mappedBy="feeds" optional="" owningSide="false" sourceTableName="feeds" targetEntity="Feedentries" targetTableName="feedentries" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK420395F83BFA4D81" id="LINK_FK_FK420395F83BFA4D81_I" inverseSideOf="LINK_FK_FK420395F83BFA4D81_O" javaName="listOfFeedsubscriptions" javaType="java.util.List" joinTableName="" mappedBy="feeds" optional="" owningSide="false" sourceTableName="feeds" targetEntity="Feedsubscriptions" targetTableName="feedsubscriptions" used="true"/>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Feedsubscriptions" name="feedsubscriptions" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="title" dbNotNull="true" dbPosition="2" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="title" javaType="java.lang.String" jdbcTypeCode="12" label="Title" maxLength="128" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="category_id" dbNotNull="false" dbPosition="3" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="categoryId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Category id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="feed_id" dbNotNull="true" dbPosition="4" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="feedId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Feed id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_id" dbNotNull="true" dbPosition="5" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="position" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="INT" inputType="number" javaName="position" javaType="java.lang.Integer" jdbcTypeCode="4" label="Position" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="filter" dbNotNull="false" dbPosition="7" dbSize="4096" dbTypeName="VARCHAR" inputType="text" javaName="filter" javaType="java.lang.String" jdbcTypeCode="12" label="Filter" maxLength="4096" notNull="false" selected="true"/>
+<fk name="FK420395F83BFA4D81">
+<fkcol colname="feed_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedsubscriptions" tableref="feeds" updaterule="3"/>
+</fk>
+<fk name="FK420395F86D690261">
+<fkcol colname="user_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedsubscriptions" tableref="users" updaterule="3"/>
+</fk>
+<fk name="FK420395F8EDA2E63F">
+<fkcol colname="category_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="feedsubscriptions" tableref="feedcategories" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK420395F83BFA4D81" id="LINK_FK_FK420395F83BFA4D81_O" inverseSideOf="" javaName="feeds" javaType="Feeds" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedsubscriptions" targetEntity="Feeds" targetTableName="feeds" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="feed_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FKD6DCE994E181535F" id="LINK_FK_FKD6DCE994E181535F_I" inverseSideOf="LINK_FK_FKD6DCE994E181535F_O" javaName="listOfFeedentrystatuses" javaType="java.util.List" joinTableName="" mappedBy="feedsubscriptions" optional="" owningSide="false" sourceTableName="feedsubscriptions" targetEntity="Feedentrystatuses" targetTableName="feedentrystatuses" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK420395F8EDA2E63F" id="LINK_FK_FK420395F8EDA2E63F_O" inverseSideOf="" javaName="feedcategories" javaType="Feedcategories" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedsubscriptions" targetEntity="Feedcategories" targetTableName="feedcategories" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="category_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FK420395F86D690261" id="LINK_FK_FK420395F86D690261_O" inverseSideOf="" javaName="users" javaType="Users" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="feedsubscriptions" targetEntity="Users" targetTableName="users" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="HibernateSequences" name="hibernate_sequences" schema="">
+<column dbComment="" dbDefaultValue="" dbName="sequence_name" dbNotNull="false" dbPosition="1" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="sequenceName" javaType="java.lang.String" jdbcTypeCode="12" label="Sequence name" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="sequence_next_hi_value" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="sequenceNextHiValue" javaType="java.lang.Integer" jdbcTypeCode="4" label="Sequence next hi value" notNull="false" selected="true"/>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Userroles" name="userroles" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="roleName" dbNotNull="true" dbPosition="2" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="rolename" javaType="java.lang.String" jdbcTypeCode="12" label="Rolename" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_id" dbNotNull="true" dbPosition="3" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<fk name="FKBB5E59B26D690261">
+<fkcol colname="user_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="userroles" tableref="users" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FKBB5E59B26D690261" id="LINK_FK_FKBB5E59B26D690261_O" inverseSideOf="" javaName="users" javaType="Users" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="userroles" targetEntity="Users" targetTableName="users" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Users" name="users" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="disabled" dbNotNull="true" dbPosition="2" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="disabled" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Disabled" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="email" dbNotNull="false" dbPosition="3" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="email" javaType="java.lang.String" jdbcTypeCode="12" label="Email" maxLength="255" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="4" dbSize="32" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Name" maxLength="32" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="password" dbNotNull="true" dbPosition="5" dbSize="65535" dbTypeName="BLOB" inputType="" javaName="password" javaType="byte[]" jdbcTypeCode="-4" label="Password" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="salt" dbNotNull="true" dbPosition="6" dbSize="65535" dbTypeName="BLOB" inputType="" javaName="salt" javaType="byte[]" jdbcTypeCode="-4" label="Salt" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="lastLogin" dbNotNull="false" dbPosition="7" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="lastlogin" javaType="java.util.Date" jdbcTypeCode="93" label="Lastlogin" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="apiKey" dbNotNull="false" dbPosition="8" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="apikey" javaType="java.lang.String" jdbcTypeCode="12" label="Apikey" maxLength="40" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="recoverPasswordToken" dbNotNull="false" dbPosition="9" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="recoverpasswordtoken" javaType="java.lang.String" jdbcTypeCode="12" label="Recoverpasswordtoken" maxLength="40" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="recoverPasswordTokenDate" dbNotNull="false" dbPosition="10" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="recoverpasswordtokendate" javaType="java.util.Date" jdbcTypeCode="93" label="Recoverpasswordtokendate" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="created" dbNotNull="false" dbPosition="11" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="created" javaType="java.util.Date" jdbcTypeCode="93" label="Created" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="last_full_refresh" dbNotNull="false" dbPosition="12" dbSize="26" dbTypeName="DATETIME" inputType="" javaName="lastFullRefresh" javaType="java.util.Date" jdbcTypeCode="93" label="Last full refresh" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FKBB5E59B26D690261" id="LINK_FK_FKBB5E59B26D690261_I" inverseSideOf="LINK_FK_FKBB5E59B26D690261_O" javaName="listOfUserroles" javaType="java.util.List" joinTableName="" mappedBy="users" optional="" owningSide="false" sourceTableName="users" targetEntity="Userroles" targetTableName="userroles" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FKAE0194EE6D690261" id="LINK_FK_FKAE0194EE6D690261_I" inverseSideOf="LINK_FK_FKAE0194EE6D690261_O" javaName="listOfUsersettings" javaType="java.util.List" joinTableName="" mappedBy="users" optional="" owningSide="false" sourceTableName="users" targetEntity="Usersettings" targetTableName="usersettings" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK420395F86D690261" id="LINK_FK_FK420395F86D690261_I" inverseSideOf="LINK_FK_FK420395F86D690261_O" javaName="listOfFeedsubscriptions" javaType="java.util.List" joinTableName="" mappedBy="users" optional="" owningSide="false" sourceTableName="users" targetEntity="Feedsubscriptions" targetTableName="feedsubscriptions" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="FK15C8223A6D690261" id="LINK_FK_FK15C8223A6D690261_I" inverseSideOf="LINK_FK_FK15C8223A6D690261_O" javaName="listOfFeedcategories" javaType="java.util.List" joinTableName="" mappedBy="users" optional="" owningSide="false" sourceTableName="users" targetEntity="Feedcategories" targetTableName="feedcategories" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_user_id" id="LINK_FK_fk_user_id_I" inverseSideOf="LINK_FK_fk_user_id_O" javaName="listOfFeedentrytags" javaType="java.util.List" joinTableName="" mappedBy="users" optional="" owningSide="false" sourceTableName="users" targetEntity="Feedentrytags" targetTableName="feedentrytags" used="true"/>
+</table>
+<table catalog="commafeed" databaseType="TABLE" javaBean="Usersettings" name="usersettings" schema="">
+<column dbComment="" dbDefaultValue="" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="id" javaType="java.lang.Long" jdbcTypeCode="-5" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="customCss" dbNotNull="false" dbPosition="2" dbSize="2147483647" dbTypeName="LONGTEXT" inputType="text" javaName="customcss" javaType="java.lang.String" jdbcTypeCode="-1" label="Customcss" longText="true" maxLength="2147483647" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="readingMode" dbNotNull="true" dbPosition="3" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="readingmode" javaType="java.lang.String" jdbcTypeCode="12" label="Readingmode" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="readingOrder" dbNotNull="true" dbPosition="4" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="readingorder" javaType="java.lang.String" jdbcTypeCode="12" label="Readingorder" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="showRead" dbNotNull="true" dbPosition="5" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="showread" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Showread" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_id" dbNotNull="true" dbPosition="6" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="scrollMarks" dbNotNull="true" dbPosition="7" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="scrollmarks" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Scrollmarks" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="viewMode" dbNotNull="true" dbPosition="8" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="viewmode" javaType="java.lang.String" jdbcTypeCode="12" label="Viewmode" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_lang" dbNotNull="false" dbPosition="9" dbSize="4" dbTypeName="VARCHAR" inputType="text" javaName="userLang" javaType="java.lang.String" jdbcTypeCode="12" label="User lang" maxLength="4" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="theme" dbNotNull="false" dbPosition="10" dbSize="32" dbTypeName="VARCHAR" inputType="text" javaName="theme" javaType="java.lang.String" jdbcTypeCode="12" label="Theme" maxLength="32" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="scroll_speed" dbNotNull="false" dbPosition="11" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="scrollSpeed" javaType="java.lang.Long" jdbcTypeCode="-5" label="Scroll speed" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="email" dbNotNull="false" dbPosition="12" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="email" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Email" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="gmail" dbNotNull="false" dbPosition="13" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="gmail" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Gmail" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="facebook" dbNotNull="false" dbPosition="14" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="facebook" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Facebook" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="twitter" dbNotNull="false" dbPosition="15" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="twitter" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Twitter" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="googleplus" dbNotNull="false" dbPosition="16" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="googleplus" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Googleplus" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="tumblr" dbNotNull="false" dbPosition="17" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="tumblr" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Tumblr" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="pocket" dbNotNull="false" dbPosition="18" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="pocket" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Pocket" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="instapaper" dbNotNull="false" dbPosition="19" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="instapaper" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Instapaper" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="buffer" dbNotNull="false" dbPosition="20" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="buffer" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Buffer" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="readability" dbNotNull="false" dbPosition="21" dbSize="1" dbTypeName="BIT" inputType="checkbox" javaName="readability" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Readability" notNull="false" selected="true"/>
+<fk name="FKAE0194EE6D690261">
+<fkcol colname="user_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="usersettings" tableref="users" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="FKAE0194EE6D690261" id="LINK_FK_FKAE0194EE6D690261_O" inverseSideOf="" javaName="users" javaType="Users" joinTableName="" mappedBy="" optional="" owningSide="true" sourceTableName="usersettings" targetEntity="Users" targetTableName="users" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+</tableList>
+</root>

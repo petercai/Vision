@@ -1,0 +1,18 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+/**
+ * Mapper provider 
+ *
+ * @author $AUTHOR
+ * 
+ */
+public interface JpaMapperProvider {
+
+	/**
+	 * Returns the current mapper instance
+	 * @return
+	 */
+	public <JPA,POJO> JpaMapper<JPA,POJO> getMapper(Class<JPA> jpaClass, Class<POJO> pojoClass) ;
+}

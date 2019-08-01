@@ -1,0 +1,10 @@
+## --- Variables with reference to the current $entity
+#set( $recordClass    = "${entity.name}Record" )
+#set( $recordInstance = $fn.uncapitalize($entity.name) )
+##
+#set( $jpaRecordClass    = "${entity.name}JpaRecord" )
+#set( $jpaRecordKeyClass = "${entity.name}JpaRecordKey" )
+#set( $jpaMapperClass    = "${entity.name}JpaMapper" )
+#set( $jpaServiceClass   = "${entity.name}PersistenceJpa" )
+##
+## #set( $keyClassName    = "${entity.name}EntityKey" )

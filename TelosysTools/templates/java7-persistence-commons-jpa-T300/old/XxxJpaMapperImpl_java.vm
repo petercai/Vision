@@ -1,0 +1,68 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+##--------------------------------------------------------------------------------------------------------
+## #set( $entityClassName = "${entity.name}EntityRec" )
+##--------------------------------------------------------------------------------------------------------
+
+import ${recordPackage}.${recordClass}; // "Neutral Record" class 
+import ${jpaMapperPackage}.JpaMapper;
+import ${jpaRecordPackage}.${jpaRecordClass}; // "JPA Entity" class 
+
+/**
+ * Mapping between entity beans and display beans.
+ */
+public class ${jpaMapperClass} extends GenericMapper implements JpaMapper<${jpaRecordClass}, ${recordClass}> {
+
+	/**
+	 * Constructor.
+	 */
+	public ${jpaMapperClass}() {
+		super();
+	}
+
+	/**
+	 * Mapping from '${jpaRecordClass}' to '${recordClass}'
+	 * @param entity the mapping input 
+	 */
+	@Override
+	public $recordClass mapEntityToRecord ( ${jpaRecordClass} entity) {
+		if ( entity == null ) {
+			return null;
+		}
+
+		//--- Generic mapping 
+		${recordClass} record = map(entity, ${recordClass}.class);
+
+		return record ;
+	}
+
+	/**
+	 * Mapping from '${recordClass}' to '${jpaRecordClass}' 
+	 * @param record the mapping input 
+	 * @return
+	 */
+	@Override
+	public ${jpaRecordClass} mapRecordToEntity(${recordClass} record) {
+		if ( record == null ) {
+			return null;
+		}
+		return map(record, ${jpaRecordClass}.class);
+	}
+
+	/**
+	 * Mapping from record '${recordClass}' to entity '${jpaRecordClass}'
+	 * @param record
+	 * @param entity
+	 */
+	public void mapRecordToEntity(${recordClass} record, ${jpaRecordClass} entity) {
+		if ( record == null ) {
+			return;
+		}
+
+		//--- Generic mapping 
+		map(record, entity);
+	}
+
+}

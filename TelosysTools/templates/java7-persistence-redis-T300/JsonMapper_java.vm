@@ -1,0 +1,25 @@
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+/**
+ * JsonMapper interface
+ * 
+ * @author Telosys
+ */
+public interface JsonMapper {
+	
+	/**
+	 * Converts the given bean to a JSON string
+	 * @param bean
+	 * @return
+	 */
+	public String beanToJson(Object bean) ;
+	
+	/**
+	 * Converts the given JSON string to a bean instance
+	 * @param json 
+	 * @return
+	 */
+	public <T> T jsonToBean(String json, Class<T> entityClass) ;
+
+}

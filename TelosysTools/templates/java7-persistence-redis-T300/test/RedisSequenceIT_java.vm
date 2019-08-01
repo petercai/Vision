@@ -1,0 +1,38 @@
+#parse("/include/java_header.vm")
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+/**
+ * Redis Sequence class Integration Test (IT) <br>
+ * ( requires a Redis active database )
+ * 
+ * @author Telosys 
+ *
+ */
+public class RedisSequenceIT {
+
+	@Test
+	public void test1() {
+		System.out.println("--- test1");
+    	RedisSequence sequence = new RedisSequence("foo") ;
+
+    	long r = sequence.delete(); // to be sure that it doesn't exist
+    	System.out.println("Sequence deleted : " + r );
+    	
+    	assertEquals( 0L, sequence.currVal() );
+
+    	assertEquals( 1L, sequence.nextVal() );
+    	System.out.println("Sequence currVal() = " + sequence.currVal() );
+    	assertEquals( 1L, sequence.currVal() );
+    	
+    	for ( int i=0 ; i < 10 ; i++ ) {
+        	sequence.nextVal() ;
+    	}
+    	System.out.println("Sequence currVal() = " + sequence.currVal() );
+    	assertEquals( 11L, sequence.currVal() );
+	}
+	
+}

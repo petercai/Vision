@@ -1,0 +1,21 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import ${jpaMapperPackage}.JpaMapper;
+import ${jpaMapperPackage}.JpaMapperProvider;
+
+/**
+ * Mapper provider for "ModelMapper" implementation.
+ * 
+ * @author $AUTHOR
+ */
+public class JpaMapperProviderImpl implements JpaMapperProvider {
+
+	@Override
+	public <JPA, POJO> JpaMapper<JPA, POJO> getMapper(Class<JPA> jpaClass, Class<POJO> pojoClass) {
+
+		return new JpaMapperImpl<>(jpaClass, pojoClass);
+	}
+
+}

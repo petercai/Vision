@@ -1,0 +1,25 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+/**
+ * Interface for mapping between JPA class and POJO class.
+ *
+ * @author $AUTHOR
+ */
+public interface JpaMapper<JPA,POJO> {
+
+	/**
+	 * Mapping from 'JPA Record' to 'POJO Record'
+	 * @param entity the mapping input 
+	 */
+	public POJO mapEntityToRecord ( JPA entity) ;
+
+	/**
+	 * Mapping from 'POJO Record' to 'JPA Record' 
+	 * @param record the mapping input 
+	 * @return
+	 */
+	public JPA mapRecordToEntity(POJO record) ;
+
+}

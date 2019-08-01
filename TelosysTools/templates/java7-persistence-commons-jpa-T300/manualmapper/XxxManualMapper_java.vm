@@ -1,0 +1,39 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import ${recordPackage}.${recordClass};
+import ${jpaMapperPackage}.JpaMapper;
+import ${jpaRecordPackage}.${jpaRecordClass};
+
+/**
+ * Manual mapping for "${entity.name}" 
+ *
+ * @author $AUTHOR
+ *
+ */
+public class ${entity.name}ManualMapper implements JpaMapper<${jpaRecordClass}, ${recordClass}> {
+
+	@Override
+	public ${recordClass} mapEntityToRecord(${jpaRecordClass} entity) {
+		if ( entity == null ) return null ;
+		${recordClass} pojo = new ${recordClass}();
+#foreach( $attribute in $entity.attributes )
+		pojo.${attribute.setter}(entity.${attribute.getter}()); 
+#end
+		return pojo;
+	}
+
+	@Override
+	public ${jpaRecordClass} mapRecordToEntity(${recordClass} pojo) {
+		if ( pojo == null ) return null ;
+		${jpaRecordClass} entity = new ${jpaRecordClass}();
+#foreach( $attribute in $entity.attributes )
+		entity.${attribute.setter}(pojo.${attribute.getter}()); 
+#end
+		return entity;
+	}
+
+}

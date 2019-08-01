@@ -1,0 +1,23 @@
+#parse("include/java_header.vm")
+
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import org.demo.persistence.${entity.name}Persistence ;
+import org.demo.persistence.${entity.name}PersistenceGenericTest;
+import org.junit.Test;
+
+/**
+ * JUnit tests for Car persistence service
+ * 
+ * @author Telosys Tools
+ *
+ */
+public class ${entity.name}PersistenceMongoIT extends ${entity.name}PersistenceGenericTest {
+
+	@Test
+	public void testPersistenceService() throws Exception {
+    	${entity.name}Persistence persistenceService = new ${entity.name}PersistenceMongo();
+    	testPersistenceService(persistenceService);
+	}
+}
+

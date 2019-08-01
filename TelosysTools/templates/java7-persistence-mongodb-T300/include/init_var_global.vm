@@ -1,0 +1,8 @@
+## --- Global Variables (without reference to $entity )
+#set( $recordPackage       = "${ROOT_PKG}.data.record" )
+#set( $mongoImplPackage    = "${ROOT_PKG}.persistence.impl.mongo" )
+## 
+#set( $mongoCommonsPackage = "${ROOT_PKG}.persistence.impl.mongo.commons" )
+##
+#set( $AUTHOR = "Telosys" )
+##

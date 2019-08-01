@@ -1,0 +1,58 @@
+#parse("include/init_var_global.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import ${jpaMapperPackage}.JpaMapper;
+import ${jpaMapperPackage}.JpaMapperProvider;
+
+/**
+ * Manual mapper provider
+ *
+ * @author $AUTHOR
+ *
+ */
+public class JpaMapperProviderImpl implements JpaMapperProvider {
+
+	private static final String RECORD = "Record" ;
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public <JPA, POJO> JpaMapper<JPA, POJO> getMapper(Class<JPA> jpaClass, Class<POJO> pojoClass) {
+
+		return (JpaMapper<JPA, POJO>) getMapperInstance(pojoClass);
+	}
+
+	protected String getEntityName(Class<?> pojoClass) {
+		String simpleName = pojoClass.getSimpleName();
+		
+		if ( ! simpleName.endsWith(RECORD) ) {
+			throw new IllegalStateException("POJO class doesn't end with '" + RECORD + "' (" + simpleName + ")");
+		}
+		int delta = simpleName.length() - RECORD.length(); 
+		return pojoClass.getSimpleName().substring(0, delta);
+	}
+	
+	protected String getMapperClassName(Class<?> pojoClass) {
+		String entityName = getEntityName(pojoClass);
+		String mapperClassName = entityName + "ManualMapper" ;
+		String packageName = this.getClass().getPackage().getName() ;
+		return packageName + "." + mapperClassName ;
+	}
+
+	protected Class<?> getMapperClass(Class<?> pojoClass) {
+		String className = getMapperClassName(pojoClass);
+		try {
+			return this.getClass().getClassLoader().loadClass(className);
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException("Cannot load class '" + className + "'", e);
+		}
+	}
+	protected JpaMapper<?, ?> getMapperInstance(Class<?> pojoClass) {
+		Class<?> mapperClass = getMapperClass(pojoClass);
+		try {
+			return (JpaMapper<?, ?>) mapperClass.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			throw new IllegalStateException("Cannot create instance for class '" + mapperClass.getSimpleName() + "'", e);
+		}
+	}
+}

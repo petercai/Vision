@@ -1,0 +1,83 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+#set( $values  = $fn.buildValues($entity.attributes , 1) )
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import ${ROOT_PKG}.data.record.${recordClass};
+import ${ROOT_PKG}.persistence.impl.jpa.record.${jpaRecordClass} ;
+
+/**
+ * Generic tests for ${entity.name} mapping
+ *
+ */
+public abstract class ${entity.name}MappingGenericTest {
+
+	protected void setMapperProvider(JpaMapperProvider provider) {
+		JpaMapping.setMapperProvider(provider);
+		System.out.println("Mapper provider set to : " + provider.getClass().getCanonicalName() );
+	}
+	
+	protected void processAllTest() {
+		testPojoMapping();
+		testEntityMapping();
+	}
+	
+	private $jpaRecordClass buildJpaRecord() {
+		$jpaRecordClass entity = new $jpaRecordClass();
+#foreach( $attribute in $entity.attributes )
+		entity.${attribute.setter}($values.getValue($attribute.name)); 
+#end
+		return entity ;
+	}
+	
+	private $recordClass buildRecord() {
+		$recordClass pojo = new $recordClass();
+#foreach( $attribute in $entity.attributes )
+		pojo.${attribute.setter}($values.getValue($attribute.name)); 
+#end
+		return pojo ;
+	}
+
+	private void checkValues($recordClass r1, $recordClass r2) {
+		assertTrue(r1 != r2); // different instances
+#foreach( $attribute in $entity.attributes )
+		assertEquals(r1.${attribute.getter}(), r2.${attribute.getter}());
+#end
+	}
+
+	private void checkValues($jpaRecordClass r1, $jpaRecordClass r2) {
+		assertTrue(r1 != r2); // different instances
+#foreach( $attribute in $entity.attributes )
+		assertEquals(r1.${attribute.getter}(), r2.${attribute.getter}());
+#end
+	}
+	
+	protected void testPojoMapping() {
+		System.out.println("Test POJO mapping" );
+    	JpaMapper<${jpaRecordClass},${recordClass}> mapper = JpaMapping.getMapperProvider().getMapper(${jpaRecordClass}.class, ${recordClass}.class);
+    	$recordClass pojo1 = buildRecord();
+    	$jpaRecordClass entity = mapper.mapRecordToEntity(pojo1);
+    	$recordClass pojo2 = mapper.mapEntityToRecord(entity);
+    	checkValues(pojo1, pojo2);
+    	// Test null 
+    	assertNull(mapper.mapRecordToEntity(null));
+	}
+	
+	protected void testEntityMapping() {
+		System.out.println("Test ENTITY mapping" );
+    	JpaMapper<${jpaRecordClass},${recordClass}> mapper = JpaMapping.getMapperProvider().getMapper(${jpaRecordClass}.class, ${recordClass}.class);
+		$jpaRecordClass entity1 = buildJpaRecord();
+		$recordClass pojo = mapper.mapEntityToRecord(entity1);
+		$jpaRecordClass entity2 = mapper.mapRecordToEntity(pojo);
+    	checkValues(entity1, entity2);
+    	// Test null 
+    	assertNull(mapper.mapEntityToRecord(null));
+	}
+	
+}

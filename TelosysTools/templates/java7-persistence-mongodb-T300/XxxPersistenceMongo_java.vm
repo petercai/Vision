@@ -1,0 +1,164 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import java.util.List;
+
+#foreach( $import in $java.imports($entity.keyAttributes) )
+import $import;
+#end
+
+import javax.inject.Named;
+import org.bson.conversions.Bson;
+import org.bson.Document;
+import ${recordPackage}.${recordClass};
+import ${ROOT_PKG}.persistence.${persistenceService};
+import ${mongoCommonsPackage}.GenericMongoDAO;
+import ${mongoCommonsPackage}.DocumentWrapper;
+
+/**
+ * ${entity.name} persistence service - Mongo implementation 
+ * 
+ * @author ${AUTHOR}
+ *
+ */
+@Named("${persistenceService}")
+public class $mongoServiceClass extends GenericMongoDAO<${recordClass}> implements $persistenceService {
+
+	/**
+	 * Constructor
+	 */
+	public ${entity.name}PersistenceMongo() {
+		super("${recordInstance}");
+	}
+
+	/**
+	 * Creates a new bean instance and set its primary key value(s)
+	 * 
+#foreach( $field in $keyFields )
+	 * @param ${field.name}
+#end
+	 * @return the new instance
+	 */
+	private ${recordClass} newInstanceWithPrimaryKey($fn.argumentsListWithType($keyFields)) {
+		${recordClass} record = new ${recordClass}();
+#foreach( $field in $keyFields )
+        record.${field.setter}(${field.name}); 
+#end
+		return record;
+	}
+
+	//-------------------------------------------------------------------------------------
+	// Generic DAO abstract methods implementations
+	//-------------------------------------------------------------------------------------
+	@Override
+	protected void setAutoIncrementedKey(${recordClass} record, long value) {
+#if( $entity.hasAutoIncrementedKey() )
+		record.${entity.autoincrementedKeyAttribute.setter}((${entity.autoincrementedKeyAttribute.type})value);
+#else
+		throw new IllegalStateException("Unexpected call to method 'setAutoIncrementedKey'");
+#end
+	}
+
+	@Override
+	protected Bson bsonForIdentifyBean(${recordClass}  record) {
+		DocumentWrapper mongoDoc = new DocumentWrapper();
+#foreach($field in $keyFields )
+		mongoDoc.append("${field.name}", record.${field.getter}());
+#end
+		return	mongoDoc.getDocument();
+	}
+
+	@Override
+	protected DocumentWrapper beanToDoc(${recordClass}  record) {
+		DocumentWrapper doc = new DocumentWrapper();	
+#foreach( $attribute in $entity.attributes)
+		doc.append("$attribute.name", record.${attribute.getter}());
+#end
+		return doc; 
+	}
+
+	@Override
+	protected ${recordClass} docTobean(Document doc) {
+		${recordClass} record = new ${recordClass} ();
+		DocumentWrapper mongoDoc = new DocumentWrapper(doc);
+#foreach( $attribute in $entity.attributes)
+		record.${attribute.setter}(mongoDoc.get${attribute.wrapperType}("$attribute.name"));
+#end
+		return record;
+	}
+	//-------------------------------------------------------------------------------------
+	// Persistence interface implementations
+	//-------------------------------------------------------------------------------------
+	@Override
+	public long countAll() {
+		return super.doCountAll();
+	}
+	
+	@Override
+	public ${recordClass} create(${recordClass} record) {
+#if( $entity.hasAutoIncrementedKey() )
+		super.doInsertIncr(record);
+#else
+		super.doInsert(record);
+#end
+		return record;
+	}
+
+	@Override
+	public boolean delete(${recordClass} record) {
+		long r = super.doDelete(record);
+		return r > 0L;
+	}
+
+	@Override
+	public boolean deleteById($fn.argumentsListWithWrapperType($keyFields)) {
+		${recordClass} record = newInstanceWithPrimaryKey($fn.argumentsList($keyFields));
+		long r = super.doDelete(record);
+		return r > 0L;
+	}
+
+	@Override
+	public boolean exists(${recordClass} record) {
+		return super.doExists(record);
+	}
+
+	@Override
+	public boolean exists($fn.argumentsListWithWrapperType($keyFields)) {
+		${recordClass} record = newInstanceWithPrimaryKey($fn.argumentsList($keyFields));
+		return super.doExists(record);
+	}
+
+	@Override
+	public List<${recordClass}> findAll() {
+		return super.doSelectAll();
+	}
+
+	@Override
+	public ${recordClass} findById($fn.argumentsListWithWrapperType($keyFields)) {
+        ${recordClass} record = newInstanceWithPrimaryKey($fn.argumentsList($keyFields));
+		return super.doSelect(record);
+	}
+
+	@Override
+	public ${recordClass} save(${recordClass} record) {
+		if (super.doExists(record)) {
+			super.doUpdate(record);
+		} else {
+#if( $entity.hasAutoIncrementedKey() )
+			super.doInsertIncr(record);
+#else
+			super.doInsert(record);
+#end
+		}
+        return record;
+	}
+
+	@Override
+	public boolean update(${recordClass} record) {
+		long result= super.doUpdate(record);	
+		return result > 0L;	
+	}
+}

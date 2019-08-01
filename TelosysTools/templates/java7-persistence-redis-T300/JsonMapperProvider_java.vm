@@ -1,0 +1,21 @@
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import org.demo.persistence.impl.redis.commons.json.impl.gson.GsonMapper;
+
+/**
+ * JsonMapper provider
+ * 
+ * @author Telosys
+ */
+public class JsonMapperProvider {
+	
+	/**
+	 * Returns an instance of JsonMapper
+	 * @return
+	 */
+	public static JsonMapper getJsonMapper() {
+		return new GsonMapper();
+	}
+	
+}

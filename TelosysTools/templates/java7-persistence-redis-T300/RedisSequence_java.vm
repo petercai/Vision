@@ -1,0 +1,91 @@
+#parse("include/java_header.vm")
+
+package ${target.javaPackageFromFolder($SRC)};
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.exceptions.JedisException;
+
+/**
+ * Sequence behavior based on a Redis counter
+ * 
+ * @author Telosys
+ *
+ */
+public class RedisSequence {
+
+	private final String sequenceName ;
+	private final String sequenceKey ;
+
+	/**
+	 * Constructor
+	 * @param entityName
+	 */
+	public RedisSequence(String name) {
+		super();
+		this.sequenceName = name ;
+		this.sequenceKey  = "SEQUENCE." + name ;
+	}
+
+	/**
+	 * Returns the sequence name
+	 * @return
+	 */
+	public final String getSequenceName() {
+		return sequenceName ; 
+	}
+
+	/**
+	 * Returns the Redis key for this sequence 
+	 * @return
+	 */
+	public final String getSequenceKey() {
+		return sequenceKey ; 
+	}
+	
+	/**
+	 * Returns the current value <br>
+	 * Returns 0 if the sequence doesn't exist
+	 * @return
+	 */
+	public final long currVal() {
+		try (Jedis jedis = ClientProvider.getJedisInstance() ) {
+			String currValString = jedis.get(sequenceKey); 
+			if ( currValString != null ) {
+				return Long.parseLong(currValString) ;
+			}
+			else {
+				//throw new RuntimeException("Sequence key '" + sequenceKey + "' not found");
+				return 0L ;
+			}
+		} catch (JedisException e) {
+			throw new RuntimeException("Sequence currVal error", e);
+		}
+	}
+
+	/**
+	 * Returns the next value (the sequence value is incremented)
+	 * @return
+	 */
+	public final long nextVal() {
+		try (Jedis jedis = ClientProvider.getJedisInstance() ) {
+			// "INCR" command : 
+			// . increments the current value
+			// . set the value to 1 if the key not already exists
+			return jedis.incr(sequenceKey); //  error if already set and not a number
+		} catch (JedisException e) {
+			throw new RuntimeException("Sequence nextVal error", e);
+		}
+	}
+
+	/**
+	 * Delete this sequence in Redis 
+	 * @return
+	 */
+	public final long delete() {
+		try (Jedis jedis = ClientProvider.getJedisInstance() ) {
+			return jedis.del(sequenceKey); //  error if already set and not a number
+		} catch (JedisException e) {
+			throw new RuntimeException("Sequence nextVal error", e);
+		}
+	}
+}

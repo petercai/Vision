@@ -1,0 +1,25 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import ${ROOT_PKG}.persistence.impl.jpa.mapping.${entity.name}MappingGenericTest;
+import org.junit.Test;
+
+/**
+ * Mapping tests for ${entity.name} with 'model mapper'
+ * 
+ * @author Telosys
+ *
+ */
+public class ${entity.name}ModelMapperTest extends ${entity.name}MappingGenericTest {
+
+	@Test
+	public void testMapping() {
+
+		setMapperProvider(new JpaMapperProviderImpl()) ;
+		processAllTest();
+	}	
+}

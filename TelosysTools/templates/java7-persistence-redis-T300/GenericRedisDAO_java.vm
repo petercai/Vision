@@ -1,0 +1,339 @@
+#parse("include/java_header.vm")
+package ${target.javaPackageFromFolder($SRC)};
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.demo.persistence.impl.redis.commons.json.JsonMapper;
+import org.demo.persistence.impl.redis.commons.json.JsonMapperProvider;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ScanParams;
+import redis.clients.jedis.ScanResult;
+import redis.clients.jedis.exceptions.JedisException;
+
+/**
+ * Generic abstract DAO for Redis persistence
+ * 
+ * @author Telosys
+ *
+ * @param <T>
+ */
+public abstract class GenericRedisDAO<T> {
+
+	private final static String ALL= "*";
+	private final static String SEPARATOR= ":";
+	//private final static String NX= "nx"; // SET OPTION : Only set the key if it does not already exist
+	private final static String XX= "xx"; // SET OPTION : Only set the key if it already exist
+	private final static String INITIAL_CURSOR= "0";
+	
+	//private final static JsonMapper mapper = new GsonMapper();
+	private final static JsonMapper mapper = JsonMapperProvider.getJsonMapper();
+	
+	private final Class<T> entityClass;
+	private final String   entityName;
+
+	//-----------------------------------------------------------------------------------------
+	/**
+	 * Constructor
+	 * @param entityName
+	 * @param entityClass
+	 */
+	protected GenericRedisDAO(String entityName, Class<T> entityClass) {
+		this.entityName  = entityName;
+		this.entityClass = entityClass;
+	}
+
+	//-----------------------------------------------------------------------------------------
+	// ABSTRACT METHODS
+	//-----------------------------------------------------------------------------------------
+	/**
+	 * Abstract method used to get the bean key as a string <br>
+	 * @return the key  
+	 */
+	protected abstract String getKey(T bean);
+	
+	/**
+	 * Abstract method used to set the computed value for an auto-incremented key <br>
+	 * This method is supposed to set the key if the bean has an auto-incremented key <br>
+	 * or to throw an exception if the bean doesn't have an auto-incremented key 
+	 * @param bean
+	 * @param id
+	 */
+	protected abstract void setAutoIncrementedKey(T bean, long id);
+	
+	//-----------------------------------------------------------------------------------------
+	// UTILITY METHODS
+	//-----------------------------------------------------------------------------------------
+	protected int toInt(long value) {
+		return (int)value;
+	}
+	
+	protected short toShort(long value) {
+		return (short)value;
+	}
+	
+	/**
+	 * Builds a Redis key composed of the entity name + ":" + the bean key 
+	 * @param bean
+	 * @return
+	 */
+	private String buildRedisKey(T bean) {
+		return entityName + SEPARATOR + getKey(bean);
+	}
+	
+	/**
+	 * Converts the given bean to a JSON string
+	 * @param bean
+	 * @return
+	 */
+	private String beanToJson(T bean) {
+		return mapper.beanToJson(bean);
+	}
+	
+	/**
+	 * Converts the given JSON string to a bean instance
+	 * @param json
+	 * @return
+	 */
+	private T jsonToBean(String json) {
+		return mapper.jsonToBean(json, entityClass);
+	}
+	
+	/**
+	 * Get connection to Redis
+	 * @return Connection to Redis by Jedis pool
+	 */
+	private Jedis getJedisInstance() {
+		return ClientProvider.getJedisInstance();
+	}
+	
+	/**
+	 * Tries to insert the given key if it doesn't exist 
+	 * @param jedis
+	 * @param key
+	 * @param value
+	 * @return true if inserted, false if not created (because already exist)
+	 */
+	private boolean insertIfInexistant(Jedis jedis, String key, String value) {
+		// Try to set the key 
+		String r = jedis.set(key, value, "nx"); // "nx" = insert only if doesn't exist
+		// Returns 
+		//  . "OK" if inserted
+		//  . null if not inserted (because already exist)
+		boolean b = false ;
+		if ( "OK".equals(r) ) {
+			b = true ; // inserted 
+		}
+		return b; // not inserted 
+	}
+
+	//-----------------------------------------------------------------------------------------
+	// REDIS PERSISTENCE METHODS
+	//-----------------------------------------------------------------------------------------
+	/**
+	 * Loads the given bean from the database using its primary key 
+	 * 
+	 * @param bean
+	 * @return bean if found and loaded, null if not found
+	 */
+	protected T doSelect(T bean) {
+		String key = buildRedisKey(bean);
+		try (Jedis jedis = getJedisInstance()) {
+			String json = jedis.get(key);
+			//return mapper.readValue(beanAsJson, type);
+			return jsonToBean(json);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Returns all the occurrences existing in the database
+	 * 
+	 * @return
+	 */
+	protected List<T> doSelectAll() {
+		try (Jedis jedis = getJedisInstance()) {
+			List<T> list = new LinkedList<T>();
+			List<String> keys = getAllKeys();
+			//String beanAsJson;
+			for (String key : keys) {
+				//beanAsJson = jedis.get(key);
+				//list.add(mapper.readValue(beanAsJson, type));
+				String json = jedis.get(key);
+				if ( json != null ) {
+					list.add( jsonToBean(json) );
+				}
+			}
+			return list;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected boolean doInsertIncr(T bean) {
+		RedisSequence sequence = new RedisSequence(entityName) ;
+		try (Jedis jedis = getJedisInstance()) {
+			String key = "";
+			String value = "";
+			do {
+				// set the next value as the auto-incremented key
+				setAutoIncrementedKey(bean, sequence.nextVal()) ;  
+				// build Redis key and value 
+				key = buildRedisKey(bean);
+				value = beanToJson(bean);				
+				// try to insert (until not exist)
+			} while ( insertIfInexistant(jedis, key, value) != true ) ;
+			
+			return true ;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * Inserts the given bean in the database <br>
+	 * only if the key does not already exist
+	 * 
+	 * @param bean
+	 * @return Indicates if the insert is successful
+	 */
+	protected void doInsert(T bean) {
+		String key = buildRedisKey(bean);
+		String value = beanToJson(bean);
+		try (Jedis jedis = getJedisInstance()) {
+			if ( insertIfInexistant(jedis, key, value) != true ) {
+				throw new RuntimeException("Cannot insert, the key '" + key + "' already exists");
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Updates the given bean in the database
+	 * 
+	 * @param bean
+	 * @return true if Redis result is "OK"
+	 */
+	protected boolean doUpdate(T bean) {
+		String key = buildRedisKey(bean);
+		String value = beanToJson(bean);
+		try (Jedis jedis = getJedisInstance()) {
+			String result = jedis.set(key, value, XX); // XX : Only set the key if already exists
+			return "OK".equals(result);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Saves the given bean in the database (creates or update using Redis "set")
+	 * @param bean
+	 */
+	protected void doSave(T bean) {
+		String key = buildRedisKey(bean);
+		String value = beanToJson(bean);
+		try (Jedis jedis = getJedisInstance()) {
+			jedis.set(key, value); // Always set the key/value (if exists or not exists)
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * Deletes the given bean in the database
+	 * 
+	 * @param bean
+	 * @return the Redis return code (1 if found and deleted, 0 if not found)
+	 */
+	protected long doDelete(T bean) {
+		String key = buildRedisKey(bean);
+		try (Jedis jedis = getJedisInstance()) {
+			return jedis.del(key);
+		} catch (JedisException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Checks if the given bean exists in the database
+	 * 
+	 * @param bean
+	 * @return true if bean exist  false else
+	 */
+	protected boolean doExists(T bean) {
+		String key = buildRedisKey(bean);
+		try (Jedis jedis = getJedisInstance()) {
+			return jedis.exists(key);
+		} catch (JedisException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Counts all the occurrences in the table
+	 * 
+	 * @return
+	 */
+	protected int doCountAll() {	
+		return getAllKeys().size();
+	}
+
+	/**
+	 * Returns all keys existing in the database
+	 * 
+	 * @return all key
+	 */
+	private List<String> getAllKeys() {
+		try (Jedis jedis = getJedisInstance()) {
+			ScanParams params = new ScanParams();
+			String select_all = entityName+SEPARATOR+ALL;
+			params.match(select_all);
+			String cursor = redis.clients.jedis.ScanParams.SCAN_POINTER_START;
+			boolean cycleIsFinished = false;
+			List<String> results = new ArrayList<String>();
+			while (!cycleIsFinished) {
+				ScanResult<String> scanResult = jedis.scan(cursor, params);
+				List<String> result = scanResult.getResult();
+				for (String res : result) {
+					results.add(res);
+				}
+				cursor = scanResult.getStringCursor();
+				if (cursor.equals(INITIAL_CURSOR)) {
+					cycleIsFinished = true;
+				}
+			}
+			return results;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected String buildKeyString( Object ... args ) {
+		checkArguments(args);
+		StringBuilder sb = new StringBuilder();
+		sb.append(args[0].toString());
+		for (int i = 1; i < args.length; i++) {
+			sb.append("|");
+			sb.append(args[i].toString());
+		}
+		return sb.toString();
+	}
+
+	private final void checkArguments(Object... args ) {
+		if ( args == null ) {
+			throw new IllegalArgumentException("Cannot build key string (args array is null)");
+		}
+		if ( args.length == 0 ) {
+			throw new IllegalArgumentException("Cannot build key string (no args, length=0)");
+		}
+		for (int i = 0; i < args.length; i++) {
+			if ( args[i] == null ) {
+				throw new IllegalArgumentException("Cannot build key string (argument["+i+"] is null)");
+			}
+		}
+	}
+}

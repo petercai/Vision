@@ -1,0 +1,27 @@
+#checkId($entity)
+#parse("include/init_var_global.vm")
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+
+import $recordPackage.${recordClass}; // "Neutral Record" class 
+import ${jpaRecordPackage}.${jpaRecordClass}; // "JPA Entity" class 
+
+/**
+ * Interface for mapping between JPA class and POJO class.
+ */
+public interface ${jpaMapperClass} {
+
+	/**
+	 * Mapping from '${jpaRecordClass}' to '${recordClass}'
+	 * @param entity the mapping input 
+	 */
+	public $recordClass mapEntityToRecord ( ${jpaRecordClass} entity) ;
+
+	/**
+	 * Mapping from '${recordClass}' to '${jpaRecordClass}' 
+	 * @param record the mapping input 
+	 * @return
+	 */
+	public ${jpaRecordClass} mapRecordToEntity(${recordClass} record) ;
+
+}

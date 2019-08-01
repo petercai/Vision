@@ -1,0 +1,30 @@
+#checkId($entity)
+#parse("/include/init_var_global.vm")
+#parse("/include/init_var_entity.vm")
+#parse("/include/java_header.vm")
+package ${target.javaPackageFromFolder($TEST_SRC)};
+
+import ${ROOT_PKG}.persistence.${persistenceService} ;
+import ${ROOT_PKG}.persistence.${persistenceService}GenericTest;
+import org.junit.Test;
+
+/**
+ * JUnit tests for ${recordClass} persistence service
+ * 
+ * @author Telosys
+ *
+ */
+public class ${redisServiceClass}IT extends ${persistenceService}GenericTest {
+
+	@Test
+	public void testPersistenceService() {
+
+    	${persistenceService} persistenceService = new ${redisServiceClass}();
+
+#if ( $entity.hasAutoIncrementedKey() )
+    	testPersistenceServiceWithAutoincrementedKey(persistenceService);
+#else
+    	testPersistenceService(persistenceService);
+#end
+	}	
+}

@@ -1,0 +1,9 @@
+#set( $recordPackage  = "${ROOT_PKG}.data.record" )
+#set( $recordClass    = "${entity.name}Record" )
+#set( $recordInstance = $fn.uncapitalize($entity.name) )
+##
+#set( $persistenceService = "${entity.name}Persistence" )
+#set( $mongoServiceClass  = "${entity.name}PersistenceMongo" )
+#set( $keyFields = $entity.keyAttributes )
+#set( $nonkeyFields = $entity.nonKeyAttributes )
+##
