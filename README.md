@@ -1,2 +1,2 @@
 # Vision
-Vision news applicaion
+Vision news applicaion. Trying to port its REST service to Spring Boot.
