@@ -1,4 +1,4 @@
-package cai.peter;
+package cai.peter.vision;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
