@@ -1,6 +1,6 @@
 package cai.peter.vision.persistence.repository;
 
-import cai.peter.VisionApplication;
+import cai.peter.vision.VisionApplication;
 import cai.peter.vision.persistence.entity.FeedCategory;
 import org.junit.After;
 import org.junit.Before;

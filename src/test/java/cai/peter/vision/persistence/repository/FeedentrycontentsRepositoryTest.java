@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import cai.peter.VisionApplication;
+import cai.peter.vision.VisionApplication;
 import cai.peter.vision.persistence.entity.FeedEntryContent;
 
 @SpringBootTest(classes = VisionApplication.class)
