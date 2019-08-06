@@ -31,8 +31,10 @@ public class FeedsRepositoryTest {
 
   @Test
   public void testFindByUrl() throws Exception {
-    Feed feed = repo.findByUrl("http://www.techradar.com/rss");
+//    Feed feed = repo.findByRawUrl("http://www.infoq.com/cn/feed?token=JompMfRYuikk9igzNwCQqyWczwTzADit");
+    Feed feed = repo.findByRawUrl("http://www.techradar.com/rss");
     logger.info("testFindByUrl() - Feed feed={}", feed); //$NON-NLS-1$
+    logger.info("testFindByUrl() - Feed feed.getUrlAfterRedirect={}", feed.getUrlAfterRedirect()); //$NON-NLS-1$
   }
 
   @Test

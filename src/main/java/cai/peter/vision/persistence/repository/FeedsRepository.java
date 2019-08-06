@@ -19,5 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface FeedsRepository extends JpaRepository<Feed, Long>, JpaSpecificationExecutor<Feed> {
 
   @Query(value = "select * from feeds where url=?1 limit 1", nativeQuery = true)
+  Feed findByRawUrl(String url);
+  @Query(value = "select * from feeds where normalizedUrl=?1 limit 1", nativeQuery = true)
   Feed findByUrl(String url);
 }
