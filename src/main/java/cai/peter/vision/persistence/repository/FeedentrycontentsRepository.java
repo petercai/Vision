@@ -7,6 +7,7 @@ package cai.peter.vision.persistence.repository;
 import cai.peter.vision.persistence.entity.FeedEntryContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,4 +16,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FeedentrycontentsRepository extends JpaRepository<FeedEntryContent, Long>, JpaSpecificationExecutor<FeedEntryContent> {
+    @Query(value = "select c.id from FeedEntryContent c where c.contentHash = ?1 and c.titleHash = ?2")
+    Long findExisting(String contentHash, String titleHash);
 }

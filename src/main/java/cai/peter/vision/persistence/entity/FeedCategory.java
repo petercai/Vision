@@ -40,4 +40,12 @@ public class FeedCategory extends AbstractModel {
 
 	private Integer position;
 
+    @Override
+    public String toString() {
+        return "FeedCategory{" +
+                "name='" + name + '\'' +
+                ", collapsed=" + collapsed +
+                ", position=" + position +
+                '}';
+    }
 }

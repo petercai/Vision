@@ -25,3 +25,8 @@ hs_err_pid*
 /.mvn/
 /.settings/
 /target/
+.classpath
+.factorypath
+.project
+.DS_Store
+*.png

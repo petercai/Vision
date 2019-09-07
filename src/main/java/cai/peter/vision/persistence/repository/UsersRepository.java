@@ -7,6 +7,7 @@ package cai.peter.vision.persistence.repository;
 import cai.peter.vision.persistence.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,4 +16,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UsersRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
+    @Query(value = "select u from User u where u.name = 'admin'")
+    public User getAdmin();
 }

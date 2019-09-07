@@ -29,7 +29,15 @@ public class FeedSubscription extends AbstractModel {
 	@JoinColumn(nullable = false)
 	private Feed feed;
 
-	@Column(length = 128, nullable = false)
+    @Override
+    public String toString() {
+        return "FeedSubscription{" +
+                "title='" + title + '\'' +
+                ", filter='" + filter + '\'' +
+                '}';
+    }
+
+    @Column(length = 128, nullable = false)
 	private String title;
 
 	@ManyToOne(fetch = FetchType.LAZY)

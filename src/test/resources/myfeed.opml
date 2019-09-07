@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Peter subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Focus" title="Focus">
+            <outline type="rss" text="IT eBooks" title="IT eBooks" xmlUrl="http://feeds.feedburner.com/IT-eBooks" htmlUrl="https://it-ebooks.info"/>
+            <outline type="rss" text="Canadian Freebies, Coupons, Deals, Bargains, Flyers, Contests Canada" title="Canadian Freebies, Coupons, Deals, Bargains, Flyers, Contests Canada" xmlUrl="http://smartcanucks.ca/feed/" htmlUrl="https://smartcanucks.ca"/>
+            <outline type="rss" text="Eclipse News" title="Eclipse News" xmlUrl="http://www.eclipse.org/eclipsenews.rss" htmlUrl="http://www.eclipse.org"/>
+            <outline type="rss" text="Releaselog" title="Releaselog" xmlUrl="http://www.rlslog.net/category/applications/feed/" htmlUrl="http://www.rlslog.net"/>
+            <outline type="rss" text="1.Solidot" title="1.Solidot" xmlUrl="http://feeds.feedburner.com/solidot" htmlUrl="https://www.solidot.org"/>
+            <outline type="rss" text="精品绿色便携软件" title="精品绿色便携软件" xmlUrl="http://www.portablesoft.org/feed/" htmlUrl="https://www.portablesoft.org"/>
+        </outline>
+        <outline text="新闻" title="新闻">
+            <outline type="rss" text="InfoQ" title="InfoQ" xmlUrl="http://www.infoq.com/cn/feed?token=JompMfRYuikk9igzNwCQqyWczwTzADit" htmlUrl="https://www.infoq.cn"/>
+            <outline type="rss" text="2.bbcchinese.com | 新闻主页" title="2.bbcchinese.com | 新闻主页" xmlUrl="http://www.bbc.co.uk/zhongwen/simp/index.xml" htmlUrl="http://www.bbcchinese.com"/>
+            <outline type="rss" text="极客公园" title="极客公园" xmlUrl="http://feeds.geekpark.net/" htmlUrl="http://main_test.geekpark.net/rss.rss"/>
+            <outline type="rss" text="Investing新闻" title="Investing新闻" xmlUrl="https://cn.investing.com/rss/news.rss" htmlUrl="https://cn.investing.com"/>
+        </outline>
+        <outline text="tech" title="tech">
+            <outline type="rss" text="IBM developerWorks 中国 : 文档库" title="IBM developerWorks 中国 : 文档库" xmlUrl="http://www.ibm.com/developerworks/cn/rss/dwcn_dwtp.rss" htmlUrl="http://www.ibm.com/developerworks/cn/"/>
+            <outline type="rss" text="TechRadar - All the latest technology news" title="TechRadar - All the latest technology news" xmlUrl="http://www.techradar.com/rss" htmlUrl="http://www.techradar.com/rss/"/>
+            <outline type="rss" text="TechWeb 今日焦点 RSS阅读" title="TechWeb 今日焦点 RSS阅读" xmlUrl="http://www.techweb.com.cn/rss/focus.xml" htmlUrl="http://www.techweb.com.cn/rss/focus.xml"/>
+            <outline type="rss" text="Java Code Geeks" title="Java Code Geeks" xmlUrl="http://feeds.feedburner.com/JavaCodeGeeks" htmlUrl="https://www.javacodegeeks.com/"/>
+            <outline type="rss" text="Engadget Simplified Chinese Summary RSS" title="Engadget Simplified Chinese Summary RSS" xmlUrl="http://cn.engadget.com/rss.xml" htmlUrl="http://cn.engadget.com"/>
+            <outline type="rss" text="JavaWorld" title="JavaWorld" xmlUrl="http://www.javaworld.com/index.xml" htmlUrl="https://www.javaworld.com"/>
+            <outline type="rss" text="cnBeta全文版" title="cnBeta全文版" xmlUrl="http://feeds2.feedburner.com/cnbeta-full" htmlUrl="https://m.cnbeta.com/"/>
+        </outline>
+        <outline text="Phone" title="Phone">
+            <outline type="rss" text="Engadget" title="Engadget" xmlUrl="http://www.engadget.com/rss-full.xml" htmlUrl="http://www.engadget.com"/>
+            <outline type="rss" text="Android Authority" title="Android Authority" xmlUrl="http://feeds.feedburner.com/androidauthority" htmlUrl="https://www.androidauthority.com"/>
+            <outline type="rss" text="Gizmodo" title="Gizmodo" xmlUrl="http://feeds.gawker.com/gizmodo/full" htmlUrl="https://gizmodo.com"/>
+            <outline type="rss" text="Droid Life" title="Droid Life" xmlUrl="http://www.droid-life.com/feed/" htmlUrl="https://www.droid-life.com"/>
+        </outline>
+        <outline text="Ebooks" title="Ebooks">
+            <outline type="rss" text="Releaselog" title="Releaselog" xmlUrl="http://www.rlslog.net/category/ebooks/feed/" htmlUrl="http://www.rlslog.net"/>
+        </outline>
+        <outline text="Must Read" title="Must Read">
+            <outline type="rss" text="InfoQ" title="InfoQ" xmlUrl="http://www.infoq.com/cn/feed?token=JompMfRYuikk9igzNwCQqyWczwTzADit" htmlUrl="https://www.infoq.cn"/>
+            <outline type="rss" text="Canadian Freebies, Coupons, Deals, Bargains, Flyers, Contests Canada" title="Canadian Freebies, Coupons, Deals, Bargains, Flyers, Contests Canada" xmlUrl="http://smartcanucks.ca/feed/" htmlUrl="https://smartcanucks.ca"/>
+            <outline type="rss" text="2.bbcchinese.com | 新闻主页" title="2.bbcchinese.com | 新闻主页" xmlUrl="http://www.bbc.co.uk/zhongwen/simp/index.xml" htmlUrl="http://www.bbcchinese.com"/>
+            <outline type="rss" text="1.Solidot" title="1.Solidot" xmlUrl="http://feeds.feedburner.com/solidot" htmlUrl="https://www.solidot.org"/>
+            <outline type="rss" text="Investing新闻" title="Investing新闻" xmlUrl="https://cn.investing.com/rss/news.rss" htmlUrl="https://cn.investing.com"/>
+        </outline>
+        <outline text="Finance" title="Finance">
+            <outline type="rss" text="MoneySense" title="MoneySense" xmlUrl="http://www.moneysense.ca/feed/" htmlUrl="https://www.moneysense.ca"/>
+            <outline type="rss" text="The Motley Fool" title="The Motley Fool" xmlUrl="http://www.fool.com/About/headlines/rss_headlines.asp" htmlUrl="https://www.fool.com/"/>
+            <outline type="rss" text="Wall Street Survivor" title="Wall Street Survivor" xmlUrl="http://blog.wallstreetsurvivor.com/feed/" htmlUrl="https://blog.wallstreetsurvivor.com"/>
+            <outline type="rss" text="Stock Market News" title="Stock Market News" xmlUrl="http://www.investing.com/rss/news_25.rss" htmlUrl="https://www.investing.com"/>
+        </outline>
+    </body>
+</opml>

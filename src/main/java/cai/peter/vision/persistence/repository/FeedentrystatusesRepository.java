@@ -4,10 +4,16 @@
  */
 package cai.peter.vision.persistence.repository;
 
+import cai.peter.vision.persistence.entity.FeedEntry;
 import cai.peter.vision.persistence.entity.FeedEntryStatus;
+import cai.peter.vision.persistence.entity.FeedSubscription;
+import cai.peter.vision.persistence.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Spring data Jpa repository for "Feedentrystatuses" <br>
@@ -15,4 +21,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FeedentrystatusesRepository extends JpaRepository<FeedEntryStatus, Long>, JpaSpecificationExecutor<FeedEntryStatus> {
+//    @Query(value = "select s from FeedEntryStatus  s where s.user = ?1 and s.subscription = ?2 and s.entry = ?3")
+    FeedEntryStatus getByUserAndSubscriptionAndEntry(User user, FeedSubscription sub, FeedEntry entry);
+
+    @Query(value = "select s from FeedEntryStatus s where s.user = ?1 and s.starred = false")
+    List<FeedEntryStatus> findStarred(User user);
 }

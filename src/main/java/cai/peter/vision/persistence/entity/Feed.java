@@ -27,7 +27,7 @@ public class Feed extends AbstractModel {
 	/**
 	 * cache the url after potential http 30x redirects
 	 */
-	@Column(name = "url_after_redirect", length = 2048, nullable = false)
+	@Column(name = "url_after_redirect", length = 2048/*, nullable = false*/)
 	private String urlAfterRedirect;
 
 	@Column(length = 2048, nullable = false)
@@ -121,4 +121,28 @@ public class Feed extends AbstractModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date pushLastPing;
 
+    @Override
+    public String toString() {
+        return "Feed{" +
+                "url='" + url + '\'' +
+                ", urlAfterRedirect='" + urlAfterRedirect + '\'' +
+                ", normalizedUrl='" + normalizedUrl + '\'' +
+                ", normalizedUrlHash='" + normalizedUrlHash + '\'' +
+                ", link='" + link + '\'' +
+                ", lastUpdated=" + lastUpdated +
+                ", lastPublishedDate=" + lastPublishedDate +
+                ", lastEntryDate=" + lastEntryDate +
+                ", message='" + message + '\'' +
+                ", errorCount=" + errorCount +
+                ", disabledUntil=" + disabledUntil +
+                ", lastModifiedHeader='" + lastModifiedHeader + '\'' +
+                ", etagHeader='" + etagHeader + '\'' +
+                ", averageEntryInterval=" + averageEntryInterval +
+                ", lastContentHash='" + lastContentHash + '\'' +
+                ", pushHub='" + pushHub + '\'' +
+                ", pushTopic='" + pushTopic + '\'' +
+                ", pushTopicHash='" + pushTopicHash + '\'' +
+                ", pushLastPing=" + pushLastPing +
+                '}';
+    }
 }

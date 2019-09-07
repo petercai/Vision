@@ -69,7 +69,7 @@ public class HttpGetter {
 	@Autowired
 	public HttpGetter() {
 		if (this.userAgent == null) {
-			this.userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64)";//String.format("CommaFeed/%s (https://github.com/Athou/commafeed)", config.getVersion());
+			this.userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64)";//String.format("Vision/%s (https://github.com/petercai/Vision)", config.getVersion());
 		}
 	}
 

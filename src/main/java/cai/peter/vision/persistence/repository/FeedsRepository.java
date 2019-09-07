@@ -10,6 +10,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Spring data Jpa repository for "Feeds" <br>
  *
@@ -18,8 +21,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FeedsRepository extends JpaRepository<Feed, Long>, JpaSpecificationExecutor<Feed> {
 
-  @Query(value = "select * from feeds where url=?1 limit 1", nativeQuery = true)
+  @Query(value = "select f from Feed f where f.url = ?1")
   Feed findByRawUrl(String url);
-  @Query(value = "select * from feeds where normalizedUrl=?1 limit 1", nativeQuery = true)
+  @Query(value = "select f from Feed f where f.normalizedUrl = ?1")
   Feed findByUrl(String url);
+
+    //TODO:
+//    List<Feed> findNextUpdatable(int count, Date lastLoginThreshold);
 }

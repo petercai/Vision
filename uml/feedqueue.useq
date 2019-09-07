@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.1.6" icons="true" automaticImage="PNG">  
+  <object id="1" language="java" name="cai.peter.vision.feed.FeedRefreshTaskGiver" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshTaskGiver.java" binary="false" 
+    label="feedRefreshTaskGiver" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="289" y="0"/>    
+    <execution id="2">      
+      <position height="493" width="175" x="5" y="103"/>    
+    </execution>    
+    <execution id="7">      
+      <position height="556" width="175" x="5" y="61"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="cai.peter.vision.feed.FeedQueues" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/FeedQueues.java" binary="false" label="feedQueues" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="388" y="0"/>    
+    <execution id="4">      
+      <position height="84" width="108" x="184" y="138"/>    
+    </execution>    
+    <execution id="11">      
+      <position height="21" width="108" x="184" y="180"/>    
+    </execution>  
+  </object>  
+  <object id="12" language="java" name="cai.peter.vision.feed.FeedRefreshWorker" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java" binary="false" label="feedRefreshWorker" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="456" y="0"/>    
+    <execution id="6">      
+      <position height="330" width="156" x="296" y="245"/>    
+    </execution>    
+    <execution id="15">      
+      <position height="148" width="156" x="296" y="364"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="cai.peter.vision.feed.FeedRefreshWorker.FeedTask" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java" binary="false" label="feedTask" 
+    type="class" autoSize="true">    
+    <position height="-1" width="-1" x="456" y="0"/>    
+    <execution id="19">      
+      <position height="246" width="96" x="728" y="287"/>    
+    </execution>  
+  </object>  
+  <object id="21" language="java" name="cai.peter.vision.feed.FeedRefreshExecutor" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshExecutor.java" binary="false" 
+    label="feedRefreshExecutor" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="701" y="0"/>    
+    <execution id="14">      
+      <position height="288" width="168" x="456" y="266"/>    
+    </execution>  
+  </object>  
+  <object id="23" language="java" name="cai.peter.vision.feed.FeedFetcher" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/FeedFetcher.java" binary="false" label="feedFetcher" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="843" y="0"/>    
+    <execution id="17">      
+      <position height="105" width="107" x="728" y="386"/>    
+    </execution>  
+  </object>  
+  <object id="26" language="java" name="cai.peter.vision.feed.HttpGetter" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/HttpGetter.java" binary="false" label="httpGetter" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="927" y="0"/>    
+    <execution id="25">      
+      <position height="63" width="96" x="839" y="407"/>    
+    </execution>  
+  </object>  
+  <object id="29" language="java" name="cai.peter.vision.feed.FeedParser" project="Vision" 
+    file="/Vision/src/main/java/cai/peter/vision/feed/FeedParser.java" binary="false" label="feedParser" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="1076" y="0"/>    
+    <execution id="28">      
+      <position height="21" width="100" x="939" y="428"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="take():cai.peter.vision.feed.FeedRefreshContext">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="updateFeed(cai.peter.vision.feed.FeedRefreshContext):void">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="8" operation="start():void">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </message>  
+  <message id="10" operation="refill():void">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="13" operation="execute(cai.peter.vision.feed.FeedRefreshExecutor.Task):void">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="16" 
+    operation="fetch(java.lang.String,boolean,java.lang.String,java.lang.String,java.util.Date,java.lang.String):cai.peter.vision.feed.FetchedFeed">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="20" operation="update(cai.peter.vision.feed.FeedRefreshContext):void">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="15"/>  
+  </message>  
+  <message id="22" operation="run():void">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="19"/>  
+  </message>  
+  <message id="24" 
+    operation="getBinary(java.lang.String,java.lang.String,java.lang.String,int):cai.peter.vision.feed.HttpGetter.HttpResult">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="25"/>  
+  </message>  
+  <message id="27" operation="parse(java.lang.String,byte[]):cai.peter.vision.feed.FetchedFeed">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="28"/>  
+  </message>
+</sequence-diagram>
