@@ -59,7 +59,7 @@ public class OPMLImporterTest {
         User admin = userRepo.getAdmin();
         importer.importOpml(admin, opml);
 
-        while( !queue.isAllDone() )
+        while( queue.isAllDone() > 0 )
         {
             Thread.sleep(100L );
         }

@@ -128,8 +128,8 @@ public class FeedQueues {
 //		}
 	}
 
-	public boolean isAllDone(){
-	    return addQueue.isEmpty() && giveBackQueue.isEmpty() && takeQueue.isEmpty();
+	public int isAllDone(){
+	    return addQueue.size() + giveBackQueue.size() + takeQueue.size();
     }
 
 
