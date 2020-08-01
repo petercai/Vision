@@ -26,7 +26,7 @@ public class FeedEntryService {
     public void markEntry(User user, Long entryId, boolean read) {
 
         feedEntryDAO.findById(entryId).ifPresent(entry -> {
-            FeedSubscription sub = feedSubscriptionDAO.findByFeed(user, entry.getFeed());
+            FeedSubscription sub = feedSubscriptionDAO.findByFeedPerUser(user, entry.getFeed());
             if (sub == null) {
                 return;
             }

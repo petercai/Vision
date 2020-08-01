@@ -10,7 +10,6 @@ import cai.peter.vision.persistence.entity.FeedCategory;
 import cai.peter.vision.persistence.entity.FeedSubscription;
 import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.persistence.repository.FeedsubscriptionsRepository;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
@@ -58,7 +57,7 @@ public class FeedSubscriptionService {
 
 		Feed feed = feedService.findOrCreate(url);
 
-		FeedSubscription sub = feedSubscriptionDAO.findByFeed(user, feed);
+		FeedSubscription sub = feedSubscriptionDAO.findByFeedPerUser(user, feed);
 		if (sub == null) {
 			sub = new FeedSubscription();
 			sub.setFeed(feed);

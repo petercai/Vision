@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FeedentriesRepository extends JpaRepository<FeedEntry, Long>, JpaSpecificationExecutor<FeedEntry> {
-    @Query(value = "select e from FeedEntry e where e.guid = ?1 and e.feed = ?2")
+    @Query(value = "select e.id from FeedEntry e where e.guid = ?1 and e.feed = ?2")
     Long findExisting(String guid, Feed feed);
 
 

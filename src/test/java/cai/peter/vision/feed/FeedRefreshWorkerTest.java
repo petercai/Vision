@@ -27,6 +27,9 @@ public class FeedRefreshWorkerTest {
     @Autowired
     FeedRefreshWorker workder;
 
+    @Autowired
+    FeedQueues queue;
+
     @Before
     public void setUp() throws Exception {
     }
@@ -41,5 +44,11 @@ public class FeedRefreshWorkerTest {
         Feed feed = feedRepo.findById(id).orElseThrow(() -> new Exception("Cannot find Feed ID="+id));
         FeedRefreshContext context = new FeedRefreshContext(feed, false);
         workder.update(context);
+
+        while( queue.isAllDone() > 0 )
+        {
+            Thread.sleep(100L );
+        }
+            Thread.sleep(5000L );
     }
 }

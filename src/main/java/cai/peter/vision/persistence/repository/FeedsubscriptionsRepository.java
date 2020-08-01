@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 public interface FeedsubscriptionsRepository extends JpaRepository<FeedSubscription, Long>, JpaSpecificationExecutor<FeedSubscription> {
     @Query(value = "select s from FeedSubscription s where s.user = ?1 and s.feed = ?2")
-    FeedSubscription findByFeed(User user, Feed feed);
+    FeedSubscription findByFeedPerUser(User user, Feed feed);
 
 
     @Query(value = "select s from FeedSubscription s where s.user = ?1 and s.id = ?2")
@@ -30,4 +30,7 @@ public interface FeedsubscriptionsRepository extends JpaRepository<FeedSubscript
     List<FeedSubscription> findUserAll(User user);
 
     List<FeedSubscription> getByUser(User user);
+
+    @Query(value = "select s from FeedSubscription  s where s.feed = ?1")
+    List<FeedSubscription> findByFeed(Feed feed);
 }

@@ -43,13 +43,13 @@ public class OPMLImporterTest {
 
     @Before
     public void setUp() throws Exception {
-        job.start();
         job.setWaitInterval(1);
+        job.process();
     }
 
     @After
     public void cleanup(){
-        job.stop();
+
     }
 
     @Test
@@ -63,5 +63,6 @@ public class OPMLImporterTest {
         {
             Thread.sleep(100L );
         }
+            Thread.sleep(5000L );
     }
 }

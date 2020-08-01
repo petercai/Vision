@@ -1,5 +1,8 @@
 package cai.peter.vision.persistence.service;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import de.jayefem.log4e.MethodParameterStyle;
+
 import cai.peter.vision.persistence.entity.Feed;
 import cai.peter.vision.persistence.entity.FeedEntry;
 import cai.peter.vision.persistence.entity.FeedEntryContent;
@@ -14,24 +17,40 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 public class FeedUpdateService {
 
-    @Autowired
-	private FeedentriesRepository feedEntryDAO;
-	private FeedentrystatusesRepository feedEntryStatusDAO;
-	private FeedEntryContentService feedEntryContentService;
-	private FeedEntryFilteringService feedEntryFilteringService;
+    private final FeedentriesRepository feedEntryDAO;
+    private final FeedentrystatusesRepository feedEntryStatusDAO;
+    private final FeedEntryContentService feedEntryContentService;
+    private final FeedEntryFilteringService feedEntryFilteringService;
+
+	public FeedUpdateService(
+		FeedentriesRepository feedEntryDAO, FeedentrystatusesRepository feedEntryStatusDAO,
+		FeedEntryContentService feedEntryContentService,
+		FeedEntryFilteringService feedEntryFilteringService) {
+		this.feedEntryDAO = feedEntryDAO;
+		this.feedEntryStatusDAO = feedEntryStatusDAO;
+		this.feedEntryContentService = feedEntryContentService;
+		this.feedEntryFilteringService = feedEntryFilteringService;
+	}
 
 	/**
 	 * this is NOT thread-safe
 	 */
 	public boolean addEntry(Feed feed, FeedEntry entry, List<FeedSubscription> subscriptions) {
+    log.info(
+        "addEntry(feed={}, entry={}, subscriptions={}) - start",
+        feed,
+        entry,
+        subscriptions); //$NON-NLS-1$
 
 		Long existing = feedEntryDAO.findExisting(entry.getGuid(), feed);
 		if (existing != null) {
+      log.info("addEntry() - end"); // $NON-NLS-1$
 			return false;
 		}
 
@@ -57,6 +76,7 @@ public class FeedUpdateService {
 			}
 		}
 
+    log.info("addEntry() - end"); // $NON-NLS-1$
 		return true;
 	}
 }

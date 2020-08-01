@@ -1,6 +1,7 @@
 package cai.peter.vision.persistence.repository;
 
 import cai.peter.vision.VisionApplication;
+import cai.peter.vision.persistence.entity.Feed;
 import cai.peter.vision.persistence.entity.FeedSubscription;
 import cai.peter.vision.persistence.entity.User;
 import org.junit.After;
@@ -33,6 +34,8 @@ public class FeedsubscriptionsRepositoryTest {
     FeedsubscriptionsRepository repo;
     @Autowired
     UsersRepository userRepo;
+    @Autowired
+    FeedsRepository feedRepo;
 
     /**
      * Logger for this class
@@ -60,10 +63,21 @@ public class FeedsubscriptionsRepositoryTest {
     @Test
     public void findByUserAndId() {
         User admin = userRepo.getAdmin();
-        FeedSubscription sub = repo.findByUser(admin, 1006L);
+        FeedSubscription sub = repo.findByUser(admin, 7003L);
 
         LOGGER.info("findByUserAndId() - FeedSubscription sub={}", sub); // $NON-NLS-1$
         assertNotNull(sub);
+    }
+
+    @Test
+    public void findByFeed() throws Exception {
+
+
+        Feed feed = feedRepo.findById(7003L).orElseThrow(()->new Exception(""));
+        List<FeedSubscription> subs = repo.findByFeed(feed);
+
+        LOGGER.info("findByUserAndId() - FeedSubscription sub={}", subs); // $NON-NLS-1$
+        assertNotNull(subs);
     }
 
     @Test

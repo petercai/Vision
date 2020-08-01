@@ -14,21 +14,23 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Calls {@link FeedFetcher} and handles its outcome
  * 
  */
 @Slf4j
-@Component
+@Service
 public class FeedRefreshWorker /*implements Managed*/ {
 
 	private final FeedRefreshUpdater feedRefreshUpdater;
 	private final FeedFetcher fetcher;
 	private final FeedQueues queues;
 //	private final CommaFeedConfiguration config;
-	private final FeedRefreshExecutor pool;
+//	private final FeedRefreshExecutor pool;
 
 //	@Inject
 	public FeedRefreshWorker(FeedRefreshUpdater feedRefreshUpdater, FeedFetcher fetcher, FeedQueues queues
@@ -36,43 +38,18 @@ public class FeedRefreshWorker /*implements Managed*/ {
 		this.feedRefreshUpdater = feedRefreshUpdater;
 		this.fetcher = fetcher;
 		this.queues = queues;
-		int threads = 50;//config.getApplicationSettings().getBackgroundThreads();
-		pool = new FeedRefreshExecutor("feed-refresh-worker", threads, Math.min(20 * threads, 1000));
+//		int threads = 50;//config.getApplicationSettings().getBackgroundThreads();
+//		pool = new FeedRefreshExecutor("feed-refresh-worker", threads, Math.min(20 * threads, 1000));
 	}
 
-//	@Override
-	public void start() throws Exception {
-	}
 
-//	@Override
-	public void stop() throws Exception {
-		pool.shutdown();
-	}
 
+	@Async("feedRefreshWorkerExecutor")
 	public void updateFeed(FeedRefreshContext context) {
-		pool.execute(new FeedTask(context));
+		update(context);
 	}
 
-	private class FeedTask implements FeedRefreshExecutor.Task {
-
-		private FeedRefreshContext context;
-
-		public FeedTask(FeedRefreshContext context) {
-			this.context = context;
-		}
-
-		@Override
-		public void run() {
-			update(context);
-		}
-
-		@Override
-		public boolean isUrgent() {
-			return context.isUrgent();
-		}
-	}
-
-	private void update(FeedRefreshContext context) {
+	public void update(FeedRefreshContext context) {
 		Feed feed = context.getFeed();
 		int refreshInterval = 15;//config.getApplicationSettings().getRefreshIntervalMinutes();
 		Date disabledUntil = DateUtils.addMinutes(new Date(), refreshInterval);
