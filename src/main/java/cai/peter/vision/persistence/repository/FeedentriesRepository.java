@@ -6,6 +6,9 @@ package cai.peter.vision.persistence.repository;
 
 import cai.peter.vision.persistence.entity.Feed;
 import cai.peter.vision.persistence.entity.FeedEntry;
+import cai.peter.vision.persistence.entity.FeedSubscription;
+import cai.peter.vision.persistence.entity.User;
+import cai.peter.vision.rest.dto.UnreadCount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

@@ -1,7 +1,11 @@
 package cai.peter.vision.persistence.service;
 
+import cai.peter.vision.persistence.repository.FeedentrystatusesRepository;
+import cai.peter.vision.rest.dto.UnreadCount;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import cai.peter.vision.feed.FeedQueues;
 import cai.peter.vision.feed.FeedUtils;
@@ -11,26 +15,21 @@ import cai.peter.vision.persistence.entity.FeedSubscription;
 import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.persistence.repository.FeedsubscriptionsRepository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 @Service
+@RequiredArgsConstructor
 public class FeedSubscriptionService {
 
-    public FeedSubscriptionService(FeedsubscriptionsRepository feedSubscriptionDAO, FeedService feedService, FeedQueues queues) {
-        this.feedSubscriptionDAO = feedSubscriptionDAO;
-        this.feedService = feedService;
-        this.queues = queues;
-    }
-
-    @SuppressWarnings("serial")
+	@SuppressWarnings("serial")
 	public static class FeedSubscriptionException extends RuntimeException {
 		private FeedSubscriptionException(String msg) {
 			super(msg);
 		}
 	}
 
-//	private final FeedEntryStatusDAO feedEntryStatusDAO;
+	private final FeedentrystatusesRepository feedEntryStatusDAO;
 	private final FeedsubscriptionsRepository feedSubscriptionDAO;
 	private final FeedService feedService;
 	private final FeedQueues queues;
@@ -91,6 +90,22 @@ public class FeedSubscriptionService {
 			queues.add(feed, true);
 		}
 	}
+
+  public Map<Long, UnreadCount> getUnreadCount(User user) {
+    return feedSubscriptionDAO.getByUser(user).stream()
+        .collect(
+            HashMap::new, (o, v) -> o.put(v.getId(), getUnreadCount(user, v)), HashMap::putAll);
+  }
+
+  private UnreadCount getUnreadCount(User user, FeedSubscription sub) {
+  	UnreadCount count = null/*cache.getUnreadCount(sub)*/;
+  	if (count == null) {
+//  		log.debug("unread count cache miss for {}", Models.getId(sub));
+  		count = feedEntryStatusDAO.getUnreadCount(user, sub);
+//  		cache.setUnreadCount(sub, count);
+  	}
+  	return count;
+  }
 
 
 

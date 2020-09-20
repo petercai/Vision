@@ -18,4 +18,6 @@ import org.springframework.stereotype.Repository;
 public interface UsersRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
     @Query(value = "select u from User u where u.name = 'admin'")
     public User getAdmin();
+    @Query(value = "select u from User u where u.name = 'peter'")
+    public User getPeter();
 }

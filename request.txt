@@ -10,13 +10,14 @@
     POST    /rest/category/collapse (com.commafeed.frontend.resource.CategoryREST)
     POST    /rest/category/delete (com.commafeed.frontend.resource.CategoryREST)
     GET     /rest/category/entries (com.commafeed.frontend.resource.CategoryREST)
-		rest/category/entries?id=all&limit=33&offset=0&order=desc&readType=unread
     GET     /rest/category/entriesAsFeed (com.commafeed.frontend.resource.CategoryREST)
     GET     /rest/category/get (com.commafeed.frontend.resource.CategoryREST)
     POST    /rest/category/mark (com.commafeed.frontend.resource.CategoryREST)
     POST    /rest/category/modify (com.commafeed.frontend.resource.CategoryREST)
     GET     /rest/category/unreadCount (com.commafeed.frontend.resource.CategoryREST)
-	
+
+		    /rest/category/entries?id=all&limit=33&offset=0&order=desc&readType=unread
+
     POST    /rest/entry/mark (com.commafeed.frontend.resource.EntryREST)
     POST    /rest/entry/markMultiple (com.commafeed.frontend.resource.EntryREST)
     POST    /rest/entry/star (com.commafeed.frontend.resource.EntryREST)
@@ -40,6 +41,7 @@
     POST    /rest/push/callback (com.commafeed.frontend.resource.PubSubHubbubCallbackREST)
     GET     /rest/server/get (com.commafeed.frontend.resource.ServerREST)
     GET     /rest/server/proxy (com.commafeed.frontend.resource.ServerREST)
+
     POST    /rest/user/login (com.commafeed.frontend.resource.UserREST)
     POST    /rest/user/passwordReset (com.commafeed.frontend.resource.UserREST)
     GET     /rest/user/passwordResetCallback (com.commafeed.frontend.resource.UserREST)
