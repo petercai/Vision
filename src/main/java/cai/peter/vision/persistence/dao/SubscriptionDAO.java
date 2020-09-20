@@ -17,36 +17,40 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SubscriptionDAO {
 
-    @Autowired
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+  @Autowired NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static final String UNREDA_COUNT =
-        "Select"
-            + "    FEEDSUBSCRIPTIONS.feed_id,"
-            + "    Count(FEEDS.id) As count,"
-            + "    FEEDSUBSCRIPTIONS.title,"
-            + "    Max(FEEDENTRIES.updated) As latest_update"
-            + " From"
-            + "    FEEDENTRIES Inner Join"
-            + "    FEEDS On FEEDENTRIES.feed_id = FEEDS.id Inner Join"
-            + "    FEEDSUBSCRIPTIONS On FEEDSUBSCRIPTIONS.feed_id = FEEDS.id Left Join"
-            + "    FEEDENTRYSTATUSES On FEEDENTRYSTATUSES.entry_id = FEEDENTRIES.id"
-            + "            And FEEDENTRYSTATUSES.subscription_id = FEEDSUBSCRIPTIONS.id"
-            + " Where"
-            + "    FEEDSUBSCRIPTIONS.user_id = :id And"
-            + "    (FEEDENTRYSTATUSES.read_status = False Or"
-            + "        FEEDENTRYSTATUSES.read_status Is Null)"
-            + " Group By"
-            + "    FEEDSUBSCRIPTIONS.feed_id,"
-            + "    FEEDSUBSCRIPTIONS.title,"
-            + "    FEEDENTRYSTATUSES.read_status";
+  private static final String UNREDA_COUNT =
+      "Select"
+          + "    FEEDSUBSCRIPTIONS.feed_id,"
+          + "    Count(FEEDS.id) As count,"
+          + "    FEEDSUBSCRIPTIONS.title,"
+          + "    Max(FEEDENTRIES.updated) As latest_update"
+          + " From"
+          + "    FEEDENTRIES Inner Join"
+          + "    FEEDS On FEEDENTRIES.feed_id = FEEDS.id Inner Join"
+          + "    FEEDSUBSCRIPTIONS On FEEDSUBSCRIPTIONS.feed_id = FEEDS.id Left Join"
+          + "    FEEDENTRYSTATUSES On FEEDENTRYSTATUSES.entry_id = FEEDENTRIES.id"
+          + "            And FEEDENTRYSTATUSES.subscription_id = FEEDSUBSCRIPTIONS.id"
+          + " Where"
+          + "    FEEDSUBSCRIPTIONS.user_id = :id And"
+          + "    (FEEDENTRYSTATUSES.read_status = False Or"
+          + "        FEEDENTRYSTATUSES.read_status Is Null)"
+          + " Group By"
+          + "    FEEDSUBSCRIPTIONS.feed_id,"
+          + "    FEEDSUBSCRIPTIONS.title,"
+          + "    FEEDENTRYSTATUSES.read_status";
 
-    public List<UnreadCount> getUnreadCount(User user) {
-        List<UnreadCount> counts = namedParameterJdbcTemplate
-            .query(UNREDA_COUNT, new BeanPropertySqlParameterSource(user),
-                (rs, ronNum) -> UnreadCount.builder().feedId(rs.getLong("feed_id"))
+  public List<UnreadCount> getUnreadCount(User user) {
+    List<UnreadCount> counts =
+        namedParameterJdbcTemplate.query(
+            UNREDA_COUNT,
+            new BeanPropertySqlParameterSource(user),
+            (rs, ronNum) ->
+                UnreadCount.builder()
+                    .feedId(rs.getLong("feed_id"))
                     .unreadCount(rs.getLong("count"))
-                    .newestItemTime(rs.getTimestamp("latest_update")).build());
-        return counts;
-    }
+                    .newestItemTime(rs.getTimestamp("latest_update"))
+                    .build());
+    return counts;
+  }
 }
