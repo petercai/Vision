@@ -1,0 +1,13 @@
+<ns:ruleset comparisonMethod="maven"
+  xmlns:ns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0">
+    <ns:ignoreVersions>
+        <ns:ignoreVersion type="exact">2.0.0-rc2</ns:ignoreVersion>
+    </ns:ignoreVersions>
+    <!--    <ns:rules>-->
+    <!--        <ns:rule groupId="cai.peter.maven" comparisonMethod="maven">-->
+    <!--            <ns:ignoreVersions>-->
+    <!--                <ns:ignoreVersion type="regex">.*[Aa]lpha.*</ns:ignoreVersion>-->
+    <!--            </ns:ignoreVersions>-->
+    <!--        </ns:rule>-->
+    <!--    </ns:rules>-->
+</ns:ruleset>

@@ -5,25 +5,19 @@ import cai.peter.vision.persistence.entity.FeedEntry;
 import cai.peter.vision.persistence.entity.FeedEntryContent;
 import cai.peter.vision.persistence.entity.FeedEntryStatus;
 import cai.peter.vision.persistence.entity.FeedSubscription;
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.apache.commons.lang3.StringUtils;
-
-
 import com.rometools.rome.feed.synd.SyndContent;
 import com.rometools.rome.feed.synd.SyndContentImpl;
 import com.rometools.rome.feed.synd.SyndEnclosure;
 import com.rometools.rome.feed.synd.SyndEnclosureImpl;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndEntryImpl;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("serial")
 @Data

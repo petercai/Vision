@@ -1,9 +1,6 @@
 package cai.peter.vision.rest.dto;
 
 import java.io.Serializable;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @SuppressWarnings("serial")

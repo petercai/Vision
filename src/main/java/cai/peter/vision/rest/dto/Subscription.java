@@ -6,9 +6,6 @@ import cai.peter.vision.persistence.entity.FeedCategory;
 import cai.peter.vision.persistence.entity.FeedSubscription;
 import java.io.Serializable;
 import java.util.Date;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @SuppressWarnings("serial")

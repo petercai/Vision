@@ -1,14 +1,8 @@
 package cai.peter.vision.rest.dto;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.annotation.*;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @SuppressWarnings("serial")
