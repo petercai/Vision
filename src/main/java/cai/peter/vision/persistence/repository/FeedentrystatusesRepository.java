@@ -42,9 +42,9 @@ public interface FeedentrystatusesRepository
           "select new cai.peter.vision.rest.dto.UnreadCount( s.entry.feed.id, count(s.id) , s.entryInserted) from FeedEntryStatus s where s.user = ?1 and s.subscription = ?2 group by s.entry.feed")
   UnreadCount getUnreadCount(User user, FeedSubscription sub);
 
-  @Query(
-      value =
-          "Select FEEDENTRIES.feed_id as feedId, Max(Distinct FEEDENTRIES.inserted) As newestItemTime, Count(FEEDENTRIES.id) As unreadCount From FEEDENTRYSTATUSES Right Outer Join FEEDENTRIES On FEEDENTRYSTATUSES.entry_id = FEEDENTRIES.id Where ((FEEDENTRYSTATUSES.id Is Null) Or (FEEDENTRYSTATUSES.read_status = 0)) Group By FEEDENTRIES.feed_id",
-      nativeQuery = true)
-  List<UnreadCount> getUnreadCountAll(User user);
+//  @Query(
+//      value =
+//          "Select FEEDENTRIES.feed_id as feedId, Max(Distinct FEEDENTRIES.inserted) As newestItemTime, Count(FEEDENTRIES.id) As unreadCount From FEEDENTRYSTATUSES Right Outer Join FEEDENTRIES On FEEDENTRYSTATUSES.entry_id = FEEDENTRIES.id Where ((FEEDENTRYSTATUSES.id Is Null) Or (FEEDENTRYSTATUSES.read_status = 0)) Group By FEEDENTRIES.feed_id",
+//      nativeQuery = true)
+//  List<UnreadCount> getUnreadCountAll(User user);
 }

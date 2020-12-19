@@ -37,8 +37,8 @@ public class SubscriptionDAO {
           + "        FEEDENTRYSTATUSES.read_status Is Null)"
           + " Group By"
           + "    FEEDSUBSCRIPTIONS.feed_id,"
-          + "    FEEDSUBSCRIPTIONS.title,"
-          + "    FEEDENTRYSTATUSES.read_status";
+          + "    FEEDSUBSCRIPTIONS.title"
+;
 
   public List<UnreadCount> getUnreadCount(User user) {
     List<UnreadCount> counts =
