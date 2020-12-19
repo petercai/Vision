@@ -60,7 +60,7 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>2.3.8</version>
+			<version>2.3.9</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
 		<dependency>
@@ -112,12 +112,12 @@
 		<dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
-			<version>67.1</version>
+			<version>68.2</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.cssparser</groupId>
 			<artifactId>cssparser</artifactId>
-			<version>0.9.27</version>
+			<version>0.9.29</version>
 		</dependency>
 
 		<dependency>
@@ -167,7 +167,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>7.0.0.Alpha6</version>
+			<version>7.0.0.CR1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
