@@ -41,7 +41,7 @@ class SubscriptionDAOTest {
     result.stream()
         .forEach(
             c -> {
-              log.info("Subscrption {} unread count {}",map.get(c.getFeedId()).getTitle(),c.getUnreadCount());
+              log.info("Subscrption {} ==> {}",map.get(c.getFeedId()).getTitle(),c.getUnreadCount());
 //              log.info(map.get(c.getFeedId()).toString());
             });
   }
