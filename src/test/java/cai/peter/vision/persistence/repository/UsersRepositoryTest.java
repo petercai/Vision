@@ -1,24 +1,21 @@
 package cai.peter.vision.persistence.repository;
 
 import cai.peter.vision.VisionApplication;
-import cai.peter.vision.service.PasswordEncryptionService;
 import cai.peter.vision.persistence.entity.User;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import cai.peter.vision.service.PasswordEncryptionService;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.List;
-
-import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest(classes = VisionApplication.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class UsersRepositoryTest {
     /**
      * Logger for this class
@@ -28,13 +25,6 @@ public class UsersRepositoryTest {
     @Autowired
     UsersRepository repo;
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
 
     @Test
     public void testFindAll() throws Exception {

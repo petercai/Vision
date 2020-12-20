@@ -4,21 +4,18 @@
 
 package cai.peter.vision.feed;
 
-import static org.junit.Assert.*;
 
 import cai.peter.vision.VisionApplication;
 import cai.peter.vision.persistence.entity.Feed;
 import cai.peter.vision.persistence.repository.FeedsRepository;
-import java.util.Optional;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest(classes = {VisionApplication.class})
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class FeedRefreshWorkerTest {
 
     @Autowired
@@ -30,9 +27,6 @@ public class FeedRefreshWorkerTest {
     @Autowired
     FeedQueues queue;
 
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @Test
     public void updateFeed() {

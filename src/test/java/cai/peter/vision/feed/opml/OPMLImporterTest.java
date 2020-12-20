@@ -10,23 +10,20 @@ import cai.peter.vision.feed.FeedRefreshTaskGiver;
 import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.persistence.repository.UsersRepository;
 import org.apache.commons.io.IOUtils;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.junit.Assert.*;
 
 @SpringBootTest(classes = {VisionApplication.class})
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class OPMLImporterTest {
 
     @Autowired
@@ -41,16 +38,12 @@ public class OPMLImporterTest {
     @Autowired
     FeedQueues queue;
 
-    @Before
+    @BeforeAll
     public void setUp() throws Exception {
         job.setWaitInterval(1);
         job.process();
     }
 
-    @After
-    public void cleanup(){
-
-    }
 
     @Test
     public void importOpml() throws IOException, InterruptedException {

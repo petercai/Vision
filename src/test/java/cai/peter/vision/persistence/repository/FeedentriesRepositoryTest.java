@@ -4,19 +4,19 @@
 
 package cai.peter.vision.persistence.repository;
 
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import cai.peter.vision.VisionApplication;
 import cai.peter.vision.persistence.entity.Feed;
-import java.util.Optional;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest(classes = VisionApplication.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class FeedentriesRepositoryTest {
     @Autowired
     FeedentriesRepository repo;

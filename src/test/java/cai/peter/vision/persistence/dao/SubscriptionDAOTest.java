@@ -10,31 +10,18 @@ import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.persistence.repository.FeedsubscriptionsRepository;
 import cai.peter.vision.persistence.repository.UsersRepository;
 import cai.peter.vision.rest.dto.UnreadCount;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.mockito.Mockito.*;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest(classes = VisionApplication.class)
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @Slf4j
 class SubscriptionDAOTest {
 
