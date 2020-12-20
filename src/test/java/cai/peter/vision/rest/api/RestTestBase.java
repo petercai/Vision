@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +32,7 @@ public class RestTestBase {
 
   ObjectMapper mapper = new ObjectMapper();
 
-  @BeforeAll
+  @BeforeEach
   public void setup(){
     mvc = MockMvcBuilders.webAppContextSetup(applicationContext).build();
   }

@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 public class CategoryController {
 
   public static final String ALL = "all";
@@ -387,8 +387,10 @@ public class CategoryController {
   @GetMapping("/get")
   //	@ApiOperation(value = "Get feed categories", notes = "Get all categories and subscriptions of
   // the user", response = Category.class)
-  public ResponseEntity<Category> getSubscriptions(/*@SecurityCheck*/ User user) {
+  public ResponseEntity<Category> getSubscriptions(/*@SecurityCheck User user*/) {
     Category root = null /*cache.getUserRootCategory(user)*/;
+    User user = new User();
+    user.setId(1000L);
     if (root == null) {
       log.debug("tree cache miss for {}", user.getId());
       List<FeedCategory> categories = feedCategoryDAO.getByUser(user);
