@@ -21,8 +21,11 @@ public class VisionApplication {
 
 }
 
-
+/*
+Since, applicationContext.xml resides inside the spring folder under src/main/resources.
+But the @ImportResource annotation defined in XmlImportingConfiguration.java tries to scan it just inside the root path.
+ */
 @Configuration
-@ImportResource("classpath*:applicationContext.xml")
+@ImportResource(locations = {"classpath*:applicationContext.xml"})
 class XmlImportingConfiguration {
 }

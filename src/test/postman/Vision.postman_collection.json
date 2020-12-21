@@ -11,6 +11,9 @@
 				{
 					"name": "get category",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -20,12 +23,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8082/rest/category/get",
+							"raw": "http://localhost:{{port}}/rest/category/get",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "{{port}}",
 							"path": [
 								"rest",
 								"category",
@@ -47,12 +50,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8082/rest/category/entries?id=all&limit=10&offset=0&order=desc&readType=unread",
+							"raw": "http://localhost:{{port}}/rest/category/entries?id=all&limit=10&offset=0&order=desc&readType=unread",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "{{port}}",
 							"path": [
 								"rest",
 								"category",
@@ -84,8 +87,36 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "Actuator",
+			"item": [
+				{
+					"name": "actuator - beans",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/actuator/beans/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"actuator",
+								"beans",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "login",
@@ -93,10 +124,9 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "91e28f9d-1faf-4c11-9af8-639faed6f4a8",
 						"exec": [
-							"var sid = pm.cookies.get(‘JSESSIONID’);",
-							"pm.globals.set(“session_id”, sid);"
+							"var sid = pm.cookies.get(\"JSESSIONID\");",
+							"pm.globals.set(\"vision_session_id\", sid);"
 						],
 						"type": "text/javascript"
 					}
@@ -121,12 +151,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/rest/user/login",
+					"raw": "http://localhost:{{port}}/rest/user/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "{{port}}",
 					"path": [
 						"rest",
 						"user",
@@ -135,7 +165,54 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "User login Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"session_id\", jsonData.sessionId);",
+							"postman.setGlobalVariable(\"user_id\", jsonData.userId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{server}}/api/{{version}}/auth",
+					"protocol": "https",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"{{version}}",
+						"auth"
+					]
+				}
+			},
+			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

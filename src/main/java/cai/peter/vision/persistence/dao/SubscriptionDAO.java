@@ -7,6 +7,7 @@ package cai.peter.vision.persistence.dao;
 import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.rest.dto.UnreadCount;
 import java.util.List;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SubscriptionDAO {
 
-  @Autowired NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+  @Autowired
+  private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
   private static final String UNREDA_COUNT =
       "Select"

@@ -25,7 +25,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Slf4j
 class SubscriptionDAOTest {
 
-  @Autowired NamedParameterJdbcTemplate namedParameterJdbcTemplate;
   @Autowired SubscriptionDAO subscriptionDAO;
   @Autowired FeedsubscriptionsRepository repo;
   @Autowired UsersRepository userRepo;

@@ -148,11 +148,11 @@ public class CategoryControllerTest /*extends RestTestBase*/ {
     @Autowired
     private MockMvc mvc;
 
-    @TestConfiguration
-    @ImportResource("classpath*:applicationContext.xml")
-    public class TestConfig{
-
-    }
+//    @TestConfiguration
+//    @ImportResource("classpath*:applicationContext.xml")
+//    public class TestConfig{
+//
+//    }
 
     @Test
     public void testGetSubscriptions() throws Exception {

@@ -46,6 +46,8 @@ public class CategoryController {
   private final FeedsubscriptionsRepository feedSubscriptionDAO;
   private final FeedEntryService feedEntryService;
   private final FeedSubscriptionService feedSubscriptionService;
+
+  private final SubscriptionDAO subscriptionDAO;
   //	private final CacheService cache;
   @Autowired private /*final*/ VisionConfiguration config;
 
@@ -395,7 +397,7 @@ public class CategoryController {
       log.debug("tree cache miss for {}", user.getId());
       List<FeedCategory> categories = feedCategoryDAO.getByUser(user);
       List<FeedSubscription> subscriptions = feedSubscriptionDAO.getByUser(user);
-      SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
+
       List<UnreadCount> unreadCount = subscriptionDAO.getUnreadCount(user);
       //			Map<Long, UnreadCount> unreadCount = feedSubscriptionService.getUnreadCount(user);
 
