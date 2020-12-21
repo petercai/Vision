@@ -1,5 +1,6 @@
 ﻿Select
     FEEDSUBSCRIPTIONS.feed_id,
+--     FEEDSUBSCRIPTIONS.user_id,
     FEEDSUBSCRIPTIONS.title,
     Count(FEEDS.id) As count,
     Max(FEEDENTRIES.updated) As latest_update
@@ -10,10 +11,11 @@ From
     FEEDENTRYSTATUSES On FEEDENTRYSTATUSES.entry_id = FEEDENTRIES.id
             And FEEDENTRYSTATUSES.subscription_id = FEEDSUBSCRIPTIONS.id
 Where
-    FEEDSUBSCRIPTIONS.user_id = 2000 And
+    FEEDSUBSCRIPTIONS.user_id = 1000 And
     (FEEDENTRYSTATUSES.read_status = False Or
         FEEDENTRYSTATUSES.read_status Is Null)
 Group By
     FEEDSUBSCRIPTIONS.feed_id,
-    FEEDSUBSCRIPTIONS.title,
-    FEEDENTRYSTATUSES.read_status
+    FEEDSUBSCRIPTIONS.title
+--     ,
+--     FEEDENTRYSTATUSES.read_status

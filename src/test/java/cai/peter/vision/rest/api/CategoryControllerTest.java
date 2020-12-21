@@ -4,67 +4,164 @@
 
 package cai.peter.vision.rest.api;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import cai.peter.vision.VisionApplication;
-import cai.peter.vision.common.VisionConfiguration;
-import cai.peter.vision.common.VisionConfiguration.ApplicationSettings;
-import cai.peter.vision.persistence.entity.FeedCategory;
-import cai.peter.vision.persistence.entity.FeedSubscription;
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.persistence.repository.FeedcategoriesRepository;
-import cai.peter.vision.persistence.repository.FeedentrystatusesRepository;
-import cai.peter.vision.persistence.repository.FeedsubscriptionsRepository;
-import cai.peter.vision.persistence.service.FeedEntryService;
-import cai.peter.vision.persistence.service.FeedSubscriptionService;
-import cai.peter.vision.rest.dto.Category;
-import cai.peter.vision.rest.dto.UnreadCount;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-
-
-import javax.ws.rs.core.Application;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+
+/*
+
+A unit test covers a single “unit”, where a unit commonly is a single class,
+but can also be a cluster of cohesive classes that is tested in combination.
+
+An integration test can be any of the following:
+- test that covers multiple “units”.
+    It tests the interaction between two or more clusters of cohesive classes.
+- test that covers multiple layers.
+    This is actually a specialization of the first case and
+    might cover the interaction between a business service and the persistence layer, for instance.
+- test that covers the whole path through the application.
+    In these tests, we send a request to the application and check that it responds correctly
+    and has changed the database state according to our expectations.
+
+Spring Boot provides the @SpringBootTest annotation
+which we can use to create an application context containing all the objects we need for all of the above test types.
+Note, however, that overusing @SpringBootTest might lead to very long-running test suites.
+
+So, for simple tests that cover multiple units we should rather create plain tests, very similar to unit tests,
+in which we manually create the object graph needed for the test and mock away the rest.
+This way, Spring doesn’t fire up a whole application context each time the test is started.
+
+For tests that cover integration with the web layer or persistence layer,
+we can use @WebMvcTest or @DataJpaTest instead.
+For integration with other layers, have a look at Spring Boot’s other test slice annotations.
+ Note that these test slices will also take some time to boot up, though.
+
+Finally, for tests that cover the whole Spring Boot application from incoming request to database,
+or tests that cover certain parts of the application that are hard to set up manually,
+we can and should use @SpringBootTest.
 
 
+ */
+
+
+/*
+When we are unit testing a rest service, we would want to launch only the specific controller and the related MVC Components.
+
+@WebMvcTest annotation is used for unit testing Spring MVC application.
+This can be used when a test focuses only Spring MVC components.
+Using this annotation will disable full auto-configuration and only apply configuration relevant to MVC tests.
+
+@RunWith(SpringRunner.class) :
+    SpringRunner is short hand for SpringJUnit4ClassRunner which extends BlockJUnit4ClassRunner
+    providing the functionality to launch a Spring TestContext Framework.
+
+@WebMvcTest(value = CategoryController.class):
+    WebMvcTest annotation is used for unit testing Spring MVC application.
+    This can be used when a test focuses only Spring MVC components.
+    In this test, we want to launch only CategoryController.
+    All other controllers and mappings will not be launched when this unit test is executed.
+
+
+MockMvcRequestBuilders.get("url").accept(MediaType.APPLICATION_JSON):
+    Creating a Request builder to be able to execute a get request to uri “url” with accept header as “application/json”
+mockMvc.perform(requestBuilder).andReturn():
+    mockMvc is used to perform the request and return the response back.
+ */
+
+/*
+@SpringBootTest by default starts searching in the current package of the test class
+and then searches upwards through the package structure,
+looking for a class annotated with @SpringBootConfiguration from which it then reads the configuration to create an application context.
+
+This class is usually our main application class since the @SpringBootApplication annotation includes the @SpringBootConfiguration annotation.
+It then creates an application context very similar to the one that would be started in a production environment.
+
+Because we have a full application context, including web controllers, Spring Data repositories, and data sources,
+@SpringBootTest is very convenient for integration tests that go through all layers of the application:
+ */
+
+/*
+@ExtendWith
+The code examples in this tutorial use the @ExtendWith annotation to tell JUnit 5 to enable Spring support.
+As of Spring Boot 2.1,
+we no longer need to load the SpringExtension
+because it's included as a meta annotation in the Spring Boot test annotations
+like @DataJpaTest, @WebMvcTest, and @SpringBootTest.
+
+Here, we use @AutoConfigureMockMvc to add a MockMvc instance to the application context.
+ */
+
+/*
+We could use Spring’s standard @ContextConfiguration support to load only one of our module configurations above,
+but this way we won’t have support for Spring Boot’s test annotations
+like @SpringBootTest, @WebMvcTest, and @DataJpaTest
+which conveniently set up an application context for integration tests.
+
+By default, the test annotations mentioned above create an application for
+the first @SpringBootConfiguration annotation they find from the current package upwards, w
+hich is usually the main application class,
+since the @SpringBootApplication annotation includes a @SpringBootConfiguration.
+ */
+
+/*
+@SpringBootConfiguration
+@EnableAutoConfiguration
+class CustomerTestConfiguration extends CustomerConfiguration {}
+
+Each test configuration is annotated with @SpringBootConfiguration to make it discoverable by @SpringBootTest
+and its companions and extends the “real” configuration class to inherit its contributions to the application context.
+
+Also, each configuration is additionally annotated with
+@EnableAutoConfiguration to enable Spring Boot’s auto-configuration magic.
+ */
+
+/*
+reference:  https://reflectoring.io/spring-boot-test/
+            https://reflectoring.io/testing-verticals-and-layers-spring-boot/?utm_source=pocket-chrome-recs
+            https://reflectoring.io/spring-boot-web-controller-test/
+ */
 
 @ExtendWith(SpringExtension.class)
+//@SpringBootTest(classes = VisionApplication.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = VisionApplication.class)
 @AutoConfigureMockMvc
-public class CategoryControllerTest /*extends RestTestBase*/{
+//@WebMvcTest(value = CategoryController.class)
+@WithMockUser
+public class CategoryControllerTest /*extends RestTestBase*/ {
     @Autowired
     private MockMvc mvc;
 
+    @TestConfiguration
+    @ImportResource("classpath*:applicationContext.xml")
+    public class TestConfig{
+
+    }
 
     @Test
     public void testGetSubscriptions() throws Exception {
-        String uri = "/get";
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
+          "/rest/category/get").accept(
+          MediaType.APPLICATION_JSON);
         MvcResult result = mvc
-          .perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
+          .perform(requestBuilder).andReturn();
         int status = result.getResponse().getStatus();
         assertEquals(200, status);
     }
 }
-
-//Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme
