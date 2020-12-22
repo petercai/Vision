@@ -1,5 +1,5 @@
 ﻿Select
-    FEEDSUBSCRIPTIONS.feed_id,
+    FEEDSUBSCRIPTIONS.id,
 --     FEEDSUBSCRIPTIONS.user_id,
     FEEDSUBSCRIPTIONS.title,
     Count(FEEDS.id) As count,
@@ -15,7 +15,7 @@ Where
     (FEEDENTRYSTATUSES.read_status = False Or
         FEEDENTRYSTATUSES.read_status Is Null)
 Group By
-    FEEDSUBSCRIPTIONS.feed_id,
+    FEEDSUBSCRIPTIONS.id,
     FEEDSUBSCRIPTIONS.title
 --     ,
 --     FEEDENTRYSTATUSES.read_status
