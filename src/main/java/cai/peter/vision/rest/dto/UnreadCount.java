@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UnreadCount implements Serializable {
-	private long feedId;
+	private long subscriptionId;
 	private long unreadCount;
 	private Date newestItemTime;
 }

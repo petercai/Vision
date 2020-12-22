@@ -35,12 +35,12 @@ class SubscriptionDAOTest {
     List<UnreadCount> result = subscriptionDAO.getUnreadCount(peter);
     HashMap<Long, FeedSubscription> map =
         repo.findUserAll(peter).stream()
-            .collect(HashMap::new, (n, v) -> n.put(v.getFeed().getId(), v), HashMap::putAll);
+            .collect(HashMap::new, (n, v) -> n.put(v.getId(), v), HashMap::putAll);
 
     result.stream()
         .forEach(
             c -> {
-              log.info("Subscrption {} ==> {}",map.get(c.getFeedId()).getTitle(),c.getUnreadCount());
+              log.info("Subscrption {} ==> {}",map.get(c.getSubscriptionId()).getTitle(),c.getUnreadCount());
 //              log.info(map.get(c.getFeedId()).toString());
             });
   }

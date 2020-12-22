@@ -23,7 +23,7 @@ public class SubscriptionDAO {
 
   private static final String UNREDA_COUNT =
       "Select"
-          + "    FEEDSUBSCRIPTIONS.feed_id,"
+          + "    FEEDSUBSCRIPTIONS.id,"
           + "    Count(FEEDS.id) As count,"
           + "    FEEDSUBSCRIPTIONS.title,"
           + "    Max(FEEDENTRIES.updated) As latest_update"
@@ -38,7 +38,7 @@ public class SubscriptionDAO {
           + "    (FEEDENTRYSTATUSES.read_status = False Or"
           + "        FEEDENTRYSTATUSES.read_status Is Null)"
           + " Group By"
-          + "    FEEDSUBSCRIPTIONS.feed_id,"
+          + "    FEEDSUBSCRIPTIONS.id,"
           + "    FEEDSUBSCRIPTIONS.title"
 ;
 
@@ -49,7 +49,7 @@ public class SubscriptionDAO {
             new BeanPropertySqlParameterSource(user),
             (rs, ronNum) ->
                 UnreadCount.builder()
-                    .feedId(rs.getLong("feed_id"))
+                    .subscriptionId(rs.getLong("id"))
                     .unreadCount(rs.getLong("count"))
                     .newestItemTime(rs.getTimestamp("latest_update"))
                     .build());

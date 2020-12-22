@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -148,12 +149,6 @@ public class CategoryControllerTest /*extends RestTestBase*/ {
     @Autowired
     private MockMvc mvc;
 
-//    @TestConfiguration
-//    @ImportResource("classpath*:applicationContext.xml")
-//    public class TestConfig{
-//
-//    }
-
     @Test
     public void testGetSubscriptions() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
@@ -161,7 +156,8 @@ public class CategoryControllerTest /*extends RestTestBase*/ {
           MediaType.APPLICATION_JSON);
         MvcResult result = mvc
           .perform(requestBuilder).andReturn();
-        int status = result.getResponse().getStatus();
+        MockHttpServletResponse response = result.getResponse();
+        int status = response.getStatus();
         assertEquals(200, status);
     }
 }

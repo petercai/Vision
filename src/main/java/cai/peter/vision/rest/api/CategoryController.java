@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -46,8 +47,8 @@ public class CategoryController {
   private final FeedsubscriptionsRepository feedSubscriptionDAO;
   private final FeedEntryService feedEntryService;
   private final FeedSubscriptionService feedSubscriptionService;
-
   private final SubscriptionDAO subscriptionDAO;
+
   //	private final CacheService cache;
   @Autowired private /*final*/ VisionConfiguration config;
 
@@ -407,7 +408,7 @@ public class CategoryController {
               categories,
               subscriptions,
               unreadCount.stream()
-                  .collect(Collectors.toMap(UnreadCount::getFeedId, Function.identity())));
+                  .collect(Collectors.toMap(UnreadCount::getSubscriptionId, Function.identity())));
       root.setId("all");
       root.setName("All");
       //			cache.setUserRootCategory(user, root);
@@ -451,7 +452,9 @@ public class CategoryController {
       if ((id == null && subscription.getCategory() == null)
           || (subscription.getCategory() != null
               && Objects.equals(subscription.getCategory().getId(), id))) {
-        UnreadCount uc = unreadCount.get(subscription.getId());
+        UnreadCount uc =
+            Optional.ofNullable(unreadCount.get(subscription.getId()))
+                .orElse(UnreadCount.builder().subscriptionId(subscription.getId()).unreadCount(0).build());
         Subscription sub =
             Subscription.build(subscription, config.getApplicationSettings().getPublicUrl(), uc);
         category.getFeeds().add(sub);
