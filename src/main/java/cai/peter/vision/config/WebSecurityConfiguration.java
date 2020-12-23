@@ -14,11 +14,14 @@ Spring security:
  */
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    /*
+     * basic authentication
+     */
     PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     auth.inMemoryAuthentication()
         .withUser("peter")

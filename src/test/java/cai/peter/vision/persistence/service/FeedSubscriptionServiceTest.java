@@ -15,24 +15,18 @@ import cai.peter.vision.persistence.repository.FeedsubscriptionsRepository;
 import cai.peter.vision.persistence.repository.UsersRepository;
 import cai.peter.vision.rest.dto.UnreadCount;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Map;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.mockito.Mockito.*;
 
@@ -100,7 +94,7 @@ class FeedSubscriptionServiceTest {
 
   @Test
   void testGetUnreadCount() {
-    User peter = usrRepo.getPeter();
+    User peter = usrRepo.getUser("peter");
     Map<Long, UnreadCount> result = feedSubscriptionService.getUnreadCount(peter);
     log.info(result.toString());
   }

@@ -29,6 +29,9 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -387,10 +390,35 @@ public class CategoryController {
   //		return Response.ok(Lists.newArrayList(unreadCount.values())).build();
   //	}
 
+  /**
+   * The SecurityContext and SecurityContextHolder are two fundamental classes of Spring Security.
+   * The SecurityContext is used to store the details of the currently authenticated user, also
+   * known as a principle. So, if you have to get the username or any other user details, you need
+   * to get the SecurityContext first.
+   *
+   * <p>The SecurityContextHolder is a helper class that provides access to the security context. By
+   * default, it uses a ThreadLocal object to store security context, which means that the security
+   * context is always available to methods in the same thread of execution, even if you don't pass
+   * the SecurityContext object around
+   *
+   * <p>In order to get the current username, you first need a SecurityContext, which is obtained
+   * from the SecurityContextHolder. This SecurityContext kept the user details in an Authentication
+   * object, which can be obtained by calling the getAuthentication() method.
+   *
+   * <p>Once you got the Authentication object, you can either cast it into UserDetails or use it as
+   * it is. The UserDetails object is the one that Spring Security uses to keep user-related
+   * information.
+   *
+   * <p>Once you got the Authentication object, you can either cast it into UserDetails or use it as
+   * it is. The UserDetails object is the one that Spring Security uses to keep user-related
+   * information.
+   *
+   * @return
+   */
   @GetMapping("/get")
-  //	@ApiOperation(value = "Get feed categories", notes = "Get all categories and subscriptions of
-  // the user", response = Category.class)
-  public ResponseEntity<Category> getSubscriptions(/*@SecurityCheck User user*/) {
+  public ResponseEntity<Category> getSubscriptions(/*@SecurityCheck User user*/ ) {
+
+
     Category root = null /*cache.getUserRootCategory(user)*/;
     User user = new User();
     user.setId(1000L);
@@ -415,6 +443,19 @@ public class CategoryController {
     }
     return new ResponseEntity<>(root, HttpStatus.OK);
   }
+
+//  @Autowired
+//  UserService userService;
+//
+//  protected User getLoginUser(){
+//
+//    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+//      String currentUserName = authentication.getName();
+//      return userService.getUser(currentUserName);
+//    }
+//    return null;
+//  }
 
   private Category buildCategory(
       Long id,
@@ -454,7 +495,11 @@ public class CategoryController {
               && Objects.equals(subscription.getCategory().getId(), id))) {
         UnreadCount uc =
             Optional.ofNullable(unreadCount.get(subscription.getId()))
-                .orElse(UnreadCount.builder().subscriptionId(subscription.getId()).unreadCount(0).build());
+                .orElse(
+                    UnreadCount.builder()
+                        .subscriptionId(subscription.getId())
+                        .unreadCount(0)
+                        .build());
         Subscription sub =
             Subscription.build(subscription, config.getApplicationSettings().getPublicUrl(), uc);
         category.getFeeds().add(sub);

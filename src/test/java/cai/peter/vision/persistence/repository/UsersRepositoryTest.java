@@ -3,7 +3,11 @@ package cai.peter.vision.persistence.repository;
 import cai.peter.vision.VisionApplication;
 import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.service.PasswordEncryptionService;
+import com.google.common.base.MoreObjects;
 import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -30,21 +34,32 @@ public class UsersRepositoryTest {
     public void testFindAll() throws Exception {
         List<User> all = repo.findAll();
         for (User u : all) {
-            User u2 = u;
-            logger.info("testFindAll() - User u2={}", u2); //$NON-NLS-1$
+            logger.info("testFindAll() - User={}",
+//              ToStringBuilder.reflectionToString(u, ToStringStyle.JSON_STYLE)
+              MoreObjects.toStringHelper(u)
+                .add("id", u.getId())
+                .add("name", u.getName())
+                .add("email", u.getEmail())
+                .toString()
+            ); //$NON-NLS-1$
         }
     }
 
     @Test
     public void testGetAdmin() {
-        User admin = repo.getAdmin();
-        logger.info("testGetAdmin() - User admin={}", admin); // $NON-NLS-1$
+        User admin = repo.getUser("admin");
+        logger.info("testGetAdmin() - User admin={}", MoreObjects.toStringHelper(admin)
+          .add("id", admin.getId())
+          .add("name", admin.getName())
+          .add("email", admin.getEmail())
+          .toString()); // $NON-NLS-1$
 
         assertNotNull(admin);
 
     }
 
     @Test
+    @Disabled
     public void testCreateAdmin(){
         User admin = new User();
         admin.setName("admin");
