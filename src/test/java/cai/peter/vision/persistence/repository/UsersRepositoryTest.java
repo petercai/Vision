@@ -59,6 +59,19 @@ public class UsersRepositoryTest {
     }
 
     @Test
+    public void testFindByName() {
+        User admin = repo.findByName("admin@commafeed.com");
+        logger.info("testGetAdmin() - User admin={}", MoreObjects.toStringHelper(admin)
+          .add("id", admin.getId())
+          .add("name", admin.getName())
+          .add("email", admin.getEmail())
+          .toString()); // $NON-NLS-1$
+
+        assertNotNull(admin);
+
+    }
+
+    @Test
     @Disabled
     public void testCreateAdmin(){
         User admin = new User();

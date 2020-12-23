@@ -20,4 +20,7 @@ public interface UsersRepository extends JpaRepository<User, Long>, JpaSpecifica
     public User getAdmin();
     @Query(value = "select u from User u where u.name = ?1")
     public User getUser(String userName);
+
+    @Query(value = "select u from User u where u.name = ?1 or u.email = ?1")
+    User findByName(String nameOrEmail);
 }
