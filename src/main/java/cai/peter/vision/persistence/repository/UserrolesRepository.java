@@ -5,8 +5,11 @@
 package cai.peter.vision.persistence.repository;
 
 import cai.peter.vision.persistence.entity.UserRole;
+import cai.peter.vision.persistence.entity.UserRole.Role;
+import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,4 +18,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserrolesRepository extends JpaRepository<UserRole, Long>, JpaSpecificationExecutor<UserRole> {
+
+  @Query(value = "select r from UserRole r where r.user.id = ?1")
+  Set<Role> findRoles(Long userId);
+
 }
