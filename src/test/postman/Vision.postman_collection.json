@@ -6,13 +6,66 @@
 	},
 	"item": [
 		{
+			"name": "Basic Auth",
+			"item": [
+				{
+					"name": "get category - basic auth",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/category/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"category",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "category",
 			"item": [
 				{
 					"name": "get category",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -119,6 +172,289 @@
 			]
 		},
 		{
+			"name": "CommaFeed",
+			"item": [
+				{
+					"name": "login - commafeed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var sid = pm.cookies.get(\"JSESSIONID\");",
+									"pm.globals.set(\"token\", sid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"admin\",\n  \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "JSESSIONID={{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get category - commafeed",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "JSESSIONID={{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/category/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"category",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "catetory entries",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "JSESSIONID={{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/category/entries?id=all&limit=10&offset=0&order=desc&readType=all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"category",
+								"entries"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "all"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "readType",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user settings",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "JSESSIONID={{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/user/settings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"user",
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user profile",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "JSESSIONID={{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/user/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "server info",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "JSESSIONID={{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/server/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"server",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tags",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "JSESSIONID={{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:{{port}}/rest/entry/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"rest",
+								"entry",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "login",
 			"event": [
 				{
@@ -133,6 +469,21 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -161,6 +512,36 @@
 						"rest",
 						"user",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout - vision",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "JSESSIONID={{vision_session_id}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:{{port}}/rest/user/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"rest",
+						"user",
+						"logout"
 					]
 				}
 			},

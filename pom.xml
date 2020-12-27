@@ -197,27 +197,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<jvmArguments>
-						-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
-					</jvmArguments>
-				</configuration>
-			</plugin>
-<!--			<plugin>-->
-<!--				<artifactId>maven-clean-plugin</artifactId>-->
-<!--				<version>2.4.1</version>-->
 <!--				<configuration>-->
-<!--					<filesets>-->
-<!--						<fileset>-->
-<!--							<directory>src/main/java/cai/peter/feed</directory>-->
-<!--							<includes>-->
-<!--								<include>**/*</include>-->
-<!--							</includes>-->
-<!--							<followSymlinks>false</followSymlinks>-->
-<!--						</fileset>-->
-<!--					</filesets>-->
+<!--					<jvmArguments>-->
+<!--						-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005-->
+<!--					</jvmArguments>-->
 <!--				</configuration>-->
-<!--			</plugin>-->
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
