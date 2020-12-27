@@ -1,0 +1,1645 @@
+swagger: '2.0'
+info:
+  version: 0.1-SNAPSHOT
+  title: Vision
+basePath: /rest
+tags:
+  - name: admin
+  - name: category
+  - name: entry
+  - name: feed
+  - name: server
+  - name: user
+paths:
+  /admin/metrics:
+    get:
+      tags:
+        - admin
+      summary: Retrieve server metrics
+      description: ''
+      operationId: getMetrics
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+  /admin/settings:
+    get:
+      tags:
+        - admin
+      summary: Retrieve application settings
+      description: Retrieve application settings
+      operationId: getSettings
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ApplicationSettings'
+  /admin/user/delete:
+    post:
+      tags:
+        - admin
+      summary: Delete a user
+      description: 'Delete a user, and all his subscriptions'
+      operationId: delete
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/IDRequest'
+      responses:
+        default:
+          description: successful operation
+  '/admin/user/get/{id}':
+    get:
+      tags:
+        - admin
+      summary: Get user information
+      description: Get user information
+      operationId: getUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: user id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User information'
+  /admin/user/getAll:
+    get:
+      tags:
+        - admin
+      summary: Get all users
+      description: Get all users
+      operationId: getUsers
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User information'
+  /admin/user/save:
+    post:
+      tags:
+        - admin
+      summary: Save or update a user
+      description: >-
+        Save or update a user. If the id is not specified, a new user will be
+        created
+      operationId: save
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/User information'
+      responses:
+        default:
+          description: successful operation
+  /category/add:
+    post:
+      tags:
+        - category
+      summary: Add a category
+      description: Add a new feed category
+      operationId: addCategory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Add Category Request'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: integer
+            format: int64
+  /category/collapse:
+    post:
+      tags:
+        - category
+      summary: Collapse a category
+      description: Save collapsed or expanded status for a category
+      operationId: collapse
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Mark Request'
+      responses:
+        default:
+          description: successful operation
+  /category/delete:
+    post:
+      tags:
+        - category
+      summary: Delete a category
+      description: Delete an existing feed category
+      operationId: deleteCategory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/IDRequest'
+      responses:
+        default:
+          description: successful operation
+  /category/entries:
+    get:
+      tags:
+        - category
+      summary: Get category entries
+      description: Get a list of category entries
+      operationId: getCategoryEntries
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          description: 'id of the category, ''all'' or ''starred'''
+          required: true
+          type: string
+        - name: readType
+          in: query
+          description: all entries or only unread ones
+          required: true
+          type: string
+          default: unread
+          enum:
+            - all
+            - unread
+        - name: newerThan
+          in: query
+          description: only entries newer than this
+          required: false
+          type: integer
+          format: int64
+        - name: offset
+          in: query
+          description: offset for paging
+          required: false
+          type: integer
+          default: 0
+          format: int32
+        - name: limit
+          in: query
+          description: 'limit for paging, default 20, maximum 1000'
+          required: false
+          type: integer
+          default: 20
+          format: int32
+        - name: order
+          in: query
+          description: ordering
+          required: false
+          type: string
+          default: desc
+          enum:
+            - asc
+            - desc
+            - abc
+            - zyx
+        - name: keywords
+          in: query
+          description: >-
+            search for keywords in either the title or the content of the
+            entries, separated by spaces, 3 characters minimum
+          required: false
+          type: string
+        - name: onlyIds
+          in: query
+          description: return only entry ids
+          required: false
+          type: boolean
+          default: false
+        - name: excludedSubscriptionIds
+          in: query
+          description: comma-separated list of excluded subscription ids
+          required: false
+          type: string
+        - name: tag
+          in: query
+          description: keep only entries tagged with this tag
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/List of entries with some metadata'
+  /category/entriesAsFeed:
+    get:
+      tags:
+        - category
+      summary: Get category entries as feed
+      description: Get a feed of category entries
+      operationId: getCategoryEntriesAsFeed
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      parameters:
+        - name: id
+          in: query
+          description: 'id of the category, ''all'' or ''starred'''
+          required: true
+          type: string
+        - name: readType
+          in: query
+          description: all entries or only unread ones
+          required: true
+          type: string
+          default: all
+          enum:
+            - all
+            - unread
+        - name: newerThan
+          in: query
+          description: only entries newer than this
+          required: false
+          type: integer
+          format: int64
+        - name: offset
+          in: query
+          description: offset for paging
+          required: false
+          type: integer
+          default: 0
+          format: int32
+        - name: limit
+          in: query
+          description: 'limit for paging, default 20, maximum 1000'
+          required: false
+          type: integer
+          default: 20
+          format: int32
+        - name: order
+          in: query
+          description: date ordering
+          required: false
+          type: string
+          default: desc
+          enum:
+            - asc
+            - desc
+        - name: keywords
+          in: query
+          description: >-
+            search for keywords in either the title or the content of the
+            entries, separated by spaces, 3 characters minimum
+          required: false
+          type: string
+        - name: onlyIds
+          in: query
+          description: return only entry ids
+          required: false
+          type: boolean
+          default: false
+        - name: excludedSubscriptionIds
+          in: query
+          description: comma-separated list of excluded subscription ids
+          required: false
+          type: string
+        - name: tag
+          in: query
+          description: keep only entries tagged with this tag
+          required: false
+          type: string
+      responses:
+        default:
+          description: successful operation
+  /category/get:
+    get:
+      tags:
+        - category
+      summary: Get feed categories
+      description: Get all categories and subscriptions of the user
+      operationId: getSubscriptions
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Entry details'
+  /category/mark:
+    post:
+      tags:
+        - category
+      summary: Mark category entries
+      description: Mark feed entries of this category as read
+      operationId: markCategoryEntries
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: 'category id, or ''all'''
+          required: true
+          schema:
+            $ref: '#/definitions/Mark Request'
+      responses:
+        default:
+          description: successful operation
+  /category/modify:
+    post:
+      tags:
+        - category
+      summary: Rename a category
+      description: Rename an existing feed category
+      operationId: modifyCategory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category modification request'
+      responses:
+        default:
+          description: successful operation
+  /category/unreadCount:
+    get:
+      tags:
+        - category
+      summary: Get unread count for feed subscriptions
+      description: ''
+      operationId: getUnreadCount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Unread count'
+  /entry/mark:
+    post:
+      tags:
+        - entry
+      summary: Mark a feed entry
+      description: Mark a feed entry as read/unread
+      operationId: markFeedEntry
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Mark Request
+          required: true
+          schema:
+            $ref: '#/definitions/Mark Request'
+      responses:
+        default:
+          description: successful operation
+  /entry/markMultiple:
+    post:
+      tags:
+        - entry
+      summary: Mark multiple feed entries
+      description: Mark feed entries as read/unread
+      operationId: markFeedEntries
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Multiple Mark Request
+          required: true
+          schema:
+            $ref: '#/definitions/Multiple Mark Request'
+      responses:
+        default:
+          description: successful operation
+  /entry/star:
+    post:
+      tags:
+        - entry
+      summary: Mark a feed entry
+      description: Mark a feed entry as read/unread
+      operationId: starFeedEntry
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Star Request
+          required: true
+          schema:
+            $ref: '#/definitions/Star Request'
+      responses:
+        default:
+          description: successful operation
+  /entry/tag:
+    post:
+      tags:
+        - entry
+      summary: Mark a feed entry
+      description: Mark a feed entry as read/unread
+      operationId: tagFeedEntry
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Tag Request
+          required: true
+          schema:
+            $ref: '#/definitions/Tag Request'
+      responses:
+        default:
+          description: successful operation
+  /entry/tags:
+    get:
+      tags:
+        - entry
+      summary: Get list of tags for the user
+      description: Get list of tags for the user
+      operationId: getTags
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+  /feed/entries:
+    get:
+      tags:
+        - feed
+      summary: Get feed entries
+      description: Get a list of feed entries
+      operationId: getFeedEntries
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: query
+          description: id of the feed
+          required: true
+          type: string
+        - name: readType
+          in: query
+          description: all entries or only unread ones
+          required: true
+          type: string
+          default: unread
+          enum:
+            - all
+            - unread
+        - name: newerThan
+          in: query
+          description: only entries newer than this
+          required: false
+          type: integer
+          format: int64
+        - name: offset
+          in: query
+          description: offset for paging
+          required: false
+          type: integer
+          default: 0
+          format: int32
+        - name: limit
+          in: query
+          description: 'limit for paging, default 20, maximum 1000'
+          required: false
+          type: integer
+          default: 20
+          format: int32
+        - name: order
+          in: query
+          description: ordering
+          required: false
+          type: string
+          default: desc
+          enum:
+            - asc
+            - desc
+            - abc
+            - zyx
+        - name: keywords
+          in: query
+          description: >-
+            search for keywords in either the title or the content of the
+            entries, separated by spaces, 3 characters minimum
+          required: false
+          type: string
+        - name: onlyIds
+          in: query
+          description: return only entry ids
+          required: false
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/List of entries with some metadata'
+  /feed/entriesAsFeed:
+    get:
+      tags:
+        - feed
+      summary: Get feed entries as a feed
+      description: Get a feed of feed entries
+      operationId: getFeedEntriesAsFeed
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      parameters:
+        - name: id
+          in: query
+          description: id of the feed
+          required: true
+          type: string
+        - name: readType
+          in: query
+          description: all entries or only unread ones
+          required: true
+          type: string
+          default: all
+          enum:
+            - all
+            - unread
+        - name: newerThan
+          in: query
+          description: only entries newer than this
+          required: false
+          type: integer
+          format: int64
+        - name: offset
+          in: query
+          description: offset for paging
+          required: false
+          type: integer
+          default: 0
+          format: int32
+        - name: limit
+          in: query
+          description: 'limit for paging, default 20, maximum 1000'
+          required: false
+          type: integer
+          default: 20
+          format: int32
+        - name: order
+          in: query
+          description: date ordering
+          required: false
+          type: string
+          default: desc
+          enum:
+            - asc
+            - desc
+        - name: keywords
+          in: query
+          description: >-
+            search for keywords in either the title or the content of the
+            entries, separated by spaces, 3 characters minimum
+          required: false
+          type: string
+        - name: onlyIds
+          in: query
+          description: return only entry ids
+          required: false
+          type: boolean
+          default: false
+      responses:
+        default:
+          description: successful operation
+  /feed/export:
+    get:
+      tags:
+        - feed
+      summary: OPML export
+      description: Export an OPML file of the user's subscriptions
+      operationId: exportOpml
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      responses:
+        default:
+          description: successful operation
+  '/feed/favicon/{id}':
+    get:
+      tags:
+        - feed
+      summary: Fetch a feed's icon
+      description: Fetch a feed's icon
+      operationId: getFavicon
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: subscription id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: successful operation
+  /feed/fetch:
+    post:
+      tags:
+        - feed
+      summary: Fetch a feed
+      description: Fetch a feed by its url
+      operationId: fetchFeed
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: feed url
+          required: true
+          schema:
+            $ref: '#/definitions/Feed information request'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Feed details'
+  '/feed/get/{id}':
+    get:
+      tags:
+        - feed
+      summary: ''
+      description: ''
+      operationId: get
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: user id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        default:
+          description: successful operation
+  /feed/import:
+    post:
+      tags:
+        - feed
+      summary: OPML import
+      description: 'Import an OPML file, posted as a FORM with the ''file'' name'
+      operationId: importOpml
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+  /feed/mark:
+    post:
+      tags:
+        - feed
+      summary: Mark feed entries
+      description: Mark feed entries as read (unread is not supported)
+      operationId: markFeedEntries
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Mark request
+          required: false
+          schema:
+            $ref: '#/definitions/Mark Request'
+      responses:
+        default:
+          description: successful operation
+  /feed/modify:
+    post:
+      tags:
+        - feed
+      summary: Modify a subscription
+      description: Modify a feed subscription
+      operationId: modify
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: subscription id
+          required: true
+          schema:
+            $ref: '#/definitions/Feed modification request'
+      responses:
+        default:
+          description: successful operation
+  /feed/refresh:
+    post:
+      tags:
+        - feed
+      summary: Queue a feed for refresh
+      description: Manually add a feed to the refresh queue
+      operationId: queueForRefresh
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Feed id
+          required: false
+          schema:
+            $ref: '#/definitions/IDRequest'
+      responses:
+        default:
+          description: successful operation
+  /feed/refreshAll:
+    get:
+      tags:
+        - feed
+      summary: Queue all feeds of the user for refresh
+      description: Manually add all feeds of the user to the refresh queue
+      operationId: queueAllForRefresh
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+  /feed/subscribe:
+    get:
+      tags:
+        - feed
+      summary: Subscribe to a feed
+      description: Subscribe to a feed
+      operationId: subscribe
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: url
+          in: query
+          description: feed url
+          required: true
+          type: string
+      responses:
+        default:
+          description: successful operation
+    post:
+      tags:
+        - feed
+      summary: Subscribe to a feed
+      description: Subscribe to a feed
+      operationId: subscribe
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: subscription request
+          required: true
+          schema:
+            $ref: '#/definitions/Subscription request'
+      responses:
+        default:
+          description: successful operation
+  /feed/unsubscribe:
+    post:
+      tags:
+        - feed
+      summary: Unsubscribe from a feed
+      description: Unsubscribe from a feed
+      operationId: unsubscribe
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/IDRequest'
+      responses:
+        default:
+          description: successful operation
+  /server/get:
+    get:
+      tags:
+        - server
+      summary: Get server infos
+      description: Get server infos
+      operationId: get
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Server infos'
+  /server/proxy:
+    get:
+      tags:
+        - server
+      summary: proxy image
+      description: ''
+      operationId: get
+      consumes:
+        - application/json
+      produces:
+        - image/png
+      parameters:
+        - name: u
+          in: query
+          required: false
+          type: string
+      responses:
+        default:
+          description: successful operation
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Login and create a session
+      description: ''
+      operationId: login
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        default:
+          description: successful operation
+  /user/passwordReset:
+    post:
+      tags:
+        - user
+      summary: send a password reset email
+      description: ''
+      operationId: sendPasswordReset
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+  /user/profile:
+    get:
+      tags:
+        - user
+      summary: Retrieve user's profile
+      description: ''
+      operationId: get
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User information'
+    post:
+      tags:
+        - user
+      summary: Save user's profile
+      description: ''
+      operationId: save
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Profile modification request'
+      responses:
+        default:
+          description: successful operation
+  /user/profile/deleteAccount:
+    post:
+      tags:
+        - user
+      summary: Delete the user account
+      description: ''
+      operationId: delete
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        default:
+          description: successful operation
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: Register a new account
+      description: ''
+      operationId: register
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegistrationRequest'
+      responses:
+        default:
+          description: successful operation
+  /user/settings:
+    get:
+      tags:
+        - user
+      summary: Retrieve user settings
+      description: Retrieve user settings
+      operationId: getSettings
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User settings'
+    post:
+      tags:
+        - user
+      summary: Save user settings
+      description: Save user settings
+      operationId: saveSettings
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/User settings'
+      responses:
+        default:
+          description: successful operation
+definitions:
+  Add Category Request:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        description: name
+      parentId:
+        type: string
+        description: 'parent category id, if any'
+  ApplicationSettings:
+    type: object
+    required:
+      - allowRegistrations
+      - announcement
+      - backgroundThreads
+      - cache
+      - createDemoAccount
+      - databaseUpdateThreads
+      - heavyLoad
+      - imageProxyEnabled
+      - keepStatusDays
+      - maxFeedCapacity
+      - publicUrl
+      - pubsubhubbub
+      - queryTimeout
+      - refreshIntervalMinutes
+    properties:
+      publicUrl:
+        type: string
+      allowRegistrations:
+        type: boolean
+        default: false
+      createDemoAccount:
+        type: boolean
+        default: false
+      googleAnalyticsTrackingCode:
+        type: string
+      googleAuthKey:
+        type: string
+      backgroundThreads:
+        type: integer
+        format: int32
+        minimum: 1
+      databaseUpdateThreads:
+        type: integer
+        format: int32
+        minimum: 1
+      smtpHost:
+        type: string
+      smtpPort:
+        type: integer
+        format: int32
+      smtpTls:
+        type: boolean
+        default: false
+      smtpUserName:
+        type: string
+      smtpPassword:
+        type: string
+      smtpFromAddress:
+        type: string
+      graphiteEnabled:
+        type: boolean
+        default: false
+      graphitePrefix:
+        type: string
+      graphiteHost:
+        type: string
+      graphitePort:
+        type: integer
+        format: int32
+      graphiteInterval:
+        type: integer
+        format: int32
+      heavyLoad:
+        type: boolean
+        default: false
+      pubsubhubbub:
+        type: boolean
+        default: false
+      imageProxyEnabled:
+        type: boolean
+        default: false
+      queryTimeout:
+        type: integer
+        format: int32
+        minimum: 0
+      keepStatusDays:
+        type: integer
+        format: int32
+        minimum: 0
+      maxFeedCapacity:
+        type: integer
+        format: int32
+        minimum: 0
+      refreshIntervalMinutes:
+        type: integer
+        format: int32
+        minimum: 0
+      cache:
+        type: string
+        enum:
+          - NOOP
+          - REDIS
+      announcement:
+        type: string
+      userAgent:
+        type: string
+      unreadThreshold:
+        type: string
+        format: date-time
+  Category modification request:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      name:
+        type: string
+        description: 'new name, null if not changed'
+      parentId:
+        type: string
+        description: new parent category id
+      position:
+        type: integer
+        format: int32
+        description: 'new display position, null if not changed'
+  Entry details:
+    type: object
+    properties:
+      id:
+        type: string
+        description: entry id
+      guid:
+        type: string
+        description: entry guid
+      title:
+        type: string
+        description: entry title
+      content:
+        type: string
+        description: entry content
+      categories:
+        type: string
+        description: comma-separated list of categories
+      rtl:
+        type: boolean
+        description: wether entry content and title are rtl
+        default: false
+      author:
+        type: string
+        description: entry author
+      enclosureUrl:
+        type: string
+        description: 'entry enclosure url, if any'
+      enclosureType:
+        type: string
+        description: 'entry enclosure mime type, if any'
+      date:
+        type: string
+        format: date-time
+        description: entry publication date
+      insertedDate:
+        type: string
+        format: date-time
+        description: entry insertion date in the database
+      feedId:
+        type: string
+        description: feed id
+      feedName:
+        type: string
+        description: feed name
+      feedUrl:
+        type: string
+        description: this entry's feed url
+      feedLink:
+        type: string
+        description: this entry's website url
+      iconUrl:
+        type: string
+        description: The favicon url to use for this feed
+      url:
+        type: string
+        description: entry url
+      read:
+        type: boolean
+        description: read sttaus
+        default: false
+      starred:
+        type: boolean
+        description: starred status
+        default: false
+      markable:
+        type: boolean
+        description: wether the entry is still markable (old entry statuses are discarded)
+        default: false
+      tags:
+        type: array
+        description: tags
+        items:
+          type: string
+  Feed details:
+    type: object
+    properties:
+      url:
+        type: string
+      title:
+        type: string
+  Feed information request:
+    type: object
+    required:
+      - url
+    properties:
+      url:
+        type: string
+        description: feed url
+  Feed modification request:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      name:
+        type: string
+        description: 'new name, null if not changed'
+      categoryId:
+        type: string
+        description: new parent category id
+      position:
+        type: integer
+        format: int32
+        description: 'new display position, null if not changed'
+      filter:
+        type: string
+        description: >-
+          JEXL string evaluated on new entries to mark them as read if they do
+          not match
+  IDRequest:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+  List of entries with some metadata:
+    type: object
+    properties:
+      name:
+        type: string
+        description: name of the feed or the category requested
+      message:
+        type: string
+        description: error or warning message
+      errorCount:
+        type: integer
+        format: int32
+        description: times the server tried to refresh the feed and failed
+      feedLink:
+        type: string
+        description: 'URL of the website, extracted from the feed'
+      timestamp:
+        type: integer
+        format: int64
+        description: list generation timestamp
+      hasMore:
+        type: boolean
+        description: if the query has more elements
+        default: false
+      offset:
+        type: integer
+        format: int32
+        description: the requested offset
+      limit:
+        type: integer
+        format: int32
+        description: the requested limit
+      entries:
+        type: array
+        description: list of entries
+        items:
+          $ref: '#/definitions/Entry details'
+      ignoredReadStatus:
+        type: boolean
+        description: >-
+          if true, the unread flag was ignored in the request, all entries are
+          returned regardless of their read status
+        default: false
+  LoginRequest:
+    type: object
+    required:
+      - name
+      - password
+    properties:
+      name:
+        type: string
+        description: username
+      password:
+        type: string
+        description: password
+  Mark Request:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: 'entry id, category id, ''all'' or ''starred'''
+      read:
+        type: boolean
+        description: mark as read or unread
+        default: false
+      olderThan:
+        type: integer
+        format: int64
+        description: >-
+          only entries older than this, pass the timestamp you got from the
+          entry list to prevent marking an entry that was not retrieved
+      keywords:
+        type: string
+        description: >-
+          only mark read if a feed has these keywords in the title or rss
+          content
+      excludedSubscriptions:
+        type: array
+        description: >-
+          if marking a category or 'all', exclude those subscriptions from the
+          marking
+        items:
+          type: integer
+          format: int64
+  Multiple Mark Request:
+    type: object
+    required:
+      - requests
+    properties:
+      requests:
+        type: array
+        description: list of mark requests
+        items:
+          $ref: '#/definitions/Mark Request'
+  Profile modification request:
+    type: object
+    properties:
+      email:
+        type: string
+        description: 'changes email of the user, if specified'
+      password:
+        type: string
+        description: 'changes password of the user, if specified'
+      newApiKey:
+        type: boolean
+        description: generate a new api key
+        default: false
+  RegistrationRequest:
+    type: object
+    required:
+      - email
+      - name
+      - password
+    properties:
+      name:
+        type: string
+        description: 'username, between 3 and 32 characters'
+      password:
+        type: string
+        description: 'password, minimum 6 characters'
+      email:
+        type: string
+        description: email address for password recovery
+  Server infos:
+    type: object
+    properties:
+      announcement:
+        type: string
+      version:
+        type: string
+      gitCommit:
+        type: string
+      allowRegistrations:
+        type: boolean
+        default: false
+      googleAnalyticsCode:
+        type: string
+      smtpEnabled:
+        type: boolean
+        default: false
+  Star Request:
+    type: object
+    required:
+      - feedId
+      - id
+    properties:
+      id:
+        type: string
+        description: id
+      feedId:
+        type: integer
+        format: int64
+        description: feed id
+      starred:
+        type: boolean
+        description: starred or not
+        default: false
+  Subscription request:
+    type: object
+    required:
+      - title
+      - url
+    properties:
+      url:
+        type: string
+        description: url of the feed
+      title:
+        type: string
+        description: name of the feed for the user
+      categoryId:
+        type: string
+        description: id of the user category to place the feed in
+  Tag Request:
+    type: object
+    required:
+      - entryId
+    properties:
+      entryId:
+        type: integer
+        format: int64
+        description: entry id
+      tags:
+        type: array
+        description: tags
+        items:
+          type: string
+  Unread count:
+    type: object
+    properties:
+      feedId:
+        type: integer
+        format: int64
+      unreadCount:
+        type: integer
+        format: int64
+      newestItemTime:
+        type: string
+        format: date-time
+  User information:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: user id
+      name:
+        type: string
+        description: user name
+      email:
+        type: string
+        description: 'user email, if any'
+      apiKey:
+        type: string
+        description: api key
+      password:
+        type: string
+        description: 'user password, never returned by the api'
+      enabled:
+        type: boolean
+        description: account status
+        default: false
+      created:
+        type: string
+        format: date-time
+        description: account creation date
+      lastLogin:
+        type: string
+        format: date-time
+        description: last login date
+      admin:
+        type: boolean
+        description: user is admin
+        default: false
+  User settings:
+    type: object
+    required:
+      - readingMode
+      - readingOrder
+      - scrollMarks
+      - showRead
+      - viewMode
+    properties:
+      language:
+        type: string
+        description: 'user''s preferred language, english if none'
+      readingMode:
+        type: string
+        description: user reads all entries or unread entries only
+        enum:
+          - all
+          - unread
+      readingOrder:
+        type: string
+        description: user reads entries in ascending or descending order
+        enum:
+          - asc
+          - desc
+      viewMode:
+        type: string
+        description: 'user viewing mode, either title-only or expande view'
+        enum:
+          - title
+          - expanded
+      showRead:
+        type: boolean
+        description: user wants category and feeds with no unread entries shown
+        default: false
+      scrollMarks:
+        type: boolean
+        description: 'In expanded view, scroll through entries mark them as read'
+        default: false
+      theme:
+        type: string
+        description: user's selected theme
+      customCss:
+        type: string
+        description: user's custom css for the website
+      scrollSpeed:
+        type: integer
+        format: int32
+        description: user's preferred scroll speed when navigating between entries
+      email:
+        type: boolean
+        default: false
+      gmail:
+        type: boolean
+        default: false
+      facebook:
+        type: boolean
+        default: false
+      twitter:
+        type: boolean
+        default: false
+      googleplus:
+        type: boolean
+        default: false
+      tumblr:
+        type: boolean
+        default: false
+      pocket:
+        type: boolean
+        default: false
+      instapaper:
+        type: boolean
+        default: false
+      buffer:
+        type: boolean
+        default: false
+      readability:
+        type: boolean
+        default: false

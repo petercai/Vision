@@ -23,11 +23,14 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import com.google.common.base.Preconditions;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
 	private final FeedcategoriesRepository feedCategoryDAO;
 	private final FeedsubscriptionsRepository feedSubscriptionDAO;
@@ -144,5 +147,10 @@ public class UserService {
 
 	public User getUser(String userName){
     return userDAO.getUser(userName);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return null;
 	}
 }

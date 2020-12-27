@@ -11,6 +11,7 @@ import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.persistence.repository.UsersRepository;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class OPMLImporterTest {
 
 
     @Test
+    @Disabled
     public void importOpml() throws IOException, InterruptedException {
         InputStream input = this.getClass().getClassLoader().getResourceAsStream("myfeed.opml");
         String opml = IOUtils.toString(input, "UTF-8");
