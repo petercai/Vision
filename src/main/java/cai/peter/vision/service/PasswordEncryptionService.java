@@ -1,6 +1,5 @@
 package cai.peter.vision.service;
 
-import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -13,11 +12,18 @@ import javax.crypto.spec.PBEKeySpec;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class PasswordEncryptionService implements Serializable {
+public class PasswordEncryptionService extends BCryptPasswordEncoder {
+
+	@Override
+	public String encode(CharSequence rawPassword) {
+		return super.encode(rawPassword);
+	}
 
 	public boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt) {
 		if (StringUtils.isBlank(attemptedPassword)) {
@@ -70,6 +76,11 @@ public class PasswordEncryptionService implements Serializable {
 		return bytes;
 	}
 
+	public String getSalt() {
+		return BCrypt.gensalt(BCryptVersion.$2A.getVersion(), -1);
+	}
+
+	@Deprecated
 	static public byte[] generateSalt() {
 		// VERY important to use SecureRandom instead of just Random
 

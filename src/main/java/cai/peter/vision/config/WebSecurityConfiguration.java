@@ -45,33 +45,32 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.authenticationProvider(daoAuthenticationProvider());
-    /*
-     * basic auth
-     */
-//    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//    auth.inMemoryAuthentication()
-//        .withUser("peter")
-//        .password(encoder.encode("peter"))
-//        .roles("USER")
-//        .and()
-//        .withUser("admin")
-//        .password(encoder.encode("admin"))
-//        .roles("USER", "ADMIN");
+
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception { // 2
     http.sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-        .sessionFixation().migrateSession()
+//        .sessionFixation()
+//        .migrateSession()
+        .and().csrf().disable() //Cross Site Request Forgery
+        .formLogin()// https://www.baeldung.com/spring-security-login
+        //        .loginPage("/login.html")
+//        .loginProcessingUrl("/login")
+        //      .defaultSuccessUrl("/home")
+        .and()
+        .logout()  //https://www.baeldung.com/spring-security-logout
+//        .logoutUrl("/logout")
+//        .logoutSuccessUrl("/")
+        .invalidateHttpSession(true)
+        .deleteCookies("JSESSIONID")
         .and()
         .authorizeRequests()
         .antMatchers("/", "/actuator/**", "/rest/user/login")
         .permitAll()
         .anyRequest()
         .authenticated();
-//        .and()
-//        .httpBasic();
 }
 
   /**
@@ -105,43 +104,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   }*/
 
-  /**
-   * 1. A normal Spring @Configuration with the @EnableWebSecurity annotation, extending from
-   * WebSecurityConfigurerAdapter.
-   *
-   * <p>2. By overriding the adapter’s configure(HttpSecurity) method, you get a nice little DSL
-   * with which you can configure your FilterChain.
-   *
-   * <p>3. All requests going to / and /home are allowed (permitted) - the user does not have to
-   * authenticate. You are using an antMatcher, which means you could have also used wildcards (*,
-   * \*\*, ?) in the string.
-   *
-   * <p>4. Any other request needs the user to be authenticated first, i.e. the user needs to login.
-   *
-   * <p>5. You are allowing form login (username/password in a form), with a custom loginPage
-   * (/login, i.e. not Spring Security’s auto-generated one). Anyone should be able to access the
-   * login page, without having to log in first (permitAll; otherwise we would have a Catch-22!).
-   *
-   * <p>6. The same goes for the logout page
-   *
-   * <p>7. On top of that, you are also allowing Basic Auth, i.e. sending in an HTTP Basic Auth
-   * Header to authenticate.
-   */
-/*  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-        .antMatchers("/", "/home")
-        .permitAll() // (3)
-        .anyRequest()
-        .authenticated() // (4)
-        .and()
-        .formLogin() // (5)
-        .loginPage("/login") // (5)
-        .permitAll()
-        .and()
-        .logout() // (6)
-        .permitAll()
-        .and()
-        .httpBasic(); // (7)
-  }*/
+
 }

@@ -4,6 +4,7 @@ import cai.peter.vision.VisionApplication;
 import cai.peter.vision.persistence.entity.User;
 import cai.peter.vision.service.PasswordEncryptionService;
 import com.google.common.base.MoreObjects;
+import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -60,7 +62,7 @@ public class UsersRepositoryTest {
 
     @Test
     public void testFindByName() {
-        User admin = repo.findByName("admin@commafeed.com");
+        User admin = repo.findByName("caipeter@outlook.com");
         logger.info("testGetAdmin() - User admin={}", MoreObjects.toStringHelper(admin)
           .add("id", admin.getId())
           .add("name", admin.getName())
@@ -72,14 +74,14 @@ public class UsersRepositoryTest {
     }
 
     @Test
-    @Disabled
     public void testCreateAdmin(){
         User admin = new User();
-        admin.setName("admin");
+        admin.setName("cai");
         admin.setEmail("caipeter@outlook.com");
-        byte[] salt = PasswordEncryptionService.generateSalt();
-        admin.setSalt(salt);
-        admin.setPassword("".getBytes());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String pwd = encoder.encode("cai");
+        admin.setPassword(pwd.getBytes());
+        admin.setCreated(new Date());
         repo.save(admin);
     }
 }

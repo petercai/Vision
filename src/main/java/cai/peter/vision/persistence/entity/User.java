@@ -33,7 +33,7 @@ public class User extends AbstractModel {
 	@Column(length = 40, unique = true)
 	private String apiKey;
 
-	@Column(length = 8, nullable = false)
+	@Column(length = 8, nullable = true)
 	private byte[] salt;
 
 	@Column(nullable = false)

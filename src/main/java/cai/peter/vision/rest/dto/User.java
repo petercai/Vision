@@ -1,8 +1,13 @@
 package cai.peter.vision.rest.dto;
 
 import cai.peter.vision.persistence.entity.AbstractModel;
+import cai.peter.vision.persistence.entity.UserRole.Role;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -14,58 +19,63 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 @Data
 public class User implements UserDetails {
-	private Long id;
-	private String name;
-	private String email;
-	private byte[] password;
-		private String apiKey;
-//	private byte[] salt;
-	private boolean disabled;
-	private Date lastLogin;
-	private Date created;
-	//	private String recoverPasswordToken;
-//	private Date recoverPasswordTokenDate;
-//	private Date lastFullRefresh;
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
+  private Long id;
+  private String name;
+  private String email;
+  private String password;
+  private String apiKey;
+  //	private byte[] salt;
+  private boolean disabled;
+  private Date lastLogin;
+  private Date created;
+  //	private String recoverPasswordToken;
+  //	private Date recoverPasswordTokenDate;
+  //	private Date lastFullRefresh;
+  private List<Role> roles;
 
-	@Override
-	public String getPassword() {
-		return null;
-	}
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
 
-	@Override
-	public String getUsername() {
-		return null;
-	}
+    return Optional.ofNullable(roles).orElse(Collections.emptyList()).stream()
+        .map(role -> new SimpleGrantedAuthority(role.name()))
+        .collect(Collectors.toList());
+  }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
+  @Override
+  public String getPassword() {
+    return password;
+  }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
-	}
+  @Override
+  public String getUsername() {
+    return this.name;
+  }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
-	}
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-	@Override
-	public boolean isEnabled() {
-		return !disabled;
-	}
-//	private String recoverPasswordToken;
-//	private Date recoverPasswordTokenDate;
-//	private Date lastFullRefresh;
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return !disabled;
+  }
+  //	private String recoverPasswordToken;
+  //	private Date recoverPasswordTokenDate;
+  //	private Date lastFullRefresh;
 }

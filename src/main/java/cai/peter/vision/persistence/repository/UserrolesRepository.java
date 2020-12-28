@@ -20,6 +20,6 @@ import org.springframework.stereotype.Repository;
 public interface UserrolesRepository extends JpaRepository<UserRole, Long>, JpaSpecificationExecutor<UserRole> {
 
   @Query(value = "select r from UserRole r where r.user.id = ?1")
-  Set<Role> findRoles(Long userId);
+  Set<UserRole> findRoles(Long userId);
 
 }
