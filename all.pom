@@ -9,13 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cai.peter</groupId>
-	<artifactId>Vision</artifactId>
+	<artifactId>vision-swagger-code-gen</artifactId>
 	<version>1.1</version>
-	<name>Vision</name>
-	<description>Vision</description>
+	<name>vision-swagger-code-gen</name>
+	<description>vision-swagger-code-gen</description>
 
 	<properties>
-		<java.version>15</java.version>
+		<java.version>1.8</java.version>
 		<rome.version>1.5.0</rome.version>
 		<springfox-version>2.8.0</springfox-version>
 	</properties>
@@ -259,16 +259,9 @@
 							</includes>
 							<followSymlinks>false</followSymlinks>
 						</fileset>
-						<fileset>
-							<directory>${project.basedir}/src/main/generated</directory>
-							<includes>
-								<include>**/*</include>
-							</includes>
-							<followSymlinks>false</followSymlinks>
-						</fileset>
 					</filesets>
 				</configuration>
-			</plugin>			
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -284,6 +277,51 @@
 				<configuration>
 <!--					<rulesUri>maven-version-rules.xml</rulesUri>-->
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>4.2.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/swagger/vision.yaml</inputSpec>
+							<output>${project.basedir}/generated</output>
+							<generatorName>spring</generatorName>
+							<addCompileSourceRoot>true</addCompileSourceRoot>
+							<skipOverwrite>false</skipOverwrite>
+							<skipValidateSpec>true</skipValidateSpec>
+
+							<modelNameSuffix>Dto</modelNameSuffix>
+							<modelPackage>cai.peter.vision.api.model</modelPackage>
+							<generateModels>true</generateModels>
+							<generateModelTests>true</generateModelTests>
+							<generateModelDocumentation>false</generateModelDocumentation>
+
+							<generateApis>true</generateApis>
+							<apiPackage>cai.peter.vision.api.controller</apiPackage>
+							<generateApiTests>true</generateApiTests>
+
+							<generateSupportingFiles>true</generateSupportingFiles>
+							<supportingFilesToGenerate>
+								ApiUtil.java
+							</supportingFilesToGenerate>
+
+							<verbose>false</verbose>
+							<configOptions>
+								<dateLibrary>java8-localdatetime</dateLibrary>
+								<java8>true</java8>
+								<useBeanValidation>true</useBeanValidation>
+								<sourceFolder>src/main/generated</sourceFolder>
+								<!-- undocumented features -->
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

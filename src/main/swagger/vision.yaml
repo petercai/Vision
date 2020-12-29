@@ -771,7 +771,7 @@ paths:
         - feed
       summary: Mark feed entries
       description: Mark feed entries as read (unread is not supported)
-      operationId: markFeedEntries
+#      operationId: markFeedEntries
       consumes:
         - application/json
       produces:
@@ -867,7 +867,7 @@ paths:
         - feed
       summary: Subscribe to a feed
       description: Subscribe to a feed
-      operationId: subscribe
+#      operationId: subscribe
       consumes:
         - application/json
       produces:
@@ -908,7 +908,7 @@ paths:
         - server
       summary: Get server infos
       description: Get server infos
-      operationId: get
+#      operationId: get
       consumes:
         - application/json
       produces:
@@ -924,7 +924,7 @@ paths:
         - server
       summary: proxy image
       description: ''
-      operationId: get
+#      operationId: get
       consumes:
         - application/json
       produces:
@@ -977,7 +977,7 @@ paths:
         - user
       summary: Retrieve user's profile
       description: ''
-      operationId: get
+#      operationId: get
       consumes:
         - application/json
       produces:
@@ -992,7 +992,7 @@ paths:
         - user
       summary: Save user's profile
       description: ''
-      operationId: save
+#      operationId: save
       consumes:
         - application/json
       produces:
@@ -1012,7 +1012,7 @@ paths:
         - user
       summary: Delete the user account
       description: ''
-      operationId: delete
+#      operationId: delete
       consumes:
         - application/json
       produces:
@@ -1046,7 +1046,7 @@ paths:
         - user
       summary: Retrieve user settings
       description: Retrieve user settings
-      operationId: getSettings
+#      operationId: getSettings
       consumes:
         - application/json
       produces:
