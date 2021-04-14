@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cai.peter</groupId>
-	<artifactId>vision-swagger-code-gen</artifactId>
+	<artifactId>vision-swagger-code-gen-all</artifactId>
 	<version>1.1</version>
-	<name>vision-swagger-code-gen</name>
+	<name>vision-swagger-code-gen-all</name>
 	<description>vision-swagger-code-gen</description>
 
 	<properties>

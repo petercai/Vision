@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cai.peter</groupId>
-	<artifactId>Vision</artifactId>
+	<artifactId>Vision-run-in-debug</artifactId>
 	<version>1.1</version>
-	<name>Vision</name>
+	<name>Vision-run-in-debug</name>
 	<description>Vision</description>
 
 	<properties>
