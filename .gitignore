@@ -30,3 +30,4 @@ hs_err_pid*
 .project
 .DS_Store
 /.sts4-cache/
+*.iml

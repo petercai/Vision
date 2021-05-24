@@ -2,6 +2,8 @@ package cai.peter.vision.feed;
 
 import java.io.StringReader;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -38,7 +40,6 @@ import com.steadystate.css.parser.CSSOMParser;
 
 import cai.peter.vision.persistence.entity.FeedEntry;
 import cai.peter.vision.persistence.entity.FeedSubscription;
-import edu.uci.ics.crawler4j.url.URLCanonicalizer;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -162,18 +163,26 @@ public class FeedUtils {
 	}
 
 	/**
-	 * Normalize the url. The resulting url is not meant to be fetched but rather used as a mean to identify a feed and avoid duplicates
+	 * Normalize the sUrl. The resulting sUrl is not meant to be fetched but rather used as a mean to identify a feed and avoid duplicates
 	 */
-	public static String normalizeURL(String url) {
-		if (url == null) {
+	public static String normalizeURL(String sUrl) {
+		if (sUrl == null) {
 			return null;
 		}
-		String normalized = URLCanonicalizer.getCanonicalURL(url);
-		if (normalized == null) {
-			normalized = url;
+		String normalized = sUrl;
+
+		try {
+			URL url = new URL(sUrl);
+			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+
+			if (normalized == null) {
+				normalized = sUrl;
+			}
+		} catch (MalformedURLException | URISyntaxException e) {
+			log.error(e.getMessage(), e);
 		}
 
-		// convert to lower case, the url probably won't work in some cases
+		// convert to lower case, the sUrl probably won't work in some cases
 		// after that but we don't care we just want to compare urls to avoid
 		// duplicates
 		normalized = normalized.toLowerCase();

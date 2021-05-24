@@ -1,10 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
@@ -79,5 +79,40 @@
     <bean id="namedParameterJdbcTemplate"
     	class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
     <constructor-arg ref="dataSource"></constructor-arg>
+    </bean>
+
+    <!--    MongoDB configuraiton-->
+<!--    <bean id="mg" class="cai.peter.vision.test.model.FxMongo">-->
+<!--    </bean>-->
+
+<!--    <mongo:mongo-client id="mongoClient"-->
+<!--                        host="localhost" port="27017">-->
+<!--    </mongo:mongo-client>-->
+<!--    <mongo:db-factory id="mongoFactory" dbname="vision"-->
+<!--                      mongo-ref="mongo-client" />-->
+
+    <bean class="cai.peter.vision.test.model.Endpoint" id="commafeed">
+        <property name="host" value="http://localhost:8083" />
+        <property name="path" value="/rest" />
+        <property name="user" value="admin" />
+        <property name="password" value="admin" />
+    </bean>
+    <bean class="cai.peter.vision.test.model.Endpoint" id="commafeed-ui">
+        <property name="host" value="http://localhost:8082" />
+        <property name="path" value="/rest" />
+        <property name="user" value="admin" />
+        <property name="password" value="admin" />
+    </bean>
+    <bean class="cai.peter.vision.test.model.Endpoint" id="commafeed-admin">
+        <property name="host" value="http://localhost:8084" />
+        <property name="path" value="/rest" />
+        <property name="user" value="admin" />
+        <property name="password" value="admin" />
+    </bean>
+    <bean class="cai.peter.vision.test.model.Endpoint" id="vision">
+        <property name="host" value="http://localhost:8080" />
+        <property name="path" value="/rest" />
+        <property name="user" value="admin" />
+        <property name="password" value="admin" />
     </bean>
 </beans>
