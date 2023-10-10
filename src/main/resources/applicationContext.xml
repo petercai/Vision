@@ -22,7 +22,7 @@
     <bean id="entityManagerFactory"
       class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="cai.peter.vision.persistence"/>
+        <property name="packagesToScan" value="com.peppermint.vision.persistence"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
@@ -62,12 +62,12 @@
     <!--	</bean>-->
 
      <bean id="config"
-      class="cai.peter.vision.common.VisionConfiguration">
+      class="com.peppermint.vision.common.VisionConfiguration">
         <property name="applicationSettings" ref="applicationSettings"></property>
     </bean>
 
     <bean id="applicationSettings"
-      class="cai.peter.vision.common.VisionConfiguration$ApplicationSettings">
+      class="com.peppermint.vision.common.VisionConfiguration$ApplicationSettings">
         <property value="http://localhost:8082/" name="publicUrl"></property>
     </bean>
 
@@ -82,7 +82,7 @@
     </bean>
 
     <!--    MongoDB configuraiton-->
-<!--    <bean id="mg" class="cai.peter.vision.test.model.FxMongo">-->
+<!--    <bean id="mg" class="com.peppermint.vision.test.model.FxMongo">-->
 <!--    </bean>-->
 
 <!--    <mongo:mongo-client id="mongoClient"-->
@@ -91,25 +91,25 @@
 <!--    <mongo:db-factory id="mongoFactory" dbname="vision"-->
 <!--                      mongo-ref="mongo-client" />-->
 
-    <bean class="cai.peter.vision.test.model.Endpoint" id="commafeed">
+    <bean class="com.peppermint.vision.test.model.Endpoint" id="commafeed">
         <property name="host" value="http://localhost:8083" />
         <property name="path" value="/rest" />
         <property name="user" value="admin" />
         <property name="password" value="admin" />
     </bean>
-    <bean class="cai.peter.vision.test.model.Endpoint" id="commafeed-ui">
+    <bean class="com.peppermint.vision.test.model.Endpoint" id="commafeed-ui">
         <property name="host" value="http://localhost:8082" />
         <property name="path" value="/rest" />
         <property name="user" value="admin" />
         <property name="password" value="admin" />
     </bean>
-    <bean class="cai.peter.vision.test.model.Endpoint" id="commafeed-admin">
+    <bean class="com.peppermint.vision.test.model.Endpoint" id="commafeed-admin">
         <property name="host" value="http://localhost:8084" />
         <property name="path" value="/rest" />
         <property name="user" value="admin" />
         <property name="password" value="admin" />
     </bean>
-    <bean class="cai.peter.vision.test.model.Endpoint" id="vision">
+    <bean class="com.peppermint.vision.test.model.Endpoint" id="vision">
         <property name="host" value="http://localhost:8080" />
         <property name="path" value="/rest" />
         <property name="user" value="admin" />

@@ -2,10 +2,6 @@ package cai.peter.vision.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.persistence.entity.Feed;
-import cai.peter.vision.persistence.entity.FeedSubscription;
-import cai.peter.vision.persistence.entity.User;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.persistence.entity.Feed;
+import com.peppermint.vision.persistence.entity.FeedSubscription;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.repository.FeedsRepository;
+import com.peppermint.vision.persistence.repository.FeedsubscriptionsRepository;
+import com.peppermint.vision.persistence.repository.UsersRepository;
 
 
 

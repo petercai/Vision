@@ -1,10 +1,11 @@
 package cai.peter.test.common;
 
-import cai.peter.vision.test.model.JacksonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMap;
+import com.peppermint.vision.test.model.JacksonUtil;
+
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RedirectConfig;

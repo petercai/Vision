@@ -1,10 +1,13 @@
 package cai.peter.vision.persistence.repository;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.persistence.entity.UserRole;
-import cai.peter.vision.persistence.entity.UserRole.Role;
 import com.google.common.base.MoreObjects;
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.entity.UserRole;
+import com.peppermint.vision.persistence.entity.UserRole.Role;
+import com.peppermint.vision.persistence.repository.UserrolesRepository;
+import com.peppermint.vision.persistence.repository.UsersRepository;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;

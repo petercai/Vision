@@ -6,7 +6,6 @@ package cai.peter.vision.rest.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import cai.peter.vision.VisionApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.peppermint.vision.VisionApplication;
 
 /**
  * A unit test covers a single “unit”, where a unit commonly is a single class, but can also be a

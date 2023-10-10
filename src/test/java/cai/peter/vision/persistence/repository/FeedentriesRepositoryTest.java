@@ -7,13 +7,16 @@ package cai.peter.vision.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.persistence.entity.Feed;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.persistence.entity.Feed;
+import com.peppermint.vision.persistence.repository.FeedentriesRepository;
+import com.peppermint.vision.persistence.repository.FeedsRepository;
 
 @SpringBootTest(classes = VisionApplication.class)
 @ExtendWith(SpringExtension.class)

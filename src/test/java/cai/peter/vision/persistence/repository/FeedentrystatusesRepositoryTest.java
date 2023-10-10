@@ -5,16 +5,20 @@
 package cai.peter.vision.persistence.repository;
 
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.persistence.entity.FeedSubscription;
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.rest.dto.UnreadCount;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.persistence.entity.FeedSubscription;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.repository.FeedentrystatusesRepository;
+import com.peppermint.vision.persistence.repository.FeedsubscriptionsRepository;
+import com.peppermint.vision.persistence.repository.UsersRepository;
+import com.peppermint.vision.rest.dto.UnreadCount;
 
 @Slf4j
 @SpringBootTest(classes = VisionApplication.class)

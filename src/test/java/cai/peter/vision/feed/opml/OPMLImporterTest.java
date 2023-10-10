@@ -4,11 +4,6 @@
 
 package cai.peter.vision.feed.opml;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.feed.FeedQueues;
-import cai.peter.vision.feed.FeedRefreshTaskGiver;
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.persistence.repository.UsersRepository;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -18,6 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.feed.FeedQueues;
+import com.peppermint.vision.feed.FeedRefreshTaskGiver;
+import com.peppermint.vision.feed.opml.OPMLImporter;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.repository.UsersRepository;
 
 import java.io.IOException;
 import java.io.InputStream;

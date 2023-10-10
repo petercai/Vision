@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="cai.peter.vision.feed.FeedRefreshTaskGiver" project="Vision" 
+  <class id="1" language="java" name="com.peppermint.vision.feed.FeedRefreshTaskGiver" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshTaskGiver.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1437" y="215"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -10,7 +10,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="cai.peter.vision.feed.HttpGetter.HttpResult" project="Vision" 
+  <class id="2" language="java" name="com.peppermint.vision.feed.HttpGetter.HttpResult" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/HttpGetter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="137" y="1335"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -19,7 +19,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="cai.peter.vision.feed.FeedRefreshUpdater" project="Vision" 
+  <class id="3" language="java" name="com.peppermint.vision.feed.FeedRefreshUpdater" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1314" y="718"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -28,7 +28,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="cai.peter.vision.feed.FeedRefreshUpdater.EntryTask" project="Vision" 
+  <class id="4" language="java" name="com.peppermint.vision.feed.FeedRefreshUpdater.EntryTask" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshUpdater.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1315" y="977"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -37,7 +37,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="cai.peter.vision.feed.FeedRefreshWorker.FeedTask" project="Vision" 
+  <class id="5" language="java" name="com.peppermint.vision.feed.FeedRefreshWorker.FeedTask" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1626" y="962"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -46,7 +46,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="cai.peter.vision.feed.FeedFetcher" project="Vision" 
+  <class id="6" language="java" name="com.peppermint.vision.feed.FeedFetcher" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedFetcher.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="504" y="687"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -55,7 +55,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="cai.peter.vision.feed.HttpGetter.NotModifiedException" project="Vision" 
+  <class id="7" language="java" name="com.peppermint.vision.feed.HttpGetter.NotModifiedException" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/HttpGetter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="423" y="1302"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -64,7 +64,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="cai.peter.vision.feed.FeedRefreshWorker" project="Vision" 
+  <class id="8" language="java" name="com.peppermint.vision.feed.FeedRefreshWorker" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1080" y="439"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -73,7 +73,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="9" language="java" name="cai.peter.vision.feed.FeedRefreshExecutor.Task" project="Vision" 
+  <interface id="9" language="java" name="com.peppermint.vision.feed.FeedRefreshExecutor.Task" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshExecutor.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1155" y="1293"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -82,7 +82,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="10" language="java" name="cai.peter.vision.feed.FeedParser" project="Vision" 
+  <class id="10" language="java" name="com.peppermint.vision.feed.FeedParser" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedParser.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="165" y="976"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -91,7 +91,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="cai.peter.vision.feed.FeedRefreshExecutor" project="Vision" 
+  <class id="11" language="java" name="com.peppermint.vision.feed.FeedRefreshExecutor" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshExecutor.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="929" y="999"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -100,7 +100,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="cai.peter.vision.feed.HttpGetter.DefaultTrustManager" project="Vision" 
+  <class id="12" language="java" name="com.peppermint.vision.feed.HttpGetter.DefaultTrustManager" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/HttpGetter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="700" y="1320"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -109,7 +109,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="cai.peter.vision.feed.FeedQueues" project="Vision" 
+  <class id="13" language="java" name="com.peppermint.vision.feed.FeedQueues" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedQueues.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2126" y="576"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -118,7 +118,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="cai.peter.vision.feed.FeedRefreshContext" project="Vision" 
+  <class id="14" language="java" name="com.peppermint.vision.feed.FeedRefreshContext" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FeedRefreshContext.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1499" y="1320"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -127,7 +127,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="cai.peter.vision.feed.HttpGetter" project="Vision" 
+  <class id="15" language="java" name="com.peppermint.vision.feed.HttpGetter" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/HttpGetter.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="548" y="1035"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -136,7 +136,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="cai.peter.vision.feed.FetchedFeed" project="Vision" 
+  <class id="16" language="java" name="com.peppermint.vision.feed.FetchedFeed" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/feed/FetchedFeed.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="606" y="209"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 

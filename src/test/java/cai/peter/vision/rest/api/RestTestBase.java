@@ -4,10 +4,9 @@
 
 package cai.peter.vision.rest.api;
 
-import cai.peter.vision.VisionApplication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.peppermint.vision.VisionApplication;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

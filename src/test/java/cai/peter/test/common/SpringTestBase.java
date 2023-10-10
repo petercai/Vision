@@ -1,8 +1,9 @@
 package cai.peter.test.common;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.test.model.Endpoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.test.model.Endpoint;
+
 import io.restassured.response.Response;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,16 +4,6 @@
 
 package cai.peter.vision.persistence.service;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.feed.FeedQueues;
-import cai.peter.vision.persistence.entity.Feed;
-import cai.peter.vision.persistence.entity.FeedCategory;
-import cai.peter.vision.persistence.entity.FeedSubscription;
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.persistence.repository.FeedentrystatusesRepository;
-import cai.peter.vision.persistence.repository.FeedsubscriptionsRepository;
-import cai.peter.vision.persistence.repository.UsersRepository;
-import cai.peter.vision.rest.dto.UnreadCount;
 import java.util.Arrays;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +17,19 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.feed.FeedQueues;
+import com.peppermint.vision.persistence.entity.Feed;
+import com.peppermint.vision.persistence.entity.FeedCategory;
+import com.peppermint.vision.persistence.entity.FeedSubscription;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.repository.FeedentrystatusesRepository;
+import com.peppermint.vision.persistence.repository.FeedsubscriptionsRepository;
+import com.peppermint.vision.persistence.repository.UsersRepository;
+import com.peppermint.vision.persistence.service.FeedService;
+import com.peppermint.vision.persistence.service.FeedSubscriptionService;
+import com.peppermint.vision.rest.dto.UnreadCount;
 
 import static org.mockito.Mockito.*;
 

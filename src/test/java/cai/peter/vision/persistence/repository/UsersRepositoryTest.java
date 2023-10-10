@@ -1,9 +1,11 @@
 package cai.peter.vision.persistence.repository;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.service.PasswordEncryptionService;
 import com.google.common.base.MoreObjects;
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.repository.UsersRepository;
+import com.peppermint.vision.service.PasswordEncryptionService;
+
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;

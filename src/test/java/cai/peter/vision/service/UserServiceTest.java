@@ -2,10 +2,12 @@ package cai.peter.vision.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.persistence.entity.UserRole;
-import cai.peter.vision.persistence.entity.UserRole.Role;
 import com.google.common.base.MoreObjects;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.entity.UserRole;
+import com.peppermint.vision.persistence.entity.UserRole.Role;
+import com.peppermint.vision.service.UserService;
+
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

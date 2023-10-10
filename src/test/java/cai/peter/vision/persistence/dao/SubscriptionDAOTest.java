@@ -4,12 +4,6 @@
 
 package cai.peter.vision.persistence.dao;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.persistence.entity.FeedSubscription;
-import cai.peter.vision.persistence.entity.User;
-import cai.peter.vision.persistence.repository.FeedsubscriptionsRepository;
-import cai.peter.vision.persistence.repository.UsersRepository;
-import cai.peter.vision.rest.dto.UnreadCount;
 import java.util.HashMap;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.persistence.dao.SubscriptionDAO;
+import com.peppermint.vision.persistence.entity.FeedSubscription;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.repository.FeedsubscriptionsRepository;
+import com.peppermint.vision.persistence.repository.UsersRepository;
+import com.peppermint.vision.rest.dto.UnreadCount;
 
 @SpringBootTest(classes = VisionApplication.class)
 @ExtendWith(SpringExtension.class)

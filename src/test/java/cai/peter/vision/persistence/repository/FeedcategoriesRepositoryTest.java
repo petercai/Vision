@@ -1,8 +1,5 @@
 package cai.peter.vision.persistence.repository;
 
-import cai.peter.vision.VisionApplication;
-import cai.peter.vision.persistence.entity.FeedCategory;
-import cai.peter.vision.persistence.entity.User;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.peppermint.vision.VisionApplication;
+import com.peppermint.vision.persistence.entity.FeedCategory;
+import com.peppermint.vision.persistence.entity.User;
+import com.peppermint.vision.persistence.repository.FeedcategoriesRepository;
+import com.peppermint.vision.persistence.repository.UsersRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = VisionApplication.class)

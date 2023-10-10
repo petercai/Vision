@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="cai.peter.vision.persistence.entity.FeedEntryStatus" project="Vision" 
+  <class id="1" language="java" name="com.peppermint.vision.persistence.entity.FeedEntryStatus" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/FeedEntryStatus.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1167" y="1204"/>    
@@ -11,7 +11,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="cai.peter.vision.persistence.entity.FeedSubscription" project="Vision" 
+  <class id="2" language="java" name="com.peppermint.vision.persistence.entity.FeedSubscription" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/FeedSubscription.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1450" y="300"/>    
@@ -21,7 +21,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="cai.peter.vision.persistence.entity.FeedEntryTag" project="Vision" 
+  <class id="3" language="java" name="com.peppermint.vision.persistence.entity.FeedEntryTag" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/FeedEntryTag.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="647" y="857"/>    
@@ -31,7 +31,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="cai.peter.vision.persistence.entity.FeedEntryContent" project="Vision" 
+  <class id="4" language="java" name="com.peppermint.vision.persistence.entity.FeedEntryContent" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/FeedEntryContent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="143" y="389"/>    
@@ -41,7 +41,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="cai.peter.vision.persistence.entity.FeedEntry" project="Vision" 
+  <class id="5" language="java" name="com.peppermint.vision.persistence.entity.FeedEntry" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/FeedEntry.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="559" y="417"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -50,7 +50,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="cai.peter.vision.persistence.entity.FeedCategory" project="Vision" 
+  <class id="6" language="java" name="com.peppermint.vision.persistence.entity.FeedCategory" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/FeedCategory.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1753" y="508"/>    
@@ -60,7 +60,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="cai.peter.vision.persistence.entity.Feed" project="Vision" 
+  <class id="7" language="java" name="com.peppermint.vision.persistence.entity.Feed" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/Feed.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="921" y="303"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -69,7 +69,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="cai.peter.vision.persistence.entity.User" project="Vision" 
+  <class id="8" language="java" name="com.peppermint.vision.persistence.entity.User" project="Vision" 
     file="/Vision/src/main/java/cai/peter/vision/persistence/entity/User.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1774" y="942"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 

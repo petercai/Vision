@@ -311,13 +311,13 @@
 							<skipValidateSpec>true</skipValidateSpec>
 
 							<modelNameSuffix>Dto</modelNameSuffix>
-							<modelPackage>cai.peter.vision.api.model</modelPackage>
+							<modelPackage>com.peppermint.vision.api.model</modelPackage>
 							<generateModels>true</generateModels>
 							<generateModelTests>true</generateModelTests>
 							<generateModelDocumentation>false</generateModelDocumentation>
 
 							<generateApis>true</generateApis>
-							<apiPackage>cai.peter.vision.api.controller</apiPackage>
+							<apiPackage>com.peppermint.vision.api.controller</apiPackage>
 							<generateApiTests>true</generateApiTests>
 
 							<generateSupportingFiles>true</generateSupportingFiles>
