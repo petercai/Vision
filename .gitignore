@@ -31,3 +31,9 @@ hs_err_pid*
 .DS_Store
 /.sts4-cache/
 *.iml
+docs
+uml
+pyproject.toml
+sync.ffs_db
+src/main/generated
+.openapi-generator

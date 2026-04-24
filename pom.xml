@@ -252,12 +252,14 @@
 				<version>3.6.0</version>
 				<executions>
 					<execution>
+						<id>add-generated-sources</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>add-source</goal>
 						</goals>
 						<configuration>
 							<sources>
+								<!-- Main generated source root, including OpenAPI output -->
 								<source>src/main/generated</source>
 							</sources>
 						</configuration>
@@ -277,6 +279,13 @@
 							<followSymlinks>false</followSymlinks>
 						</fileset>
 						<fileset>
+							<directory>${project.basedir}/src/generated</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+						<fileset>
 							<directory>${project.basedir}/src/main/generated</directory>
 							<includes>
 								<include>**/*</include>
@@ -288,6 +297,51 @@
 			</plugin>
 			<!-- FIX 13: Upgraded maven-compiler-plugin to 3.13.0 for current JDK support -->
 			<!-- Also added annotationProcessorPaths so Lombok runs as an explicit processor -->
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.6.0</version>
+				<executions>
+					<execution>
+						<id>generate-openapi-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/swagger/vision.yaml</inputSpec>
+							<output>${project.basedir}</output>
+							<generatorName>spring</generatorName>
+							<library>spring-boot</library>
+							<addCompileSourceRoot>false</addCompileSourceRoot>
+							<skipOverwrite>false</skipOverwrite>
+							<skipValidateSpec>true</skipValidateSpec>
+							<modelNameSuffix>Dto</modelNameSuffix>
+							<modelPackage>cai.peter.vision.api.model</modelPackage>
+							<generateModels>true</generateModels>
+							<generateModelTests>false</generateModelTests>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateApis>true</generateApis>
+							<apiPackage>cai.peter.vision.api.controller</apiPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<!-- ApiUtil already exists in src/main/java and should not be duplicated -->
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<verbose>false</verbose>
+							<configOptions>
+								<dateLibrary>java8-localdatetime</dateLibrary>
+								<useBeanValidation>true</useBeanValidation>
+								<useJakartaEe>true</useJakartaEe>
+								<useSpringBoot3>true</useSpringBoot3>
+								<documentationProvider>springdoc</documentationProvider>
+								<annotationLibrary>swagger2</annotationLibrary>
+								<sourceFolder>src/main/generated</sourceFolder>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
