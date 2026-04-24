@@ -8,13 +8,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -120,3 +120,4 @@ public class UserController {
 
 	}
 }
+

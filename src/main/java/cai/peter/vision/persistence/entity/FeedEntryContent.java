@@ -2,13 +2,11 @@ package cai.peter.vision.persistence.entity;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +26,6 @@ public class FeedEntryContent extends AbstractModel {
 
 	@Lob
 	@Column(length = Integer.MAX_VALUE)
-	@Type(type = "org.hibernate.type.MaterializedClobType")
 	private String content;
 
 	@Column(length = 40)
@@ -50,3 +47,4 @@ public class FeedEntryContent extends AbstractModel {
 	private Set<FeedEntry> entries;
 
 }
+

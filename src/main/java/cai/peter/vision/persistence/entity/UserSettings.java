@@ -1,16 +1,14 @@
 package cai.peter.vision.persistence.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -61,7 +59,6 @@ public class UserSettings extends AbstractModel {
 
 	@Lob
 	@Column(length = Integer.MAX_VALUE)
-	@Type(type = "org.hibernate.type.MaterializedClobType")
 	private String customCss;
 
 	@Column(name = "scroll_speed")
@@ -79,3 +76,4 @@ public class UserSettings extends AbstractModel {
 	private boolean readability;
 
 }
+

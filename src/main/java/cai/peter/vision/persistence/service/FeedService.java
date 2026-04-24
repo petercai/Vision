@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Set;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
@@ -69,3 +69,4 @@ public class FeedService {
     return icon;
   }
 }
+

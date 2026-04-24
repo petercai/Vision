@@ -1,20 +1,17 @@
 package cai.peter.vision.config;
 
 import cai.peter.vision.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /*
 Spring security:
@@ -23,10 +20,10 @@ Spring security:
 
 @Configuration
 @EnableWebSecurity(debug = true)
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+@RequiredArgsConstructor
+public class WebSecurityConfiguration {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
 
 
   @Bean
@@ -42,36 +39,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     return provider;
   }
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.authenticationProvider(daoAuthenticationProvider());
-
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .sessionManagement(
+            session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+        .csrf(AbstractHttpConfigurer::disable)
+        .formLogin(Customizer.withDefaults())
+        .logout(logout -> logout.invalidateHttpSession(true).deleteCookies("JSESSIONID"))
+        .authorizeHttpRequests(
+            auth ->
+                auth.requestMatchers("/", "/actuator/**", "/rest/user/login")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+        .authenticationProvider(daoAuthenticationProvider());
+    return http.build();
   }
-
-  @Override
-  protected void configure(HttpSecurity http) throws Exception { // 2
-    http.sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//        .sessionFixation()
-//        .migrateSession()
-        .and().csrf().disable() //Cross Site Request Forgery
-        .formLogin()// https://www.baeldung.com/spring-security-login
-        //        .loginPage("/login.html")
-//        .loginProcessingUrl("/login")
-        //      .defaultSuccessUrl("/home")
-        .and()
-        .logout()  //https://www.baeldung.com/spring-security-logout
-//        .logoutUrl("/logout")
-//        .logoutSuccessUrl("/")
-        .invalidateHttpSession(true)
-        .deleteCookies("JSESSIONID")
-        .and()
-        .authorizeRequests()
-        .antMatchers("/", "/actuator/**", "/rest/user/login")
-        .permitAll()
-        .anyRequest()
-        .authenticated();
-}
 
   /**
    * 2. stateless (no session)

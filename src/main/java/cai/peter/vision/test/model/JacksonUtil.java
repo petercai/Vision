@@ -8,7 +8,7 @@ import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 
 public abstract class JacksonUtil {
@@ -28,3 +28,4 @@ public abstract class JacksonUtil {
     }
 
 }
+

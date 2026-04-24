@@ -3,7 +3,7 @@ package cai.peter.vision.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 import cai.peter.vision.feed.FeedQueues;
 import cai.peter.vision.feed.FeedUtils;
@@ -96,3 +96,4 @@ public class PubSubService {
 		}
 	}
 }
+

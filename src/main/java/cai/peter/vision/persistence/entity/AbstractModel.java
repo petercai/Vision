@@ -2,11 +2,11 @@ package cai.peter.vision.persistence.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.TableGenerator;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.TableGenerator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,3 +31,4 @@ public abstract class AbstractModel implements Serializable {
 			allocationSize = 1000)
 	private Long id;
 }
+

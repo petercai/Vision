@@ -3,7 +3,7 @@ package cai.peter.vision.test.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 
 import org.bson.UuidRepresentation;
@@ -42,3 +42,4 @@ public class FxMongo {
       .build(mongoDatabase, name, clz, UuidRepresentation.STANDARD);
   }
 }
+

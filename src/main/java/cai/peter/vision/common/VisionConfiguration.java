@@ -5,15 +5,15 @@ package cai.peter.vision.common;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import lombok.Getter;
 
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
-import org.hibernate.validator.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -153,3 +153,4 @@ public class VisionConfiguration /*extends Configuration*/ {
 	}
 
 }
+
