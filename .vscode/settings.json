@@ -1,4 +1,9 @@
 {
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "plantuml.jar": "C:\\dev\\mvn\\repo\\net\\sourceforge\\plantuml\\plantuml\\1.2026.1\\plantuml-1.2026.1.jar",
+  "plantuml.render": "Local",
+  "plantuml.exportOutDir": "uml",
+  "plantuml.exportIncludeFolderHeirarchy": false,
+  "plantuml.exportSubFolder": false
 }

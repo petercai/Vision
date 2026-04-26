@@ -19,7 +19,6 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /.idea/
 /.mvn/
@@ -30,10 +29,14 @@ hs_err_pid*
 .project
 .DS_Store
 /.sts4-cache/
-*.iml
+**/__pycache__
+
 docs
-uml
-pyproject.toml
 sync.ffs_db
 src/main/generated
 .openapi-generator
+.m2
+.vscode/numbered-bookmarks.json
+uv.lock
+*.png
+/uml
