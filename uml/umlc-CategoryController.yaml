@@ -1,4 +1,4 @@
-# python uml\.gen\umlc_gen.py --config uml\umlc-CategoryController.yaml
+# umlc-gen --config uml\umlc-CategoryController.yaml
 diagram:
   type: class
 runtime:

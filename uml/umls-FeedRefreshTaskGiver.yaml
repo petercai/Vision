@@ -1,4 +1,4 @@
-# python uml\.gen\umls_gen.py --config uml\umls-FeedRefreshTaskGiver.yaml
+# umls-gen --config uml\umls-FeedRefreshTaskGiver.yaml
 diagram:
   type: sequence
 runtime:

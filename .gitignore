@@ -40,4 +40,4 @@ src/main/generated
 uv.lock
 *.png
 uml/.gen
-uml/plantuml
+
