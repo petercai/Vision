@@ -39,4 +39,5 @@ src/main/generated
 .vscode/numbered-bookmarks.json
 uv.lock
 *.png
-/uml
+uml/.gen
+uml/plantuml
