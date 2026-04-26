@@ -1,0 +1,58 @@
+# python uml\.gen\umlc_gen.py --config uml\umlc-CategoryController.yaml
+diagram:
+  type: class
+runtime:
+  language: java
+  parser: tree-sitter
+  strict: false
+  stable_sort:
+    enabled: true
+    strategy: by_name
+  parser_lock_file: uml\parsers.lock.yaml
+evidence:
+  mode: basic
+observability:
+  emit_summary: true
+output:
+  format: plantuml
+  path: uml\plantuml\umlc-CategoryController.puml
+depth: 3
+import:
+  - uml\filter.yaml
+method_scope: public
+member_scope: none
+src_root: 
+  - src\main\java
+  - src\main\generated
+include:
+  - CategoryController
+exclude:
+  - src\main\java\cai\peter\vision\rest\dto\**\*.java
+  - src\main\java\cai\peter\vision\test\model\**\*.java  
+matched:
+  - src/main/java/cai/peter/vision/common/VisionConfiguration.java
+  - src/main/java/cai/peter/vision/favicon/AbstractFaviconFetcher.java
+  - src/main/java/cai/peter/vision/feed/FeedQueues.java
+  - src/main/java/cai/peter/vision/feed/FeedRefreshContext.java
+  - src/main/java/cai/peter/vision/persistence/dao/SubscriptionDAO.java
+  - src/main/java/cai/peter/vision/persistence/entity/AbstractModel.java
+  - src/main/java/cai/peter/vision/persistence/entity/Feed.java
+  - src/main/java/cai/peter/vision/persistence/entity/FeedCategory.java
+  - src/main/java/cai/peter/vision/persistence/entity/FeedEntry.java
+  - src/main/java/cai/peter/vision/persistence/entity/FeedEntryContent.java
+  - src/main/java/cai/peter/vision/persistence/entity/FeedEntryStatus.java
+  - src/main/java/cai/peter/vision/persistence/entity/FeedEntryTag.java
+  - src/main/java/cai/peter/vision/persistence/entity/FeedSubscription.java
+  - src/main/java/cai/peter/vision/persistence/entity/User.java
+  - src/main/java/cai/peter/vision/persistence/repository/FeedcategoriesRepository.java
+  - src/main/java/cai/peter/vision/persistence/repository/FeedentriesRepository.java
+  - src/main/java/cai/peter/vision/persistence/repository/FeedentrystatusesRepository.java
+  - src/main/java/cai/peter/vision/persistence/repository/FeedsRepository.java
+  - src/main/java/cai/peter/vision/persistence/repository/FeedsubscriptionsRepository.java
+  - src/main/java/cai/peter/vision/persistence/service/FeedEntryService.java
+  - src/main/java/cai/peter/vision/persistence/service/FeedService.java
+  - src/main/java/cai/peter/vision/persistence/service/FeedSubscriptionService.java
+  - src/main/java/cai/peter/vision/rest/api/CategoryController.java
+  - src/main/java/cai/peter/vision/rest/dto/Category.java
+  - src/main/java/cai/peter/vision/rest/dto/Subscription.java
+  - src/main/java/cai/peter/vision/rest/dto/UnreadCount.java
