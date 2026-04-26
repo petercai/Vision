@@ -1,0 +1,6 @@
+exclude:
+  - ".*\\.toString.*" # exclude toString methods from either class or sequence diagrams
+  - ".*\\.hashCode.*" # exclude hashCode methods
+  - ".*\\.equals.*" # exclude equals methods
+  - ".*Dto.*" # exclude all classes and methods with "Dto" in their name
+  - ".*Properties.*" # exclude all classes and methods with "Properties" in their name
