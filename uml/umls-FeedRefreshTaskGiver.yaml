@@ -33,93 +33,28 @@ async:
     enable_webflux_chain: true
 include: 
   - FeedRefreshTaskGiver:process 
-exclude: []
+exclude: 
+  - src/main/java/cai/peter/vision/feed/HttpGetter.java
+  - src/main/java/cai/peter/vision/service/PubSubService.java
+  - src/main/java/cai/peter/vision/feed/FeedRefreshExecutor.java
+  - src/main/java/cai/peter/vision/feed/FeedUtils.java
+  - src/main/java/cai/peter/vision/persistence/repository/FeedentrycontentsRepository.java
+  - src/main/java/cai/peter/vision/persistence/service/FeedEntryContentService.java
+  - src/main/java/cai/peter/vision/persistence/service/FeedEntryFilteringService.java
+  - src/main/generated/cai/peter/vision/api/controller/AdminApi.java
+  - src/main/java/cai/peter/vision/feed/FeedQueues.java
+  - src/main/java/cai/peter/vision/feed/FeedRefreshUpdater.java
+  - src/main/java/cai/peter/vision/feed/FeedParser.java
 defined_hierarchy: []
 available_type_hierarchy:
-  - AbstractModel
-    - Feed
-      - FeedsRepository
-    - FeedCategory
-      - FeedcategoriesRepository
-    - FeedEntry
-      - FeedentriesRepository
-    - FeedEntryContent
-      - FeedentrycontentsRepository
-    - FeedEntryStatus
-      - FeedentrystatusesRepository
-    - FeedEntryTag
-      - FeedentrytagsRepository
-    - FeedSubscription
-      - FeedsubscriptionsRepository
-    - User
-      - UsersRepository
-    - UserRole
-      - UserrolesRepository
-    - UserSettings
-      - UsersettingsRepository
-  - AdminApi
-    - AdminApiController
+  []
 matched:
-  - src/main/generated/cai/peter/vision/api/controller/AdminApi.java
-  - src/main/generated/cai/peter/vision/api/controller/AdminApi.java:save
   - src/main/java/cai/peter/vision/feed/FeedFetcher.java
   - src/main/java/cai/peter/vision/feed/FeedFetcher.java:extractFeedUrl
   - src/main/java/cai/peter/vision/feed/FeedFetcher.java:fetch
-  - src/main/java/cai/peter/vision/feed/FeedParser.java
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:findHub
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:findSelf
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:getContent
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:getEntryUpdateDate
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:getTitle
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:handleForeignMarkup
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:parse
-  - src/main/java/cai/peter/vision/feed/FeedParser.java:validateDate
-  - src/main/java/cai/peter/vision/feed/FeedQueues.java
-  - src/main/java/cai/peter/vision/feed/FeedQueues.java:add
-  - src/main/java/cai/peter/vision/feed/FeedQueues.java:giveBack
-  - src/main/java/cai/peter/vision/feed/FeedQueues.java:refill
-  - src/main/java/cai/peter/vision/feed/FeedQueues.java:take
-  - src/main/java/cai/peter/vision/feed/FeedRefreshExecutor.java
-  - src/main/java/cai/peter/vision/feed/FeedRefreshExecutor.java:execute
   - src/main/java/cai/peter/vision/feed/FeedRefreshTaskGiver.java
   - src/main/java/cai/peter/vision/feed/FeedRefreshTaskGiver.java:process
-  - src/main/java/cai/peter/vision/feed/FeedRefreshUpdater.java
-  - src/main/java/cai/peter/vision/feed/FeedRefreshUpdater.java:addEntry
-  - src/main/java/cai/peter/vision/feed/FeedRefreshUpdater.java:handlePubSub
-  - src/main/java/cai/peter/vision/feed/FeedRefreshUpdater.java:updateFeed
   - src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java
   - src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java:handlePubSub
   - src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java:update
   - src/main/java/cai/peter/vision/feed/FeedRefreshWorker.java:updateFeed
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:averageTimeBetweenEntries
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:buildDisabledUntil
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:detectEncoding
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:escapeIFrameCss
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:escapeImgCss
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:extractDeclaredEncoding
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:getSortedTimestamps
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:guessEncoding
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:handleContent
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:isRelative
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:normalizeURL
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:removeTrailingSlash
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:replaceHtmlEntitiesWithNumericEntities
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:toAbsoluteUrl
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:trimInvalidXmlCharacters
-  - src/main/java/cai/peter/vision/feed/FeedUtils.java:truncate
-  - src/main/java/cai/peter/vision/feed/HttpGetter.java
-  - src/main/java/cai/peter/vision/feed/HttpGetter.java:getBinary
-  - src/main/java/cai/peter/vision/feed/HttpGetter.java:newClient
-  - src/main/java/cai/peter/vision/persistence/repository/FeedentriesRepository.java
-  - src/main/java/cai/peter/vision/persistence/repository/FeedentriesRepository.java:findExisting
-  - src/main/java/cai/peter/vision/persistence/repository/FeedentrycontentsRepository.java
-  - src/main/java/cai/peter/vision/persistence/repository/FeedentrycontentsRepository.java:findExisting
-  - src/main/java/cai/peter/vision/persistence/service/FeedEntryContentService.java
-  - src/main/java/cai/peter/vision/persistence/service/FeedEntryContentService.java:findOrCreate
-  - src/main/java/cai/peter/vision/persistence/service/FeedEntryFilteringService.java
-  - src/main/java/cai/peter/vision/persistence/service/FeedEntryFilteringService.java:filterMatchesEntry
-  - src/main/java/cai/peter/vision/persistence/service/FeedUpdateService.java
-  - src/main/java/cai/peter/vision/persistence/service/FeedUpdateService.java:addEntry
-  - src/main/java/cai/peter/vision/service/PubSubService.java
-  - src/main/java/cai/peter/vision/service/PubSubService.java:subscribe

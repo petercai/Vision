@@ -34,32 +34,6 @@ class FeedQueues [[src/main/java/cai/peter/vision/feed/FeedQueues.java:23]] {
 class FeedRefreshContext [[src/main/java/cai/peter/vision/feed/FeedRefreshContext.java:10]] {
   + [[src/main/java/cai/peter/vision/feed/FeedRefreshContext.java:17 FeedRefreshContext()]]
 }
-class SubscriptionDAO [[src/main/java/cai/peter/vision/persistence/dao/SubscriptionDAO.java:18]] {
-  + [[src/main/java/cai/peter/vision/persistence/dao/SubscriptionDAO.java:45 getUnreadCount()]]
-}
-class AbstractModel [[src/main/java/cai/peter/vision/persistence/entity/AbstractModel.java:18]]
-class Feed [[src/main/java/cai/peter/vision/persistence/entity/Feed.java:14]] {
-  + [[src/main/java/cai/peter/vision/persistence/entity/Feed.java:124 toString()]]
-}
-class FeedCategory [[src/main/java/cai/peter/vision/persistence/entity/FeedCategory.java:16]] {
-  + [[src/main/java/cai/peter/vision/persistence/entity/FeedCategory.java:43 toString()]]
-}
-class FeedEntry [[src/main/java/cai/peter/vision/persistence/entity/FeedEntry.java:21]]
-class FeedEntryContent [[src/main/java/cai/peter/vision/persistence/entity/FeedEntryContent.java:14]]
-class FeedEntryStatus [[src/main/java/cai/peter/vision/persistence/entity/FeedEntryStatus.java:20]] {
-  + [[src/main/java/cai/peter/vision/persistence/entity/FeedEntryStatus.java:59 FeedEntryStatus()]]
-  + [[src/main/java/cai/peter/vision/persistence/entity/FeedEntryStatus.java:63 FeedEntryStatus()]]
-}
-class FeedEntryTag [[src/main/java/cai/peter/vision/persistence/entity/FeedEntryTag.java:13]] {
-  + [[src/main/java/cai/peter/vision/persistence/entity/FeedEntryTag.java:31 FeedEntryTag()]]
-  + [[src/main/java/cai/peter/vision/persistence/entity/FeedEntryTag.java:34 FeedEntryTag()]]
-}
-class FeedSubscription [[src/main/java/cai/peter/vision/persistence/entity/FeedSubscription.java:17]] {
-  + [[src/main/java/cai/peter/vision/persistence/entity/FeedSubscription.java:32 toString()]]
-}
-class User [[src/main/java/cai/peter/vision/persistence/entity/User.java:17]] {
-  + [[src/main/java/cai/peter/vision/persistence/entity/User.java:58 shouldRefreshFeedsAt()]]
-}
 interface FeedcategoriesRepository [[src/main/java/cai/peter/vision/persistence/repository/FeedcategoriesRepository.java:20]] {
   + [[src/main/java/cai/peter/vision/persistence/repository/FeedcategoriesRepository.java:22 findByName()]]
   + [[src/main/java/cai/peter/vision/persistence/repository/FeedcategoriesRepository.java:26 getByUser()]]
@@ -105,81 +79,22 @@ class FeedSubscriptionService [[src/main/java/cai/peter/vision/persistence/servi
 class CategoryController [[src/main/java/cai/peter/vision/rest/api/CategoryController.java:40]] {
   + [[src/main/java/cai/peter/vision/rest/api/CategoryController.java:88 getSubscriptions()]]
 }
-class Category [[src/main/java/cai/peter/vision/rest/dto/Category.java:9]]
-class Subscription [[src/main/java/cai/peter/vision/rest/dto/Subscription.java:11]] {
-  + [[src/main/java/cai/peter/vision/rest/dto/Subscription.java:15 build()]]
-}
-class UnreadCount [[src/main/java/cai/peter/vision/rest/dto/UnreadCount.java:10]]
 
-AbstractFaviconFetcher --> Feed
 FeedQueues --> FeedsRepository
 FeedQueues --> FeedRefreshContext
-FeedQueues --> Feed
-FeedRefreshContext --> Feed
-FeedRefreshContext --> FeedEntry
-SubscriptionDAO --> UnreadCount
-Feed --|> AbstractModel
-FeedCategory --|> AbstractModel
-FeedCategory --> User
-FeedCategory --> FeedSubscription
-FeedEntry --|> AbstractModel
-FeedEntry --> Feed
-FeedEntry --> FeedEntryContent
-FeedEntry --> FeedEntryStatus
-FeedEntry --> FeedEntryTag
-FeedEntryContent --|> AbstractModel
-FeedEntryContent --> FeedEntry
-FeedEntryStatus --|> AbstractModel
-FeedEntryStatus --> FeedSubscription
-FeedEntryStatus --> FeedEntry
-FeedEntryStatus --> FeedEntryTag
-FeedEntryStatus --> User
-FeedEntryTag --|> AbstractModel
-FeedEntryTag --> User
-FeedEntryTag --> FeedEntry
-FeedSubscription --|> AbstractModel
-FeedSubscription --> User
-FeedSubscription --> Feed
-FeedSubscription --> FeedCategory
-FeedSubscription --> FeedEntryStatus
-User --|> AbstractModel
-FeedcategoriesRepository --|> FeedCategory
-FeedentriesRepository --|> FeedEntry
-FeedentriesRepository --> Feed
-FeedentrystatusesRepository --|> FeedEntryStatus
-FeedentrystatusesRepository --> FeedSubscription
-FeedentrystatusesRepository --> FeedEntry
-FeedentrystatusesRepository --> UnreadCount
-FeedsRepository --|> Feed
-FeedsubscriptionsRepository --|> FeedSubscription
-FeedsubscriptionsRepository --> Feed
 FeedEntryService --> FeedsubscriptionsRepository
 FeedEntryService --> FeedentriesRepository
 FeedEntryService --> FeedentrystatusesRepository
-FeedEntryService --> FeedEntryStatus
 FeedService --> FeedsRepository
 FeedService --> AbstractFaviconFetcher
-FeedService --> Feed
 FeedSubscriptionService --> FeedentrystatusesRepository
 FeedSubscriptionService --> FeedsubscriptionsRepository
 FeedSubscriptionService --> FeedService
 FeedSubscriptionService --> FeedQueues
-FeedSubscriptionService --> Feed
-FeedSubscriptionService --> FeedCategory
-FeedSubscriptionService --> UnreadCount
-FeedSubscriptionService --> FeedSubscription
 CategoryController --> FeedcategoriesRepository
 CategoryController --> FeedentrystatusesRepository
 CategoryController --> FeedsubscriptionsRepository
 CategoryController --> FeedEntryService
 CategoryController --> FeedSubscriptionService
-CategoryController --> SubscriptionDAO
 CategoryController --> VisionConfiguration
-CategoryController --> Category
-CategoryController --> FeedCategory
-CategoryController --> FeedSubscription
-CategoryController --> UnreadCount
-Category --> Subscription
-Subscription --> FeedSubscription
-Subscription --> UnreadCount
 @enduml

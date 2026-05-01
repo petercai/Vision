@@ -1,9 +1,10 @@
 {
   "java.compile.nullAnalysis.mode": "automatic",
   "java.configuration.updateBuildConfiguration": "automatic",
-  "plantuml.jar": "C:\\dev\\mvn\\repo\\net\\sourceforge\\plantuml\\plantuml\\1.2026.1\\plantuml-1.2026.1.jar",
-  "plantuml.render": "Local",
-  "plantuml.exportOutDir": "uml",
-  "plantuml.exportIncludeFolderHeirarchy": false,
-  "plantuml.exportSubFolder": false
+  "umlmark.jar": "C:\\dev\\mvn\\repo\\net\\sourceforge\\plantuml\\plantuml\\1.2026.1\\plantuml-1.2026.1.jar",
+  "umlmark.render": "Local",
+  "umlmark.exportOutDir": "uml",
+  "umlmark.exportIncludeFolderHeirarchy": false,
+  "umlmark.exportSubFolder": false,
+  "umlmark.exportFormat": "svg"
 }
